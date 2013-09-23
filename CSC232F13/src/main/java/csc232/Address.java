@@ -1,14 +1,18 @@
-package csc232;
-
 /**
    CSC232A - Fall 2013
-   The <code>Address</code> class represents a US mailing address (just the
-   street address and city/state/ZIP, not the recipient).
-   An address is immutable -- once constructed, the fields may not be changed.
+   A class to store mailing addresses.
 
    @author Brian Howard <bhoward@depauw.edu>
    @author Scott Thede <sthede@depauw.edu>
    @version 2013-09-23
+*/
+
+package csc232;
+
+/**
+   The <code>Address</code> class represents a US mailing address (just the
+   street address and city/state/ZIP, not the recipient).
+   An address is immutable -- once constructed, the fields may not be changed.
 */
 public class Address
 {
