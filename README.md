@@ -1,7 +1,5 @@
-CSC232-Fall 2013
-================
+CSC232-Spring 2014
+==================
 
-This is the model solution for the semester group project. It
-will be updated after each homework with a model solution for
-that stage of the project. It will not necessarily be updated
-quickly, however.
+This is the initial contents of the group project repository.
+Edit README.md to give more information about your project.
