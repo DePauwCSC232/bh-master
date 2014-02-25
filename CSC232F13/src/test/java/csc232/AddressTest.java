@@ -1,10 +1,9 @@
 /**
-   CSC232A - Fall 2013
+   CSC232 - Spring 2014
    Test suite for <code>Address</code> objects.
 
    @author Brian Howard <bhoward@depauw.edu>
-   @author Scott Thede <sthede@depauw.edu>
-   @version 2013-09-23
+   @version 2014-02-24
 */
 
 package csc232;
@@ -22,11 +21,9 @@ public class AddressTest
 {
    /**
       Initializes the <code>address</code> field used in the rest of the suite.
-      
-      @throws Exception
    */
    @Before
-   public void setUp() throws Exception
+   public void setUp()
    {
       address = new Address("602 S. College", "Greencastle", "IN", "46135");
    }

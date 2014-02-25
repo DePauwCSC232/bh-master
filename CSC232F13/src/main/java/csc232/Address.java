@@ -1,10 +1,9 @@
 /**
-   CSC232A - Fall 2013
+   CSC232 - Spring 2014
    A class to store mailing addresses.
 
    @author Brian Howard <bhoward@depauw.edu>
-   @author Scott Thede <sthede@depauw.edu>
-   @version 2013-09-23
+   @version 2014-02-24
 */
 
 package csc232;
@@ -46,7 +45,7 @@ public class Address
    /**
       Get the street part from this address.
    */
-   String getStreet()
+   public String getStreet()
    {
       return street;
    }
@@ -54,7 +53,7 @@ public class Address
    /**
       Get the city name from this address.
    */
-   String getCity()
+   public String getCity()
    {
       return city;
    }
@@ -62,7 +61,7 @@ public class Address
    /**
       Get the state abbreviation from this address.
    */
-   String getState()
+   public String getState()
    {
       return state;
    }
@@ -70,7 +69,7 @@ public class Address
    /**
       Get the ZIP code from this address.
    */
-   String getZIP()
+   public String getZIP()
    {
       return zip;
    }

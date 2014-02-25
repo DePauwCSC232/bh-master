@@ -1,10 +1,9 @@
 /**
-   CSC232A - Fall 2013
+   CSC232 - Spring 2014
    A simple program to test the <code>Address</code> class.
    
    @author Brian Howard <bhoward@depauw.edu>
-   @author Scott Thede <sthede@depauw.edu>
-   @version 2013-09-23
+   @version 2014-02-24
 */
 
 package csc232;
