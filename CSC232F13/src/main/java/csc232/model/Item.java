@@ -17,6 +17,9 @@ package csc232.model;
 public class Item
 {
    /**
+    * Construct an <code>Item</code> given its short name, type, and
+    * description.
+    * 
     * @param shortName
     * @param type
     * @param description

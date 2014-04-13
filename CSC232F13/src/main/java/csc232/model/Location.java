@@ -4,7 +4,7 @@ A class to represent a location in an adventure game.
 
 @author Brian Howard <bhoward@depauw.edu>
 @version 2014-04-11
-*/
+ */
 
 package csc232.model;
 
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The <code>Location</code> class represents a location, such as a room.
- * It has a short name and a description, just like an Item. It also
- * contains a collection of items.
+ * The <code>Location</code> class represents a location, such as a room. It has
+ * a short name and a description, just like an {@link Item}. It also contains a
+ * collection of items.
  */
 public class Location
 {
    /**
-    * Construct a location with the given short name and description,
-    * and an empty collection of items.
+    * Construct a location with the given short name and description, and an
+    * empty collection of items.
     * 
     * @param shortName
     * @param description
@@ -31,7 +31,7 @@ public class Location
       this.description = description;
       this.items = new ArrayList<Item>();
    }
-   
+
    /**
     * @return the shortName
     */
@@ -39,7 +39,7 @@ public class Location
    {
       return shortName;
    }
-   
+
    /**
     * @return the description
     */
@@ -47,7 +47,7 @@ public class Location
    {
       return description;
    }
-   
+
    /**
     * Add an item to this location.
     * 
@@ -57,11 +57,12 @@ public class Location
    {
       items.add(item);
    }
-   
+
    /**
     * Retrieve an item from this location by specifying its short name.
     * 
-    * @param name the short name of the desired item
+    * @param name
+    *           the short name of the desired item
     * @return the item, or null if not found
     */
    public Item lookup(String name)
@@ -73,11 +74,11 @@ public class Location
             return item;
          }
       }
-      
+
       // Not found
       return null;
    }
-   
+
    /**
     * Find out how many items are at this location.
     * 
@@ -89,8 +90,8 @@ public class Location
    }
 
    /**
-    * Retrieve an item from this location by specifying an index.
-    * Precondition: 0 <= index < getItemCount()
+    * Retrieve an item from this location by specifying an index. Precondition:
+    * 0 <= index < getItemCount()
     * 
     * @param index
     * @return
@@ -99,7 +100,7 @@ public class Location
    {
       return items.get(index);
    }
-   
+
    /*
     * (non-Javadoc)
     * 
@@ -108,10 +109,22 @@ public class Location
    @Override
    public String toString()
    {
+      String contents = "";
+      for (Item item : items)
+      {
+         // Put commas _between_ items in the list
+         if (!contents.equals(""))
+         {
+            contents = contents + ", ";
+         }
+         
+         contents = contents + item.getShortName();
+      }
+      
       return "Location:\n"
                + "  shortName: " + shortName + "\n"
                + "  description: " + description + "\n"
-               + "  contents: " + items;
+               + "  contents: " + contents;
    }
 
    private String shortName;
