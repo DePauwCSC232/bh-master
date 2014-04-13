@@ -90,11 +90,11 @@ public class Location
    }
 
    /**
-    * Retrieve an item from this location by specifying an index. Precondition:
-    * 0 <= index < getItemCount()
+    * Retrieve an item from this location by specifying an index.
+    * Precondition: 0 <= index < getItemCount()
     * 
     * @param index
-    * @return
+    * @return the desired item
     */
    public Item getItemByIndex(int index)
    {
@@ -109,6 +109,19 @@ public class Location
    @Override
    public String toString()
    {
+      return "Location:\n"
+               + "  shortName: " + shortName + "\n"
+               + "  description: " + description + "\n"
+               + "  contents: " + listContents();
+   }
+
+   /**
+    * Get a comma-separated list of the short names of the contents.
+    * 
+    * @return the list of the contents
+    */
+   public String listContents()
+   {
       String contents = "";
       for (Item item : items)
       {
@@ -120,11 +133,7 @@ public class Location
          
          contents = contents + item.getShortName();
       }
-      
-      return "Location:\n"
-               + "  shortName: " + shortName + "\n"
-               + "  description: " + description + "\n"
-               + "  contents: " + contents;
+      return contents;
    }
 
    private String shortName;
