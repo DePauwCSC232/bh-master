@@ -57,6 +57,16 @@ public class Location
    {
       items.add(item);
    }
+   
+   /**
+    * Remove an item from this location. If the item is not present, do nothing.
+    * 
+    * @param item the {@link Item} to remove
+    */
+   public void removeItem(Item item)
+   {
+      items.remove(item);
+   }
 
    /**
     * Retrieve an item from this location by specifying its short name.
