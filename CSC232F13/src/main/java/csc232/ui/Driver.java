@@ -12,13 +12,14 @@ import javax.swing.JFrame;
 
 import acm.io.IOConsole;
 import acm.io.IOModel;
-import csc232.model.Item;
 import csc232.model.ContainerItem;
+import csc232.model.GameMap;
+import csc232.model.Item;
 
 /**
  * The <code>Driver</code> class manages the user interface to the adventure
  * game. It keeps track of the desired {@link IOModel}, and the current
- * {@link Location}, and it knows how to respond to user commands.
+ * location, inventory, and map, and it knows how to respond to user commands.
  */
 public class Driver
 {
@@ -45,7 +46,7 @@ public class Driver
 
    /**
     * Construct a <code>Driver</code> using the given {@link IOModel}. For now,
-    * also create a sample {@link Location} and some simple {@link Item}s.
+    * also create a sample location and some simple {@link Item}s.
     * 
     * @param io
     *           The I/O device to use when communicating with the user
@@ -65,6 +66,8 @@ public class Driver
 
       location.addItem(sandwich);
       location.addItem(flashlight);
+      
+      // TODO add more locations, and put them in the map
    }
 
    /**
@@ -76,6 +79,7 @@ public class Driver
     * <li>take (t) NAME [from CONTAINER]: move item from location or named container into inventory</li>
     * <li>put (p) NAME [in CONTAINER]: move item from inventory to location or named container</li>
     * <li>inventory (i): list items in inventory</li>
+    * <li>go (g) DIRECTION: move to a new location in the given direction</li>
     * <li>help (h): list available commands</li>
     * </ul>
     */
@@ -92,6 +96,11 @@ public class Driver
          else if (words[0].equals("look") || words[0].equals("l"))
          {
             io.println(location.getDescription());
+            String exits = map.listNeighbors(location);
+            if (!exits.equals(""))
+            {
+               io.println("Exits are: " + exits);
+            }
          }
          else if (words[0].equals("examine") || words[0].equals("x"))
          {
@@ -164,6 +173,25 @@ public class Driver
          {
             io.println("You have: " + inventory.listContents());
          }
+         else if (words[0].equals("go") || words[0].equals("g"))
+         {
+            if (words.length == 1)
+            {
+               io.println("No direction specified");
+            }
+            else
+            {
+               ContainerItem destination = map.getNeighbor(location, words[1]);
+               if (destination == null)
+               {
+                  io.println("You can't go that way.");
+               }
+               else
+               {
+                  location = destination;
+               }
+            }
+         }
          else if (words[0].equals("help") || words[0].equals("h"))
          {
             io.println("quit (q): end the game");
@@ -172,6 +200,7 @@ public class Driver
             io.println("take (t) NAME [from CONTAINER]: move item from location or named container into inventory");
             io.println("put (p) NAME [in CONTAINER]: move item from inventory to location or named container");
             io.println("inventory (i): list items in inventory");
+            io.println("go (g) DIRECTION: move to a new location in the given direction");
             io.println("help (h): list available commands");
          }
          else
@@ -217,4 +246,5 @@ public class Driver
    private IOModel io;
    private ContainerItem location;
    private ContainerItem inventory;
+   private GameMap map;
 }

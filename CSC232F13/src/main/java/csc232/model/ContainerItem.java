@@ -108,6 +108,7 @@ public class ContainerItem extends Item
    public String listContents()
    {
       String contents = "";
+      
       for (Item item : items)
       {
          // Put commas _between_ items in the list
@@ -118,6 +119,7 @@ public class ContainerItem extends Item
 
          contents = contents + item.getShortName();
       }
+      
       return contents;
    }
 
