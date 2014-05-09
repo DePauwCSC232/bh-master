@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import acm.io.IOConsole;
 import acm.io.IOModel;
 import csc232.model.ContainerItem;
-import csc232.model.GameMap;
+import csc232.model.GameState;
 import csc232.model.Item;
 
 /**
@@ -56,11 +56,7 @@ public class Driver
    public Driver(IOModel io)
    {
       this.io = io;
-      this.inventory = new ContainerItem("inventory",
-               "The stuff you are carrying");
-      this.map = new GameMap();
-      
-      this.location = populateMap();
+      this.gameState = new GameState();
    }
    
    /**
@@ -88,8 +84,8 @@ public class Driver
          }
          else if (words[0].equals("look") || words[0].equals("l"))
          {
-            io.println(location.getDescription());
-            String exits = map.listNeighbors(location);
+            io.println(gameState.getLocationDescription());
+            String exits = gameState.listNeighbors();
             if (!exits.equals(""))
             {
                io.println("Exits are: " + exits);
@@ -103,12 +99,7 @@ public class Driver
             }
             else
             {
-               Item item = location.lookup(words[1]);
-               if (item == null)
-               {
-                  // Check in your inventory
-                  item = inventory.lookup(words[1]);
-               }
+               Item item = gameState.findItem(words[1]);
                
                if (item == null)
                {
@@ -122,7 +113,7 @@ public class Driver
          }
          else if (words[0].equals("take") || words[0].equals("t"))
          {
-            ContainerItem source = location;
+            ContainerItem source = gameState.getLocation();
             
             // Handle taking from a named container
             if (words.length > 2)
@@ -140,13 +131,13 @@ public class Driver
             else
             {
                source.removeItem(item);
-               inventory.addItem(item);
+               gameState.addInventoryItem(item);
                io.println("Taken");
             }
          }
          else if (words[0].equals("put") || words[0].equals("p"))
          {
-            ContainerItem target = location;
+            ContainerItem target = gameState.getLocation();
             
             // Handle putting into a named container
             if (words.length > 2)
@@ -156,21 +147,21 @@ public class Driver
                target = findContainer(containerName);
             }
             
-            Item item = inventory.lookup(words[1]);
+            Item item = gameState.lookupInventory(words[1]);
             if (item == null)
             {
                io.println("You do not have that item");
             }
             else
             {
-               inventory.removeItem(item);
+               gameState.removeInventoryItem(item);
                target.addItem(item);
                io.println("Done");
             }
          }
          else if (words[0].equals("inventory") || words[0].equals("i"))
          {
-            io.println("You have: " + inventory.listContents());
+            io.println("You have: " + gameState.listInventory());
          }
          else if (words[0].equals("go") || words[0].equals("g"))
          {
@@ -180,14 +171,10 @@ public class Driver
             }
             else
             {
-               ContainerItem destination = map.getNeighbor(location, words[1]);
-               if (destination == null)
+               boolean success = gameState.move(words[1]);
+               if (!success)
                {
                   io.println("You can't go that way.");
-               }
-               else
-               {
-                  location = destination;
                }
             }
          }
@@ -215,13 +202,7 @@ public class Driver
 
    private ContainerItem findContainer(String containerName)
    {
-      Item container = inventory.lookup(containerName);
-      
-      // If container is not in inventory, check the location
-      if (container == null)
-      {
-         container = location.lookup(containerName);
-      }
+      Item container = gameState.findItem(containerName);
       
       // Check that the container really is a ContainerItem
       if (container != null && container instanceof ContainerItem)
@@ -237,59 +218,11 @@ public class Driver
 
    private String[] getCommand()
    {
-      String prompt = location.getShortName() + "> ";
+      String prompt = gameState.getPrompt() + "> ";
       String line = io.readLine(prompt);
       return line.trim().toLowerCase().split(" ");
    }
 
-   private ContainerItem populateMap()
-   {
-      ContainerItem kitchen = new ContainerItem("kitchen",
-               "It is full of appliances and utensils, but not much food");
-      ContainerItem hallway = new ContainerItem("hallway",
-               "It is long and narrow");
-      ContainerItem library = new ContainerItem("library",
-               "It is filled with books");
-
-      kitchen.addItem(new Item("sandwich", "consumable",
-               "a peanut-butter and jelly sandwich"));
-      kitchen.addItem(new Item("cheesecake", "consumable",
-               "it's magically delicious!"));
-      
-      ContainerItem backpack = new ContainerItem("backpack",
-               "a seemingly ordinary backpack");
-      backpack.addItem(new Item("flashlight", "tool",
-               "an ordinary flashlight, currently turned off"));
-      
-      hallway.addItem(backpack);
-      hallway.addItem(new Item("mail", "media",
-               "just a bunch of bills and junk mail"));
-      
-      library.addItem(new Item("dictionary", "media",
-               "it is very heavy"));
-      library.addItem(new Item("novel", "media",
-               "it's \"The Hitchhiker's Guide to the Galaxy\"!"));
-      library.addItem(new Item("spellbook", "media",
-               "a powerful book of spells"));
-      
-      inventory.addItem(new Item("screwdriver", "tool",
-               "a flathead screwdriver"));
-      
-      map.addLocation(kitchen);
-      map.addLocation(hallway);
-      map.addLocation(library);
-      
-      map.addNeighbor(kitchen, "north", hallway);
-      map.addNeighbor(hallway, "south", kitchen);
-      
-      map.addNeighbor(hallway, "east", library);
-      map.addNeighbor(library, "west", hallway);
-      
-      return kitchen;
-   }
-
    private IOModel io;
-   private ContainerItem location;
-   private ContainerItem inventory;
-   private GameMap map;
+   private GameState gameState;
 }
