@@ -42,6 +42,8 @@ public class Driver
 
       Driver d = new Driver(console);
       d.run();
+
+      frame.dispose();
    }
 
    /**
@@ -54,22 +56,13 @@ public class Driver
    public Driver(IOModel io)
    {
       this.io = io;
-      this.location = new ContainerItem("kitchen",
-               "It is full of appliances and utensils, but not much food");
       this.inventory = new ContainerItem("inventory",
                "The stuff you are carrying");
-
-      Item sandwich = new Item("sandwich", "consumable",
-               "a peanut-butter and jelly sandwich");
-      Item flashlight = new Item("flashlight", "tool",
-               "an ordinary flashlight, currently turned off");
-
-      location.addItem(sandwich);
-      location.addItem(flashlight);
+      this.map = new GameMap();
       
-      // TODO add more locations, and put them in the map
+      this.location = populateMap();
    }
-
+   
    /**
     * Interact with the user. Recognized commands are:
     * <ul>
@@ -241,6 +234,52 @@ public class Driver
       String prompt = location.getShortName() + "> ";
       String line = io.readLine(prompt);
       return line.trim().toLowerCase().split(" ");
+   }
+
+   private ContainerItem populateMap()
+   {
+      ContainerItem kitchen = new ContainerItem("kitchen",
+               "It is full of appliances and utensils, but not much food");
+      ContainerItem hallway = new ContainerItem("hallway",
+               "It is long and narrow");
+      ContainerItem library = new ContainerItem("library",
+               "It is filled with books");
+
+      kitchen.addItem(new Item("sandwich", "consumable",
+               "a peanut-butter and jelly sandwich"));
+      kitchen.addItem(new Item("cheesecake", "consumable",
+               "it's magically delicious!"));
+      
+      ContainerItem backpack = new ContainerItem("backpack",
+               "a seemingly ordinary backpack");
+      backpack.addItem(new Item("flashlight", "tool",
+               "an ordinary flashlight, currently turned off"));
+      
+      hallway.addItem(backpack);
+      hallway.addItem(new Item("mail", "media",
+               "just a bunch of bills and junk mail"));
+      
+      library.addItem(new Item("dictionary", "media",
+               "it is very heavy"));
+      library.addItem(new Item("novel", "media",
+               "it's \"The Hitchhiker's Guide to the Galaxy\"!"));
+      library.addItem(new Item("spellbook", "media",
+               "a powerful book of spells"));
+      
+      inventory.addItem(new Item("screwdriver", "tool",
+               "a flathead screwdriver"));
+      
+      map.addLocation(kitchen);
+      map.addLocation(hallway);
+      map.addLocation(library);
+      
+      map.addNeighbor(kitchen, "north", hallway);
+      map.addNeighbor(hallway, "south", kitchen);
+      
+      map.addNeighbor(hallway, "east", library);
+      map.addNeighbor(library, "west", hallway);
+      
+      return kitchen;
    }
 
    private IOModel io;
