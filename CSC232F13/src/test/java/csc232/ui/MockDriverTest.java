@@ -39,11 +39,11 @@ public class MockDriverTest
       driver.run();
       
       InOrder inOrder = inOrder(io);
-      inOrder.verify(io).println("It is full of appliances and utensils, but not much food\nIt contains: sandwich, flashlight");
+      inOrder.verify(io).println("It is full of appliances and utensils, but not much food\nIt contains: sandwich, cheesecake");
       inOrder.verify(io).println("No item specified");
       inOrder.verify(io).println("a peanut-butter and jelly sandwich");
-      inOrder.verify(io).println("an ordinary flashlight, currently turned off");
       inOrder.verify(io).println("There is no such item here");
+      inOrder.verify(io).println("a flathead screwdriver");
       inOrder.verify(io).println("I don't know how to do that");
       inOrder.verify(io).println("Goodbye!");
    }
@@ -65,11 +65,11 @@ public class MockDriverTest
       driver.run();
       
       InOrder inOrder = inOrder(io);
-      inOrder.verify(io).println("It is full of appliances and utensils, but not much food\nIt contains: sandwich, flashlight");
+      inOrder.verify(io).println("It is full of appliances and utensils, but not much food\nIt contains: sandwich, cheesecake");
       inOrder.verify(io).println("No item specified");
       inOrder.verify(io).println("a peanut-butter and jelly sandwich");
-      inOrder.verify(io).println("an ordinary flashlight, currently turned off");
       inOrder.verify(io).println("There is no such item here");
+      inOrder.verify(io).println("a flathead screwdriver");
       inOrder.verify(io).println("I don't know how to do that");
       inOrder.verify(io).println("Goodbye!");
    }

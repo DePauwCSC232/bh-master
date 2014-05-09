@@ -29,11 +29,12 @@ public class RWDriverTest
    {
       String testInput = "look\nexamine\nexamine sandwich\nexamine flashlight\nexamine screwdriver\neat sandwich\nquit";
       String expectedOutput = "kitchen> It is full of appliances and utensils, but not much food" + NL
-               + "It contains: sandwich, flashlight" + NL
+               + "It contains: sandwich, cheesecake" + NL
+               + "Exits are: north" + NL
                + "kitchen> No item specified" + NL
                + "kitchen> a peanut-butter and jelly sandwich" + NL
-               + "kitchen> an ordinary flashlight, currently turned off" + NL
                + "kitchen> There is no such item here" + NL
+               + "kitchen> a flathead screwdriver" + NL
                + "kitchen> I don't know how to do that" + NL
                + "kitchen> Goodbye!" + NL;
       runTest(testInput, expectedOutput);
@@ -44,11 +45,12 @@ public class RWDriverTest
    {
       String testInput = "l\nx\nx sandwich\nx flashlight\nx screwdriver\ne sandwich\nq";
       String expectedOutput = "kitchen> It is full of appliances and utensils, but not much food" + NL
-               + "It contains: sandwich, flashlight" + NL
+               + "It contains: sandwich, cheesecake" + NL
+               + "Exits are: north" + NL
                + "kitchen> No item specified" + NL
                + "kitchen> a peanut-butter and jelly sandwich" + NL
-               + "kitchen> an ordinary flashlight, currently turned off" + NL
                + "kitchen> There is no such item here" + NL
+               + "kitchen> a flathead screwdriver" + NL
                + "kitchen> I don't know how to do that" + NL
                + "kitchen> Goodbye!" + NL;
       runTest(testInput, expectedOutput);

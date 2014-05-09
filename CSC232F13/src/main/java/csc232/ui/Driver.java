@@ -106,6 +106,12 @@ public class Driver
                Item item = location.lookup(words[1]);
                if (item == null)
                {
+                  // Check in your inventory
+                  item = inventory.lookup(words[1]);
+               }
+               
+               if (item == null)
+               {
                   io.println("There is no such item here");
                }
                else
