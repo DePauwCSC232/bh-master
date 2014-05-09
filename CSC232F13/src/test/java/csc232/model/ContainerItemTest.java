@@ -1,16 +1,16 @@
 package csc232.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class LocationTest
+public class ContainerItemTest
 {
 
    @Test
    public void testGetters()
    {
-      Location kitchen = new Location("kitchen",
+      ContainerItem kitchen = new ContainerItem("kitchen",
                "It is full of appliances and utensils, but not much food");
 
       assertEquals("kitchen", kitchen.getShortName());
@@ -18,7 +18,7 @@ public class LocationTest
                kitchen.getDescription());
       assertEquals(0, kitchen.getItemCount());
       assertEquals(
-               "Location:\n  shortName: kitchen\n  description: It is full of appliances and utensils, but not much food\n  contents: ",
+               "Item:\n  shortName: kitchen\n  type: container\n  description: It is full of appliances and utensils, but not much food",
                kitchen.toString());
       assertEquals("", kitchen.listContents());
    }
@@ -26,7 +26,7 @@ public class LocationTest
    @Test
    public void testAddItem()
    {
-      Location kitchen = new Location("kitchen",
+      ContainerItem kitchen = new ContainerItem("kitchen",
                "It is full of appliances and utensils, but not much food");
       Item sandwich = new Item("sandwich", "consumable",
                "a peanut-butter and jelly sandwich");
@@ -36,25 +36,25 @@ public class LocationTest
       kitchen.addItem(sandwich);
       
       assertEquals("kitchen", kitchen.getShortName());
-      assertEquals("It is full of appliances and utensils, but not much food",
+      assertEquals("It is full of appliances and utensils, but not much food\nIt contains: sandwich",
                kitchen.getDescription());
       assertEquals(1, kitchen.getItemCount());
       assertEquals(sandwich, kitchen.getItemByIndex(0));
       assertEquals(
-               "Location:\n  shortName: kitchen\n  description: It is full of appliances and utensils, but not much food\n  contents: sandwich",
+               "Item:\n  shortName: kitchen\n  type: container\n  description: It is full of appliances and utensils, but not much food\nIt contains: sandwich",
                kitchen.toString());
       assertEquals("sandwich", kitchen.listContents());
       
       kitchen.addItem(flashlight);
       
       assertEquals("kitchen", kitchen.getShortName());
-      assertEquals("It is full of appliances and utensils, but not much food",
+      assertEquals("It is full of appliances and utensils, but not much food\nIt contains: sandwich, flashlight",
                kitchen.getDescription());
       assertEquals(2, kitchen.getItemCount());
       assertEquals(sandwich, kitchen.getItemByIndex(0));
       assertEquals(flashlight, kitchen.getItemByIndex(1));
       assertEquals(
-               "Location:\n  shortName: kitchen\n  description: It is full of appliances and utensils, but not much food\n  contents: sandwich, flashlight",
+               "Item:\n  shortName: kitchen\n  type: container\n  description: It is full of appliances and utensils, but not much food\nIt contains: sandwich, flashlight",
                kitchen.toString());
       assertEquals("sandwich, flashlight", kitchen.listContents());
    }
@@ -62,7 +62,7 @@ public class LocationTest
    @Test
    public void testLookup()
    {
-      Location kitchen = new Location("kitchen",
+      ContainerItem kitchen = new ContainerItem("kitchen",
                "It is full of appliances and utensils, but not much food");
       Item sandwich = new Item("sandwich", "consumable",
                "a peanut-butter and jelly sandwich");
@@ -89,7 +89,7 @@ public class LocationTest
    @Test
    public void testRemoveItem()
    {
-      Location kitchen = new Location("kitchen",
+      ContainerItem kitchen = new ContainerItem("kitchen",
                "It is full of appliances and utensils, but not much food");
       Item sandwich = new Item("sandwich", "consumable",
                "a peanut-butter and jelly sandwich");

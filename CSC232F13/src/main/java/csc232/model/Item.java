@@ -3,7 +3,7 @@ CSC232 - Spring 2014
 A class to represent an item in an adventure game.
 
 @author Brian Howard <bhoward@depauw.edu>
-@version 2014-04-11
+@version 2014-05-09
 */
 
 package csc232.model;
@@ -64,9 +64,9 @@ public class Item
    public String toString()
    {
       return "Item:\n"
-               + "  shortName: " + shortName + "\n"
-               + "  type: " + type + "\n"
-               + "  description: " + description;
+               + "  shortName: " + getShortName() + "\n"
+               + "  type: " + getType() + "\n"
+               + "  description: " + getDescription();
    }
 
    private String shortName;

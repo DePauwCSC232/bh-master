@@ -3,7 +3,7 @@ CSC232 - Spring 2014
 A unit test for a simple driver for an adventure game. (Homework #5)
 
 @author Brian Howard <bhoward@depauw.edu>
-@version 2014-04-11
+@version 2014-05-09
  */
 
 package csc232.ui;
@@ -39,8 +39,7 @@ public class MockDriverTest
       driver.run();
       
       InOrder inOrder = inOrder(io);
-      inOrder.verify(io).println("It is full of appliances and utensils, but not much food");
-      inOrder.verify(io).println("You see: sandwich, flashlight");
+      inOrder.verify(io).println("It is full of appliances and utensils, but not much food\nIt contains: sandwich, flashlight");
       inOrder.verify(io).println("No item specified");
       inOrder.verify(io).println("a peanut-butter and jelly sandwich");
       inOrder.verify(io).println("an ordinary flashlight, currently turned off");
@@ -66,8 +65,7 @@ public class MockDriverTest
       driver.run();
       
       InOrder inOrder = inOrder(io);
-      inOrder.verify(io).println("It is full of appliances and utensils, but not much food");
-      inOrder.verify(io).println("You see: sandwich, flashlight");
+      inOrder.verify(io).println("It is full of appliances and utensils, but not much food\nIt contains: sandwich, flashlight");
       inOrder.verify(io).println("No item specified");
       inOrder.verify(io).println("a peanut-butter and jelly sandwich");
       inOrder.verify(io).println("an ordinary flashlight, currently turned off");

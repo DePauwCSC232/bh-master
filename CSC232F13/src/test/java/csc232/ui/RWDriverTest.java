@@ -3,7 +3,7 @@ CSC232 - Spring 2014
 A unit test for a simple driver for an adventure game. (Homework #5)
 
 @author Brian Howard <bhoward@depauw.edu>
-@version 2014-04-11
+@version 2014-05-09
  */
 
 package csc232.ui;
@@ -28,14 +28,14 @@ public class RWDriverTest
    public void testLong()
    {
       String testInput = "look\nexamine\nexamine sandwich\nexamine flashlight\nexamine screwdriver\neat sandwich\nquit";
-      String expectedOutput = "kitchen> It is full of appliances and utensils, but not much food\n"
-               + "You see: sandwich, flashlight\n"
-               + "kitchen> No item specified\n"
-               + "kitchen> a peanut-butter and jelly sandwich\n"
-               + "kitchen> an ordinary flashlight, currently turned off\n"
-               + "kitchen> There is no such item here\n"
-               + "kitchen> I don't know how to do that\n"
-               + "kitchen> Goodbye!\n";
+      String expectedOutput = "kitchen> It is full of appliances and utensils, but not much food" + NL
+               + "It contains: sandwich, flashlight" + NL
+               + "kitchen> No item specified" + NL
+               + "kitchen> a peanut-butter and jelly sandwich" + NL
+               + "kitchen> an ordinary flashlight, currently turned off" + NL
+               + "kitchen> There is no such item here" + NL
+               + "kitchen> I don't know how to do that" + NL
+               + "kitchen> Goodbye!" + NL;
       runTest(testInput, expectedOutput);
    }
 
@@ -43,14 +43,14 @@ public class RWDriverTest
    public void testShort()
    {
       String testInput = "l\nx\nx sandwich\nx flashlight\nx screwdriver\ne sandwich\nq";
-      String expectedOutput = "kitchen> It is full of appliances and utensils, but not much food\n"
-               + "You see: sandwich, flashlight\n"
-               + "kitchen> No item specified\n"
-               + "kitchen> a peanut-butter and jelly sandwich\n"
-               + "kitchen> an ordinary flashlight, currently turned off\n"
-               + "kitchen> There is no such item here\n"
-               + "kitchen> I don't know how to do that\n"
-               + "kitchen> Goodbye!\n";
+      String expectedOutput = "kitchen> It is full of appliances and utensils, but not much food" + NL
+               + "It contains: sandwich, flashlight" + NL
+               + "kitchen> No item specified" + NL
+               + "kitchen> a peanut-butter and jelly sandwich" + NL
+               + "kitchen> an ordinary flashlight, currently turned off" + NL
+               + "kitchen> There is no such item here" + NL
+               + "kitchen> I don't know how to do that" + NL
+               + "kitchen> Goodbye!" + NL;
       runTest(testInput, expectedOutput);
    }
 
@@ -69,4 +69,6 @@ public class RWDriverTest
       
       assertEquals(expectedOutput, out.toString());
    }
+   
+   private final String NL = System.getProperty("line.separator");
 }
