@@ -24,7 +24,7 @@ public class GameState
     */
    public String getLocationDescription()
    {
-      return location.getDescription();
+      return location.getDescription(this);
    }
 
    /**
@@ -70,7 +70,7 @@ public class GameState
     */
    public void addInventoryItem(Item item)
    {
-      inventory.addItem(item);
+      inventory.addItem(item, this);
    }
 
    /**
@@ -159,6 +159,31 @@ public class GameState
       map.addNeighbor(library, "west", hallway);
 
       return kitchen;
+   }
+
+   private ContainerItem populateCastleMap()
+   {
+      ContainerItem cottage = new ContainerItem("cottage",
+               "You are standing in a small cottage.");
+      ContainerItem garden = new ContainerItem("garden",
+               "You are standing on a lush garden path. There is a cottage here.");
+      ContainerItem pond = new ContainerItem("pond",
+               "You are at the edge of a small fishing pond.");
+      ContainerItem path = new ContainerItem("path",
+               "You are walking along a winding path. There is a tall tree here.");
+      ContainerItem tree = new ContainerItem("tree",
+               "You are at the top of the tall tree.");
+      ContainerItem courtyard = null;
+      Item fish = null;
+      ContainerItem drawbridge = new SwitchLocation(
+               "drawbridge",
+               "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a mean troll here.",
+               fish,
+               "east",
+               courtyard,
+               "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a satisfied troll here.");
+
+      return cottage;
    }
 
    private GameMap map;

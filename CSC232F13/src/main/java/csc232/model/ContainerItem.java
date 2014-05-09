@@ -24,9 +24,9 @@ public class ContainerItem extends Item
    }
 
    @Override
-   public String getDescription()
+   public String getDescription(GameState gameState)
    {
-      String result = super.getDescription();
+      String result = super.getDescription(gameState);
       if (getItemCount() > 0)
       {
          result = result + "\nIt contains: " + listContents();
@@ -36,13 +36,26 @@ public class ContainerItem extends Item
    }
 
    /**
-    * Add an item to this container.
+    * Add an item to this container. Takes the current {@link GameState},
+    * in case a subclass wants to modify its behavior based on state.
+    * 
+    * @param item
+    * @param gameState current state, or null if not available
+    */
+   public void addItem(Item item, GameState gameState)
+   {
+      items.add(item);
+   }
+
+   /**
+    * Add an item to this container. Passes a null {@link GameState}, for
+    * cases where we don't have one available.
     * 
     * @param item
     */
    public void addItem(Item item)
    {
-      items.add(item);
+      addItem(item, null);
    }
 
    /**

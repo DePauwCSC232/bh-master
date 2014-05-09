@@ -4,15 +4,15 @@ A class to represent an item in an adventure game.
 
 @author Brian Howard <bhoward@depauw.edu>
 @version 2014-05-09
-*/
+ */
 
 package csc232.model;
 
 /**
- * The <code>Item</code> class represents a simple item. It has a short
- * name that may be used to refer to the item in commands, as well as a
- * type (such as "food" or "tool") and a longer description. An item is
- * immutable (there are no setters or mutators).
+ * The <code>Item</code> class represents a simple item. It has a short name
+ * that may be used to refer to the item in commands, as well as a type (such as
+ * "food" or "tool") and a longer description. An item is immutable (there are
+ * no setters or mutators).
  */
 public class Item
 {
@@ -48,9 +48,14 @@ public class Item
    }
 
    /**
+    * Get the description of this item, which in subclasses might depend on
+    * information in the GameState.
+    * 
+    * @param gameState
+    *           the current GameState, or null if not available
     * @return the description
     */
-   public String getDescription()
+   public String getDescription(GameState gameState)
    {
       return description;
    }
@@ -66,7 +71,7 @@ public class Item
       return "Item:\n"
                + "  shortName: " + getShortName() + "\n"
                + "  type: " + getType() + "\n"
-               + "  description: " + getDescription();
+               + "  description: " + getDescription(null);
    }
 
    private String shortName;

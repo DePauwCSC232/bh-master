@@ -15,7 +15,7 @@ public class ItemTest
       
       assertEquals("sandwich", sandwich.getShortName());
       assertEquals("consumable", sandwich.getType());
-      assertEquals("a peanut-butter and jelly sandwich", sandwich.getDescription());
+      assertEquals("a peanut-butter and jelly sandwich", sandwich.getDescription(null));
       assertEquals("Item:\n  shortName: sandwich\n  type: consumable\n  description: a peanut-butter and jelly sandwich", sandwich.toString());
    }
 
@@ -29,12 +29,12 @@ public class ItemTest
       
       assertEquals("sandwich", sandwich.getShortName());
       assertEquals("consumable", sandwich.getType());
-      assertEquals("a peanut-butter and jelly sandwich", sandwich.getDescription());
+      assertEquals("a peanut-butter and jelly sandwich", sandwich.getDescription(null));
       assertEquals("Item:\n  shortName: sandwich\n  type: consumable\n  description: a peanut-butter and jelly sandwich", sandwich.toString());
 
       assertEquals("flashlight", flashlight.getShortName());
       assertEquals("tool", flashlight.getType());
-      assertEquals("an ordinary flashlight, currently turned off", flashlight.getDescription());
+      assertEquals("an ordinary flashlight, currently turned off", flashlight.getDescription(null));
       assertEquals("Item:\n  shortName: flashlight\n  type: tool\n  description: an ordinary flashlight, currently turned off", flashlight.toString());
    }
 

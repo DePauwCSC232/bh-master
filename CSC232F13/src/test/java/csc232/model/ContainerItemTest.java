@@ -15,7 +15,7 @@ public class ContainerItemTest
 
       assertEquals("kitchen", kitchen.getShortName());
       assertEquals("It is full of appliances and utensils, but not much food",
-               kitchen.getDescription());
+               kitchen.getDescription(null));
       assertEquals(0, kitchen.getItemCount());
       assertEquals(
                "Item:\n  shortName: kitchen\n  type: container\n  description: It is full of appliances and utensils, but not much food",
@@ -37,7 +37,7 @@ public class ContainerItemTest
       
       assertEquals("kitchen", kitchen.getShortName());
       assertEquals("It is full of appliances and utensils, but not much food\nIt contains: sandwich",
-               kitchen.getDescription());
+               kitchen.getDescription(null));
       assertEquals(1, kitchen.getItemCount());
       assertEquals(sandwich, kitchen.getItemByIndex(0));
       assertEquals(
@@ -49,7 +49,7 @@ public class ContainerItemTest
       
       assertEquals("kitchen", kitchen.getShortName());
       assertEquals("It is full of appliances and utensils, but not much food\nIt contains: sandwich, flashlight",
-               kitchen.getDescription());
+               kitchen.getDescription(null));
       assertEquals(2, kitchen.getItemCount());
       assertEquals(sandwich, kitchen.getItemByIndex(0));
       assertEquals(flashlight, kitchen.getItemByIndex(1));

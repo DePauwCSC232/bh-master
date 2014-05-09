@@ -58,15 +58,17 @@ public class Driver
       this.io = io;
       this.gameState = new GameState();
    }
-   
+
    /**
     * Interact with the user. Recognized commands are:
     * <ul>
     * <li>quit (q): end the game</li>
     * <li>look (l): print a description of the current location</li>
     * <li>examine (x) NAME: print a description of the named item, if present</li>
-    * <li>take (t) NAME [from CONTAINER]: move item from location or named container into inventory</li>
-    * <li>put (p) NAME [in CONTAINER]: move item from inventory to location or named container</li>
+    * <li>take (t) NAME [from CONTAINER]: move item from location or named
+    *   container into inventory</li>
+    * <li>put (p) NAME [in CONTAINER]: move item from inventory to location or
+    *   named container</li>
     * <li>inventory (i): list items in inventory</li>
     * <li>go (g) DIRECTION: move to a new location in the given direction</li>
     * <li>help (h): list available commands</li>
@@ -100,63 +102,77 @@ public class Driver
             else
             {
                Item item = gameState.findItem(words[1]);
-               
+
                if (item == null)
                {
                   io.println("There is no such item here");
                }
                else
                {
-                  io.println(item.getDescription());
+                  io.println(item.getDescription(gameState));
                }
             }
          }
          else if (words[0].equals("take") || words[0].equals("t"))
          {
-            ContainerItem source = gameState.getLocation();
-            
-            // Handle taking from a named container
-            if (words.length > 2)
+            if (words.length == 1)
             {
-               // Assume the last word is the container name
-               String containerName = words[words.length - 1];
-               source = findContainer(containerName);
-            }
-            
-            Item item = source.lookup(words[1]);
-            if (item == null)
-            {
-               io.println("There is no such item here");
+               io.println("No item specified");
             }
             else
             {
-               source.removeItem(item);
-               gameState.addInventoryItem(item);
-               io.println("Taken");
+               ContainerItem source = gameState.getLocation();
+
+               // Handle taking from a named container
+               if (words.length > 2)
+               {
+                  // Assume the last word is the container name
+                  String containerName = words[words.length - 1];
+                  source = findContainer(containerName);
+               }
+
+               Item item = source.lookup(words[1]);
+               if (item == null)
+               {
+                  io.println("There is no such item here");
+               }
+               else
+               {
+                  source.removeItem(item);
+                  gameState.addInventoryItem(item);
+                  io.println("Taken");
+               }
             }
          }
          else if (words[0].equals("put") || words[0].equals("p"))
          {
-            ContainerItem target = gameState.getLocation();
-            
-            // Handle putting into a named container
-            if (words.length > 2)
+            if (words.length == 1)
             {
-               // Assume the last word is the container name
-               String containerName = words[words.length - 1];
-               target = findContainer(containerName);
-            }
-            
-            Item item = gameState.lookupInventory(words[1]);
-            if (item == null)
-            {
-               io.println("You do not have that item");
+               io.println("No item specified");
             }
             else
             {
-               gameState.removeInventoryItem(item);
-               target.addItem(item);
-               io.println("Done");
+               ContainerItem target = gameState.getLocation();
+
+               // Handle putting into a named container
+               if (words.length > 2)
+               {
+                  // Assume the last word is the container name
+                  String containerName = words[words.length - 1];
+                  target = findContainer(containerName);
+               }
+
+               Item item = gameState.lookupInventory(words[1]);
+               if (item == null)
+               {
+                  io.println("You do not have that item");
+               }
+               else
+               {
+                  gameState.removeInventoryItem(item);
+                  target.addItem(item, gameState);
+                  io.println("Done");
+               }
             }
          }
          else if (words[0].equals("inventory") || words[0].equals("i"))
@@ -203,7 +219,7 @@ public class Driver
    private ContainerItem findContainer(String containerName)
    {
       Item container = gameState.findItem(containerName);
-      
+
       // Check that the container really is a ContainerItem
       if (container != null && container instanceof ContainerItem)
       {
