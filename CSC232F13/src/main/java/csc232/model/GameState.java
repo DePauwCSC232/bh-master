@@ -161,6 +161,12 @@ public class GameState
       return kitchen;
    }
 
+   /**
+    * Load items and locations for the Parsely game, "ACTION CASTLE!"
+    * (c) 2009, Jared A. Sorensen / Memento Mori Theatricks
+    * http://www.memento-mori.com/
+    * Content used here solely for educational purposes, not for distribution
+    */
    private ContainerItem populateCastleMap()
    {
       ContainerItem cottage = new ContainerItem("cottage",
