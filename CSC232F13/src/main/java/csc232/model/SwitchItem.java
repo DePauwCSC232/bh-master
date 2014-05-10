@@ -27,24 +27,12 @@ public class SwitchItem extends ContainerItem
    }
 
    @Override
-   public String getDescription(GameState gameState)
-   {
-      if (triggered)
-      {
-         return newDescription;
-      }
-      else
-      {
-         return super.getDescription(gameState);
-      }
-   }
-
-   @Override
    public void addItem(Item item, GameState gameState)
    {
-      if (item == trigger)
+      if (!triggered && item == trigger)
       {
          triggered = true;
+         setDescription(newDescription);
          if (hidden != null)
          {
             super.addItem(hidden, gameState);

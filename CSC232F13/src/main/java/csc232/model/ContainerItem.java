@@ -24,9 +24,9 @@ public class ContainerItem extends Item
    }
 
    @Override
-   public String getDescription(GameState gameState)
+   public String getDescription()
    {
-      String result = super.getDescription(gameState);
+      String result = super.getDescription();
       if (getItemCount() > 0)
       {
          result = result + "\nIt contains: " + listContents();

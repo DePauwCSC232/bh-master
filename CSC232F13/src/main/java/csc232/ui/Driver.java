@@ -110,7 +110,7 @@ public class Driver
                }
                else
                {
-                  io.println(item.getDescription(gameState));
+                  io.println(item.getDescription());
                }
             }
          }

@@ -11,7 +11,7 @@ public class GameState
       this.inventory = new ContainerItem("inventory",
                "The stuff you are carrying");
       this.map = new GameMap();
-//      this.location = populateDemoMap();
+      // this.location = populateDemoMap();
       this.location = populateCastleMap();
    }
 
@@ -25,7 +25,7 @@ public class GameState
     */
    public String getLocationDescription()
    {
-      return location.getDescription(this);
+      return location.getDescription();
    }
 
    /**
@@ -183,22 +183,38 @@ public class GameState
     */
    private ContainerItem populateCastleMap()
    {
+      Item lamp = new Item("lamp", "tool", "an ordinary lamp");
+      inventory.addItem(lamp);
+
       ContainerItem cottage = new ContainerItem("cottage",
                "You are standing in a small cottage.");
+      Item pole = new Item("pole", "tool", "a simple fishing pole");
+      cottage.addItem(pole);
+
       ContainerItem garden = new ContainerItem("garden",
                "You are standing on a lush garden path. There is a cottage here.");
-      ContainerItem pond = new ContainerItem("pond",
-               "You are at the edge of a small fishing pond.");
+      Item rose = new Item("rose", "tool", "a beautiful red rose");
+      garden.addItem(rose);
+
+      Item fish = new Item("fish", "food", "a raw fish");
+      ContainerItem pond = new SwitchItem("pond",
+               "You are at the edge of a small fishing pond.", pole, fish,
+               true, null, null, "You are at the edge of a small fishing pond.");
+
       ContainerItem path = new ContainerItem("path",
                "You are walking along a winding path. There is a tall tree here.");
-      
+
       ContainerItem tree = new ContainerItem("tree",
                "You are at the top of the tall tree.");
       Item branch = new Item("branch", "tool", "a stout, dead branch");
       tree.addItem(branch);
-      
-      ContainerItem hall = new ContainerItem("hall", "You stand inside the Great Feasting Hall.");
-      
+
+      ContainerItem hall = new ContainerItem("hall",
+               "You stand inside the Great Feasting Hall.");
+      Item candle = new Item("candle", "tool",
+               "a strange candle, covered in strange runes");
+      hall.addItem(candle);
+
       Item key = new Item("key", "tool", "a heavy iron key");
       ContainerItem courtyard = new SwitchItem(
                "courtyard",
@@ -209,9 +225,7 @@ public class GameState
                "east",
                hall,
                "You are in the courtyard of ACTION CASTLE. There is an unconscious guard here.");
-      Item fish = new Item("fish", "food", "a raw fish");
-      pond.addItem(fish); // TODO make the pond a Switch
-      
+
       ContainerItem drawbridge = new SwitchItem(
                "drawbridge",
                "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a mean troll here.",
@@ -222,6 +236,44 @@ public class GameState
                courtyard,
                "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a satisfied troll here.");
 
+      ContainerItem tower = new SwitchItem(
+               "tower",
+               "You are inside a tower. The princess is here.",
+               rose,
+               null,
+               false,
+               null,
+               null,
+               "You are inside a tower. The princess is here. She says she will marry you if you have a crown.");
+
+      ContainerItem towerStairs = new SwitchItem(
+               "tower stairs",
+               "You are climbing the stairs to the tower. There is a locked door here.",
+               key, null, false, "up", tower,
+               "You are climbing the stairs to the tower. There is an unlocked door here.");
+
+      Item crown = new Item("crown", "tool", "an ornate golden crown");
+      ContainerItem dungeon = new SwitchItem(
+               "dungeon",
+               "You are in the dungeon. There is a spooky ghost here, wearing a crown.",
+               candle, crown, true, null, null, "You are in the dungeon.");
+
+      ContainerItem dungeonStairs = new SwitchItem(
+               "dungeon stairs",
+               "You are climbing the stairs down to the dungeon. It is too dark to see!",
+               lamp, null, true, "down", dungeon,
+               "You are climbing the stairs down to the dungeon.");
+
+      ContainerItem throne = new SwitchItem(
+               "throne room",
+               "This is the throne room of ACTION CASTLE. There is an ornate golden throne here.",
+               crown,
+               null,
+               true,
+               null,
+               null,
+               "This is the throne room of ACTION CASTLE. You are sitting in an ornate golden throne, with your new queen by your side.");
+
       map.addLocation(cottage);
       map.addLocation(garden);
       map.addLocation(pond);
@@ -230,26 +282,44 @@ public class GameState
       map.addLocation(drawbridge);
       map.addLocation(courtyard);
       map.addLocation(hall);
-      
+      map.addLocation(towerStairs);
+      map.addLocation(tower);
+      map.addLocation(dungeonStairs);
+      map.addLocation(dungeon);
+      map.addLocation(throne);
+
       map.addNeighbor(cottage, "out", garden);
       map.addNeighbor(garden, "in", cottage);
-      
+
       map.addNeighbor(garden, "south", pond);
       map.addNeighbor(pond, "north", garden);
-      
+
       map.addNeighbor(garden, "north", path);
       map.addNeighbor(path, "south", garden);
-      
+
       map.addNeighbor(path, "up", tree);
       map.addNeighbor(tree, "down", path);
-      
+
       map.addNeighbor(path, "east", drawbridge);
       map.addNeighbor(drawbridge, "west", path);
-      
+
       map.addNeighbor(courtyard, "west", drawbridge);
-      
+
+      map.addNeighbor(courtyard, "up", towerStairs);
+      map.addNeighbor(towerStairs, "down", courtyard);
+
+      map.addNeighbor(tower, "down", towerStairs);
+
+      map.addNeighbor(courtyard, "down", dungeonStairs);
+      map.addNeighbor(dungeonStairs, "up", courtyard);
+
+      map.addNeighbor(dungeon, "up", dungeonStairs);
+
       map.addNeighbor(hall, "west", courtyard);
-      
+
+      map.addNeighbor(hall, "east", throne);
+      map.addNeighbor(throne, "west", hall);
+
       return cottage;
    }
 

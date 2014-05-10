@@ -48,16 +48,16 @@ public class Item
    }
 
    /**
-    * Get the description of this item, which in subclasses might depend on
-    * information in the GameState.
-    * 
-    * @param gameState
-    *           the current GameState, or null if not available
     * @return the description
     */
-   public String getDescription(GameState gameState)
+   public String getDescription()
    {
       return description;
+   }
+   
+   protected void setDescription(String description)
+   {
+      this.description = description;
    }
 
    /*
@@ -71,7 +71,7 @@ public class Item
       return "Item:\n"
                + "  shortName: " + getShortName() + "\n"
                + "  type: " + getType() + "\n"
-               + "  description: " + getDescription(null);
+               + "  description: " + getDescription();
    }
 
    private String shortName;
