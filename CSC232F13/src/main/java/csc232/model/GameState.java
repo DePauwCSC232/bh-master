@@ -1,8 +1,16 @@
+/**
+CSC232 - Spring 2014
+A class to represent the player's state in an adventure game.
+
+@author Brian Howard <bhoward@depauw.edu>
+@version 2014-05-09
+ */
+
 package csc232.model;
 
 /**
- * Wraps up information about the player's inventory, location, and the game map
- * in a single object.
+ * Wraps up information about the player's inventory, location, moves, points,
+ * and the game map in a single object.
  */
 public class GameState
 {
@@ -11,8 +19,11 @@ public class GameState
       this.inventory = new ContainerItem("inventory",
                "The stuff you are carrying");
       this.map = new GameMap();
-      // this.location = populateDemoMap();
+      // this.location = populateDemoMap(); // Use this for testing...
       this.location = populateCastleMap();
+      
+      this.moves = 0;
+      this.points = 0;
    }
 
    public ContainerItem getLocation()
@@ -33,7 +44,7 @@ public class GameState
     */
    public String getPrompt()
    {
-      return location.getShortName();
+      return location.getShortName() + " [" + moves + " moves; " + points + "/" + goal + " points]";
    }
 
    /**
@@ -117,6 +128,13 @@ public class GameState
       return item;
    }
 
+   /**
+    * Attempt to move in the given direction. If unable, stay in the same
+    * location and return false.
+    * 
+    * @param direction
+    * @return true if successful
+    */
    public boolean move(String direction)
    {
       ContainerItem destination = map.getNeighbor(location, direction);
@@ -130,55 +148,72 @@ public class GameState
          return true;
       }
    }
-
-   private ContainerItem populateDemoMap()
+   
+   public void addPoints(int points)
    {
-      ContainerItem kitchen = new ContainerItem("kitchen",
-               "It is full of appliances and utensils, but not much food");
-      ContainerItem hallway = new ContainerItem("hallway",
-               "It is long and narrow");
-      ContainerItem library = new ContainerItem("library",
-               "It is filled with books");
-
-      kitchen.addItem(new Item("sandwich", "consumable",
-               "a peanut-butter and jelly sandwich"));
-      kitchen.addItem(new Item("cheesecake", "consumable",
-               "it's magically delicious!"));
-
-      ContainerItem backpack = new ContainerItem("backpack",
-               "a seemingly ordinary backpack");
-      backpack.addItem(new Item("flashlight", "tool",
-               "an ordinary flashlight, currently turned off"));
-
-      hallway.addItem(backpack);
-      hallway.addItem(new Item("mail", "media",
-               "just a bunch of bills and junk mail"));
-
-      library.addItem(new Item("dictionary", "media", "it is very heavy"));
-      library.addItem(new Item("novel", "media",
-               "it's \"The Hitchhiker's Guide to the Galaxy\"!"));
-      library.addItem(new Item("spellbook", "media",
-               "a powerful book of spells"));
-
-      inventory.addItem(new Item("screwdriver", "tool",
-               "a flathead screwdriver"));
-
-      map.addLocation(kitchen);
-      map.addLocation(hallway);
-      map.addLocation(library);
-
-      map.addNeighbor(kitchen, "north", hallway);
-      map.addNeighbor(hallway, "south", kitchen);
-
-      map.addNeighbor(hallway, "east", library);
-      map.addNeighbor(library, "west", hallway);
-
-      return kitchen;
+      this.points += points;
    }
+   
+   public void addMove()
+   {
+      moves++;
+   }
+   
+   public boolean reachedGoal()
+   {
+      return points >= goal;
+   }
+
+// This map was used for earlier testing:
+//   private ContainerItem populateDemoMap()
+//   {
+//      ContainerItem kitchen = new ContainerItem("kitchen",
+//               "It is full of appliances and utensils, but not much food");
+//      ContainerItem hallway = new ContainerItem("hallway",
+//               "It is long and narrow");
+//      ContainerItem library = new ContainerItem("library",
+//               "It is filled with books");
+//
+//      kitchen.addItem(new Item("sandwich", "consumable",
+//               "a peanut-butter and jelly sandwich"));
+//      kitchen.addItem(new Item("cheesecake", "consumable",
+//               "it's magically delicious!"));
+//
+//      ContainerItem backpack = new ContainerItem("backpack",
+//               "a seemingly ordinary backpack");
+//      backpack.addItem(new Item("flashlight", "tool",
+//               "an ordinary flashlight, currently turned off"));
+//
+//      hallway.addItem(backpack);
+//      hallway.addItem(new Item("mail", "media",
+//               "just a bunch of bills and junk mail"));
+//
+//      library.addItem(new Item("dictionary", "media", "it is very heavy"));
+//      library.addItem(new Item("novel", "media",
+//               "it's \"The Hitchhiker's Guide to the Galaxy\"!"));
+//      library.addItem(new Item("spellbook", "media",
+//               "a powerful book of spells"));
+//
+//      inventory.addItem(new Item("screwdriver", "tool",
+//               "a flathead screwdriver"));
+//
+//      map.addLocation(kitchen);
+//      map.addLocation(hallway);
+//      map.addLocation(library);
+//
+//      map.addNeighbor(kitchen, "north", hallway);
+//      map.addNeighbor(hallway, "south", kitchen);
+//
+//      map.addNeighbor(hallway, "east", library);
+//      map.addNeighbor(library, "west", hallway);
+//      
+//      return kitchen;
+//   }
 
    /**
     * Load items and locations for the Parsely game, "ACTION CASTLE!" (c) 2009,
-    * Jared A. Sorensen / Memento Mori Theatricks http://www.memento-mori.com/
+    * Jared A. Sorensen / Memento Mori Theatricks
+    * http://www.memento-mori.com/
     * Content used here solely for educational purposes, not for distribution
     */
    private ContainerItem populateCastleMap()
@@ -199,7 +234,7 @@ public class GameState
       Item fish = new Item("fish", "food", "a raw fish");
       ContainerItem pond = new SwitchItem("pond",
                "You are at the edge of a small fishing pond.", pole, fish,
-               true, null, null, "You are at the edge of a small fishing pond.");
+               true, null, null, "You are at the edge of a small fishing pond.", 10);
 
       ContainerItem path = new ContainerItem("path",
                "You are walking along a winding path. There is a tall tree here.");
@@ -224,7 +259,7 @@ public class GameState
                false,
                "east",
                hall,
-               "You are in the courtyard of ACTION CASTLE. There is an unconscious guard here.");
+               "You are in the courtyard of ACTION CASTLE. There is an unconscious guard here.", 20);
 
       ContainerItem drawbridge = new SwitchItem(
                "drawbridge",
@@ -234,7 +269,7 @@ public class GameState
                false,
                "east",
                courtyard,
-               "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a satisfied troll here.");
+               "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a satisfied troll here.", 20);
 
       ContainerItem tower = new SwitchItem(
                "tower",
@@ -244,25 +279,25 @@ public class GameState
                false,
                null,
                null,
-               "You are inside a tower. The princess is here. She says she will marry you if you have a crown.");
+               "You are inside a tower. The princess is here. She says she will marry you if you have a crown.", 10);
 
       ContainerItem towerStairs = new SwitchItem(
                "tower stairs",
                "You are climbing the stairs to the tower. There is a locked door here.",
                key, null, false, "up", tower,
-               "You are climbing the stairs to the tower. There is an unlocked door here.");
+               "You are climbing the stairs to the tower. There is an unlocked door here.", 5);
 
       Item crown = new Item("crown", "tool", "an ornate golden crown");
       ContainerItem dungeon = new SwitchItem(
                "dungeon",
                "You are in the dungeon. There is a spooky ghost here, wearing a crown.",
-               candle, crown, true, null, null, "You are in the dungeon.");
+               candle, crown, true, null, null, "You are in the dungeon.", 10);
 
       ContainerItem dungeonStairs = new SwitchItem(
                "dungeon stairs",
                "You are climbing the stairs down to the dungeon. It is too dark to see!",
                lamp, null, true, "down", dungeon,
-               "You are climbing the stairs down to the dungeon.");
+               "You are climbing the stairs down to the dungeon.", 5);
 
       ContainerItem throne = new SwitchItem(
                "throne room",
@@ -272,7 +307,7 @@ public class GameState
                true,
                null,
                null,
-               "This is the throne room of ACTION CASTLE. You are sitting in an ornate golden throne, with your new queen by your side.");
+               "This is the throne room of ACTION CASTLE. You are sitting in an ornate golden throne, with your new queen by your side.", 20);
 
       map.addLocation(cottage);
       map.addLocation(garden);
@@ -320,10 +355,15 @@ public class GameState
       map.addNeighbor(hall, "east", throne);
       map.addNeighbor(throne, "west", hall);
 
+      this.goal = 100;
+      
       return cottage;
    }
 
    private GameMap map;
    private ContainerItem inventory;
    private ContainerItem location;
+   private int moves;
+   private int points;
+   private int goal;
 }

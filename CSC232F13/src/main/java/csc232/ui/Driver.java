@@ -43,6 +43,16 @@ public class Driver
       Driver d = new Driver(console);
       d.run();
 
+      // pause for five seconds
+      try
+      {
+         Thread.sleep(5000);
+      }
+      catch (InterruptedException e)
+      {
+         // ignore this
+      }
+
       frame.dispose();
    }
 
@@ -79,7 +89,7 @@ public class Driver
    {
       String[] words = getCommand();
 
-      while (true)
+      while (!gameState.reachedGoal())
       {
          if (words[0].equals("quit") || words[0].equals("q"))
          {
@@ -142,6 +152,7 @@ public class Driver
                   source.removeItem(item);
                   gameState.addInventoryItem(item);
                   io.println("Taken");
+                  gameState.addMove();
                }
             }
          }
@@ -174,6 +185,7 @@ public class Driver
                   gameState.removeInventoryItem(item);
                   target.addItem(item, gameState);
                   io.println("Done");
+                  gameState.addMove();
                }
             }
          }
@@ -193,6 +205,10 @@ public class Driver
                if (!success)
                {
                   io.println("You can't go that way.");
+               }
+               else
+               {
+                  gameState.addMove();
                }
             }
          }
@@ -216,6 +232,12 @@ public class Driver
          words = getCommand();
       }
 
+      if (gameState.reachedGoal())
+      {
+         io.println(gameState.getLocationDescription()); // this is a hack...
+         io.println("*** YOU WIN!!! ***");
+      }
+      
       io.println("Goodbye!");
    }
 
