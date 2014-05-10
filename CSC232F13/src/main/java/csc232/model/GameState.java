@@ -11,7 +11,8 @@ public class GameState
       this.inventory = new ContainerItem("inventory",
                "The stuff you are carrying");
       this.map = new GameMap();
-      this.location = populateDemoMap();
+//      this.location = populateDemoMap();
+      this.location = populateCastleMap();
    }
 
    public ContainerItem getLocation()
@@ -41,6 +42,20 @@ public class GameState
    public String listNeighbors()
    {
       return map.listNeighbors(location);
+   }
+
+   /**
+    * Change the map by adding (or revising) a neighbor to the given location in
+    * the specified direction.
+    * 
+    * @param location
+    * @param direction
+    * @param neighbor
+    */
+   public void putNeighbor(ContainerItem location, String direction,
+            ContainerItem neighbor)
+   {
+      map.addNeighbor(location, direction, neighbor);
    }
 
    /**
@@ -162,9 +177,8 @@ public class GameState
    }
 
    /**
-    * Load items and locations for the Parsely game, "ACTION CASTLE!"
-    * (c) 2009, Jared A. Sorensen / Memento Mori Theatricks
-    * http://www.memento-mori.com/
+    * Load items and locations for the Parsely game, "ACTION CASTLE!" (c) 2009,
+    * Jared A. Sorensen / Memento Mori Theatricks http://www.memento-mori.com/
     * Content used here solely for educational purposes, not for distribution
     */
    private ContainerItem populateCastleMap()
@@ -177,18 +191,65 @@ public class GameState
                "You are at the edge of a small fishing pond.");
       ContainerItem path = new ContainerItem("path",
                "You are walking along a winding path. There is a tall tree here.");
+      
       ContainerItem tree = new ContainerItem("tree",
                "You are at the top of the tall tree.");
-      ContainerItem courtyard = null;
-      Item fish = null;
-      ContainerItem drawbridge = new SwitchLocation(
+      Item branch = new Item("branch", "tool", "a stout, dead branch");
+      tree.addItem(branch);
+      
+      ContainerItem hall = new ContainerItem("hall", "You stand inside the Great Feasting Hall.");
+      
+      Item key = new Item("key", "tool", "a heavy iron key");
+      ContainerItem courtyard = new SwitchItem(
+               "courtyard",
+               "You are in the courtyard of ACTION CASTLE. There is a guard here, blocking the path east.",
+               branch,
+               key,
+               false,
+               "east",
+               hall,
+               "You are in the courtyard of ACTION CASTLE. There is an unconscious guard here.");
+      Item fish = new Item("fish", "food", "a raw fish");
+      pond.addItem(fish); // TODO make the pond a Switch
+      
+      ContainerItem drawbridge = new SwitchItem(
                "drawbridge",
                "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a mean troll here.",
                fish,
+               null,
+               false,
                "east",
                courtyard,
                "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a satisfied troll here.");
 
+      map.addLocation(cottage);
+      map.addLocation(garden);
+      map.addLocation(pond);
+      map.addLocation(path);
+      map.addLocation(tree);
+      map.addLocation(drawbridge);
+      map.addLocation(courtyard);
+      map.addLocation(hall);
+      
+      map.addNeighbor(cottage, "out", garden);
+      map.addNeighbor(garden, "in", cottage);
+      
+      map.addNeighbor(garden, "south", pond);
+      map.addNeighbor(pond, "north", garden);
+      
+      map.addNeighbor(garden, "north", path);
+      map.addNeighbor(path, "south", garden);
+      
+      map.addNeighbor(path, "up", tree);
+      map.addNeighbor(tree, "down", path);
+      
+      map.addNeighbor(path, "east", drawbridge);
+      map.addNeighbor(drawbridge, "west", path);
+      
+      map.addNeighbor(courtyard, "west", drawbridge);
+      
+      map.addNeighbor(hall, "west", courtyard);
+      
       return cottage;
    }
 

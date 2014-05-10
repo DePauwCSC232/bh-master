@@ -69,6 +69,7 @@ public class Driver
     *   container into inventory</li>
     * <li>put (p) NAME [in CONTAINER]: move item from inventory to location or
     *   named container</li>
+    * <li>use (u) NAME: alias for "put name"</li>
     * <li>inventory (i): list items in inventory</li>
     * <li>go (g) DIRECTION: move to a new location in the given direction</li>
     * <li>help (h): list available commands</li>
@@ -144,7 +145,8 @@ public class Driver
                }
             }
          }
-         else if (words[0].equals("put") || words[0].equals("p"))
+         else if (words[0].equals("put") || words[0].equals("p")
+                  || words[0].equals("use") || words[0].equals("u"))
          {
             if (words.length == 1)
             {
@@ -201,6 +203,7 @@ public class Driver
             io.println("examine (x) NAME: print a description of the named item, if present");
             io.println("take (t) NAME [from CONTAINER]: move item from location or named container into inventory");
             io.println("put (p) NAME [in CONTAINER]: move item from inventory to location or named container");
+            io.println("use (u) NAME: alias for \"put NAME\"");
             io.println("inventory (i): list items in inventory");
             io.println("go (g) DIRECTION: move to a new location in the given direction");
             io.println("help (h): list available commands");
