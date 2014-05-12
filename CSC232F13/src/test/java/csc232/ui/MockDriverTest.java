@@ -72,7 +72,7 @@ public class MockDriverTest
       InOrder inOrder = inOrder(io);
       inOrder.verify(io).println("You are standing in a small cottage.\nIt contains: pole");
       inOrder.verify(io).println("Exits are: out");
-      inOrder.verify(io).println("You have: lamp");
+      inOrder.verify(io).println("You have: lamp, apple");
       inOrder.verify(io).println("No item specified");
       inOrder.verify(io).println("a simple fishing pole");
       inOrder.verify(io).println("There is no such item here");
@@ -87,7 +87,7 @@ public class MockDriverTest
       inOrder.verify(io).println("You are standing on a lush garden path. There is a cottage here.\nIt contains: rose");
       inOrder.verify(io).println("Exits are: south, north, in");
       inOrder.verify(io).println("Taken");
-      inOrder.verify(io).println("You have: lamp, pole, rose");
+      inOrder.verify(io).println("You have: lamp, apple, pole, rose");
       inOrder.verify(io).println("OK");
       inOrder.verify(io).println("You are at the edge of a small fishing pond.");
       inOrder.verify(io).println("Exits are: north");
@@ -98,11 +98,11 @@ public class MockDriverTest
       inOrder.verify(io).println("Done");
       inOrder.verify(io).println("You are at the edge of a small fishing pond.\nIt contains: pole, rose");
       inOrder.verify(io).println("Exits are: north");
-      inOrder.verify(io).println("You have: lamp, fish");
+      inOrder.verify(io).println("You have: lamp, apple, fish");
       inOrder.verify(io).println("There is no such container here");
       inOrder.verify(io).println("You are at the edge of a small fishing pond.\nIt contains: pole, rose");
       inOrder.verify(io).println("Exits are: north");
-      inOrder.verify(io).println("You have: lamp, fish");
+      inOrder.verify(io).println("You have: lamp, apple, fish");
       inOrder.verify(io).println("There is no such container here");
       inOrder.verify(io).println("OK");
       inOrder.verify(io).println("You are standing on a lush garden path. There is a cottage here.");
@@ -160,7 +160,7 @@ public class MockDriverTest
       InOrder inOrder = inOrder(io);
       inOrder.verify(io).println("You are standing in a small cottage.\nIt contains: pole");
       inOrder.verify(io).println("Exits are: out");
-      inOrder.verify(io).println("You have: lamp");
+      inOrder.verify(io).println("You have: lamp, apple");
       inOrder.verify(io).println("No item specified");
       inOrder.verify(io).println("a simple fishing pole");
       inOrder.verify(io).println("There is no such item here");
@@ -175,7 +175,7 @@ public class MockDriverTest
       inOrder.verify(io).println("You are standing on a lush garden path. There is a cottage here.\nIt contains: rose");
       inOrder.verify(io).println("Exits are: south, north, in");
       inOrder.verify(io).println("Taken");
-      inOrder.verify(io).println("You have: lamp, pole, rose");
+      inOrder.verify(io).println("You have: lamp, apple, pole, rose");
       inOrder.verify(io).println("OK");
       inOrder.verify(io).println("You are at the edge of a small fishing pond.");
       inOrder.verify(io).println("Exits are: north");
@@ -186,11 +186,11 @@ public class MockDriverTest
       inOrder.verify(io).println("Done");
       inOrder.verify(io).println("You are at the edge of a small fishing pond.\nIt contains: pole, rose");
       inOrder.verify(io).println("Exits are: north");
-      inOrder.verify(io).println("You have: lamp, fish");
+      inOrder.verify(io).println("You have: lamp, apple, fish");
       inOrder.verify(io).println("There is no such container here");
       inOrder.verify(io).println("You are at the edge of a small fishing pond.\nIt contains: pole, rose");
       inOrder.verify(io).println("Exits are: north");
-      inOrder.verify(io).println("You have: lamp, fish");
+      inOrder.verify(io).println("You have: lamp, apple, fish");
       inOrder.verify(io).println("There is no such container here");
       inOrder.verify(io).println("OK");
       inOrder.verify(io).println("You are standing on a lush garden path. There is a cottage here.");

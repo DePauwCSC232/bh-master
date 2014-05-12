@@ -15,7 +15,7 @@ public class GameStateTest
                gameState.getLocationDescription());
       assertEquals("cottage [0 moves; 0/100 points]", gameState.getPrompt());
       assertEquals("out", gameState.listNeighbors());
-      assertEquals("lamp", gameState.listInventory());
+      assertEquals("lamp, apple", gameState.listInventory());
       assertEquals("lamp", gameState.lookupInventory("lamp").getShortName());
       assertEquals(null, gameState.lookupInventory("pole"));
       assertEquals(null, gameState.lookupInventory("fish"));
@@ -49,7 +49,7 @@ public class GameStateTest
       Item fish = new Item("fish", "", "");
       gameState.addInventoryItem(fish);
 
-      assertEquals("lamp, fish", gameState.listInventory());
+      assertEquals("lamp, apple, fish", gameState.listInventory());
       assertEquals("lamp", gameState.lookupInventory("lamp").getShortName());
       assertEquals(null, gameState.lookupInventory("pole"));
       assertEquals(fish, gameState.lookupInventory("fish"));
@@ -60,7 +60,7 @@ public class GameStateTest
       Item lamp = gameState.lookupInventory("lamp");
       gameState.removeInventoryItem(lamp);
 
-      assertEquals("fish", gameState.listInventory());
+      assertEquals("apple, fish", gameState.listInventory());
       assertEquals(null, gameState.lookupInventory("lamp"));
       assertEquals(null, gameState.lookupInventory("pole"));
       assertEquals(fish, gameState.lookupInventory("fish"));
@@ -70,7 +70,7 @@ public class GameStateTest
 
       gameState.getLocation().addItem(lamp);
 
-      assertEquals("fish", gameState.listInventory());
+      assertEquals("apple, fish", gameState.listInventory());
       assertEquals(null, gameState.lookupInventory("lamp"));
       assertEquals(null, gameState.lookupInventory("pole"));
       assertEquals(fish, gameState.lookupInventory("fish"));

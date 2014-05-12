@@ -57,10 +57,9 @@ public class RWDriverTest
                + "go north\n"
                + "look\n"
                + "quit";
-      String expectedOutput = "cottage [0 moves; 0/100 points]> You are standing in a small cottage." + NL
-               + "It contains: pole" + NL
+      String expectedOutput = "cottage [0 moves; 0/100 points]> You are standing in a small cottage.\nIt contains: pole" + NL
                + "Exits are: out" + NL
-               + "cottage [0 moves; 0/100 points]> You have: lamp" + NL
+               + "cottage [0 moves; 0/100 points]> You have: lamp, apple" + NL
                + "cottage [0 moves; 0/100 points]> No item specified" + NL
                + "cottage [0 moves; 0/100 points]> a simple fishing pole" + NL
                + "cottage [0 moves; 0/100 points]> There is no such item here" + NL
@@ -72,29 +71,25 @@ public class RWDriverTest
                + "Exits are: out" + NL
                + "cottage [1 moves; 0/100 points]> You can't go that way." + NL
                + "cottage [1 moves; 0/100 points]> OK" + NL
-               + "garden [2 moves; 0/100 points]> You are standing on a lush garden path. There is a cottage here." + NL
-               + "It contains: rose" + NL
+               + "garden [2 moves; 0/100 points]> You are standing on a lush garden path. There is a cottage here.\nIt contains: rose" + NL
                + "Exits are: south, north, in" + NL
                + "garden [2 moves; 0/100 points]> Taken" + NL
-               + "garden [3 moves; 0/100 points]> You have: lamp, pole, rose" + NL
+               + "garden [3 moves; 0/100 points]> You have: lamp, apple, pole, rose" + NL
                + "garden [3 moves; 0/100 points]> OK" + NL
                + "pond [4 moves; 0/100 points]> You are at the edge of a small fishing pond." + NL
                + "Exits are: north" + NL
                + "pond [4 moves; 0/100 points]> Done" + NL
-               + "pond [5 moves; 10/100 points]> You are at the edge of a small fishing pond." + NL
-               + "It contains: fish, pole" + NL
+               + "pond [5 moves; 10/100 points]> You are at the edge of a small fishing pond.\nIt contains: fish, pole" + NL
                + "Exits are: north" + NL
                + "pond [5 moves; 10/100 points]> Taken" + NL
                + "pond [6 moves; 10/100 points]> Done" + NL
-               + "pond [7 moves; 10/100 points]> You are at the edge of a small fishing pond." + NL
-               + "It contains: pole, rose" + NL
+               + "pond [7 moves; 10/100 points]> You are at the edge of a small fishing pond.\nIt contains: pole, rose" + NL
                + "Exits are: north" + NL
-               + "pond [7 moves; 10/100 points]> You have: lamp, fish" + NL
+               + "pond [7 moves; 10/100 points]> You have: lamp, apple, fish" + NL
                + "pond [7 moves; 10/100 points]> There is no such container here" + NL
-               + "pond [7 moves; 10/100 points]> You are at the edge of a small fishing pond." + NL
-               + "It contains: pole, rose" + NL
+               + "pond [7 moves; 10/100 points]> You are at the edge of a small fishing pond.\nIt contains: pole, rose" + NL
                + "Exits are: north" + NL
-               + "pond [7 moves; 10/100 points]> You have: lamp, fish" + NL
+               + "pond [7 moves; 10/100 points]> You have: lamp, apple, fish" + NL
                + "pond [7 moves; 10/100 points]> There is no such container here" + NL
                + "pond [7 moves; 10/100 points]> OK" + NL
                + "garden [8 moves; 10/100 points]> You are standing on a lush garden path. There is a cottage here." + NL
@@ -137,10 +132,9 @@ public class RWDriverTest
                + "g north\n"
                + "l\n"
                + "q";
-      String expectedOutput = "cottage [0 moves; 0/100 points]> You are standing in a small cottage." + NL
-               + "It contains: pole" + NL
+      String expectedOutput = "cottage [0 moves; 0/100 points]> You are standing in a small cottage.\nIt contains: pole" + NL
                + "Exits are: out" + NL
-               + "cottage [0 moves; 0/100 points]> You have: lamp" + NL
+               + "cottage [0 moves; 0/100 points]> You have: lamp, apple" + NL
                + "cottage [0 moves; 0/100 points]> No item specified" + NL
                + "cottage [0 moves; 0/100 points]> a simple fishing pole" + NL
                + "cottage [0 moves; 0/100 points]> There is no such item here" + NL
@@ -152,29 +146,25 @@ public class RWDriverTest
                + "Exits are: out" + NL
                + "cottage [1 moves; 0/100 points]> You can't go that way." + NL
                + "cottage [1 moves; 0/100 points]> OK" + NL
-               + "garden [2 moves; 0/100 points]> You are standing on a lush garden path. There is a cottage here." + NL
-               + "It contains: rose" + NL
+               + "garden [2 moves; 0/100 points]> You are standing on a lush garden path. There is a cottage here.\nIt contains: rose" + NL
                + "Exits are: south, north, in" + NL
                + "garden [2 moves; 0/100 points]> Taken" + NL
-               + "garden [3 moves; 0/100 points]> You have: lamp, pole, rose" + NL
+               + "garden [3 moves; 0/100 points]> You have: lamp, apple, pole, rose" + NL
                + "garden [3 moves; 0/100 points]> OK" + NL
                + "pond [4 moves; 0/100 points]> You are at the edge of a small fishing pond." + NL
                + "Exits are: north" + NL
                + "pond [4 moves; 0/100 points]> Done" + NL
-               + "pond [5 moves; 10/100 points]> You are at the edge of a small fishing pond." + NL
-               + "It contains: fish, pole" + NL
+               + "pond [5 moves; 10/100 points]> You are at the edge of a small fishing pond.\nIt contains: fish, pole" + NL
                + "Exits are: north" + NL
                + "pond [5 moves; 10/100 points]> Taken" + NL
                + "pond [6 moves; 10/100 points]> Done" + NL
-               + "pond [7 moves; 10/100 points]> You are at the edge of a small fishing pond." + NL
-               + "It contains: pole, rose" + NL
+               + "pond [7 moves; 10/100 points]> You are at the edge of a small fishing pond.\nIt contains: pole, rose" + NL
                + "Exits are: north" + NL
-               + "pond [7 moves; 10/100 points]> You have: lamp, fish" + NL
+               + "pond [7 moves; 10/100 points]> You have: lamp, apple, fish" + NL
                + "pond [7 moves; 10/100 points]> There is no such container here" + NL
-               + "pond [7 moves; 10/100 points]> You are at the edge of a small fishing pond." + NL
-               + "It contains: pole, rose" + NL
+               + "pond [7 moves; 10/100 points]> You are at the edge of a small fishing pond.\nIt contains: pole, rose" + NL
                + "Exits are: north" + NL
-               + "pond [7 moves; 10/100 points]> You have: lamp, fish" + NL
+               + "pond [7 moves; 10/100 points]> You have: lamp, apple, fish" + NL
                + "pond [7 moves; 10/100 points]> There is no such container here" + NL
                + "pond [7 moves; 10/100 points]> OK" + NL
                + "garden [8 moves; 10/100 points]> You are standing on a lush garden path. There is a cottage here." + NL
