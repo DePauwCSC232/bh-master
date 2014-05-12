@@ -57,8 +57,7 @@ public class Driver
    }
 
    /**
-    * Construct a <code>Driver</code> using the given {@link IOModel}. For now,
-    * also create a sample location and some simple {@link Item}s.
+    * Construct a <code>Driver</code> using the given {@link IOModel}.
     * 
     * @param io
     *           The I/O device to use when communicating with the user
@@ -76,9 +75,9 @@ public class Driver
     * <li>look (l): print a description of the current location</li>
     * <li>examine (x) NAME: print a description of the named item, if present</li>
     * <li>take (t) NAME [from CONTAINER]: move item from location or named
-    *   container into inventory</li>
+    * container into inventory</li>
     * <li>put (p) NAME [in CONTAINER]: move item from inventory to location or
-    *   named container</li>
+    * named container</li>
     * <li>use (u) NAME: alias for "put name"</li>
     * <li>inventory (i): list items in inventory</li>
     * <li>go (g) DIRECTION: move to a new location in the given direction</li>
@@ -139,20 +138,27 @@ public class Driver
                {
                   // Assume the last word is the container name
                   String containerName = words[words.length - 1];
-                  source = findContainer(containerName);
+                  source = gameState.findContainer(containerName);
                }
 
-               Item item = source.lookup(words[1]);
-               if (item == null)
+               if (source == null)
                {
-                  io.println("There is no such item here");
+                  io.println("There is no such container here");
                }
                else
                {
-                  source.removeItem(item);
-                  gameState.addInventoryItem(item);
-                  io.println("Taken");
-                  gameState.addMove();
+                  Item item = source.lookup(words[1]);
+                  if (item == null)
+                  {
+                     io.println("There is no such item here");
+                  }
+                  else
+                  {
+                     source.removeItem(item);
+                     gameState.addInventoryItem(item);
+                     io.println("Taken");
+                     gameState.addMove();
+                  }
                }
             }
          }
@@ -172,20 +178,27 @@ public class Driver
                {
                   // Assume the last word is the container name
                   String containerName = words[words.length - 1];
-                  target = findContainer(containerName);
+                  target = gameState.findContainer(containerName);
                }
 
-               Item item = gameState.lookupInventory(words[1]);
-               if (item == null)
+               if (target == null)
                {
-                  io.println("You do not have that item");
+                  io.println("There is no such container here");
                }
                else
                {
-                  gameState.removeInventoryItem(item);
-                  target.addItem(item, gameState);
-                  io.println("Done");
-                  gameState.addMove();
+                  Item item = gameState.lookupInventory(words[1]);
+                  if (item == null)
+                  {
+                     io.println("You do not have that item");
+                  }
+                  else
+                  {
+                     gameState.removeInventoryItem(item);
+                     target.addItem(item, gameState);
+                     io.println("Done");
+                     gameState.addMove();
+                  }
                }
             }
          }
@@ -209,6 +222,7 @@ public class Driver
                else
                {
                   gameState.addMove();
+                  io.println("OK");
                }
             }
          }
@@ -237,24 +251,8 @@ public class Driver
          io.println(gameState.getLocationDescription()); // this is a hack...
          io.println("*** YOU WIN!!! ***");
       }
-      
+
       io.println("Goodbye!");
-   }
-
-   private ContainerItem findContainer(String containerName)
-   {
-      Item container = gameState.findItem(containerName);
-
-      // Check that the container really is a ContainerItem
-      if (container != null && container instanceof ContainerItem)
-      {
-         return (ContainerItem) container;
-      }
-      else
-      {
-         io.println("There is no such container here");
-         return null;
-      }
    }
 
    private String[] getCommand()

@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class ContainerItemTest
 {
-
    @Test
    public void testGetters()
    {

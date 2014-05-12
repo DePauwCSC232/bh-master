@@ -24,21 +24,9 @@ public class GameMap
    }
 
    /**
-    * Add a {@link ContainerItem} to the collection of known locations.
-    * 
-    * @param location
-    */
-   public void addLocation(ContainerItem location)
-   {
-      String name = location.getShortName();
-      locations.put(name, location);
-      neighbors.put(name, new HashMap<String, String>());
-   }
-
-   /**
     * Add a connection from the given location, in the given direction, to reach
-    * the given neighboring location. Assumes that both locations have already
-    * been added to the map.
+    * the given neighboring location. If either location has not yet been added
+    * to the map, add it first.
     * 
     * @param location
     *           the starting location
@@ -51,6 +39,16 @@ public class GameMap
             ContainerItem neighbor)
    {
       String name = location.getShortName();
+      
+      if (!locations.containsKey(name)) {
+         addLocation(location);
+      }
+      
+      if (!locations.containsKey(neighbor.getShortName()))
+      {
+         addLocation(neighbor);
+      }
+      
       neighbors.get(name).put(direction, neighbor.getShortName());
    }
 
@@ -98,6 +96,13 @@ public class GameMap
       String name = location.getShortName();
       String neighbor = neighbors.get(name).get(direction);
       return locations.get(neighbor);
+   }
+
+   private void addLocation(ContainerItem location)
+   {
+      String name = location.getShortName();
+      locations.put(name, location);
+      neighbors.put(name, new HashMap<String, String>());
    }
 
    private Map<String, ContainerItem> locations;
