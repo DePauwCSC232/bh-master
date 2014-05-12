@@ -198,6 +198,8 @@ public class GameState
    {
       Item lamp = new Item("lamp", "tool", "an ordinary lamp");
       inventory.addItem(lamp);
+      Item apple = new Item("apple", "food", "a delicious Jonathan apple");
+      inventory.addItem(apple);
 
       ContainerItem cottage = new ContainerItem("cottage",
                "You are standing in a small cottage.");
