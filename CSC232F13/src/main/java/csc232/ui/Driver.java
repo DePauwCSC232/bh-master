@@ -8,7 +8,16 @@ A simple driver for an adventure game.
 
 package csc232.ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.StringReader;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 
 import acm.io.IOConsole;
 import acm.io.IOModel;
@@ -23,6 +32,7 @@ import csc232.model.Item;
  */
 public class Driver
 {
+   @SuppressWarnings("serial")
    public static void main(String[] args)
    {
       // // Create a Driver using System.in/out as the IOModel
@@ -33,11 +43,70 @@ public class Driver
 
       // Create a Driver using a Swing interface
       JFrame frame = new JFrame("Adventure!");
-      frame.setSize(500, 300);
+      frame.setSize(800, 500);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-      IOConsole console = new IOConsole();
+      console = new IOConsole();
       frame.add(console);
+      
+      Action quit = new AbstractAction("Quit")
+      {
+         {
+            putValue(MNEMONIC_KEY, KeyEvent.VK_Q);
+         }
+         
+         public void actionPerformed(ActionEvent arg0)
+         {
+            runCommand("quit\n");
+         }
+      };
+      
+      Action help = new AbstractAction("Help")
+      {
+         {
+            putValue(MNEMONIC_KEY, KeyEvent.VK_H);
+         }
+         
+         public void actionPerformed(ActionEvent arg0)
+         {
+            runCommand("help\n");
+         }
+      };
+      
+      Action large = new AbstractAction("LARGE")
+      {
+         {
+            putValue(MNEMONIC_KEY, KeyEvent.VK_L);
+            System.out.println(console.getFont());
+         }
+         
+         public void actionPerformed(ActionEvent arg0)
+         {
+            console.setFont("Monospaced-bold-18");
+         }
+      };
+      
+      Action small = new AbstractAction("small")
+      {
+         {
+            putValue(MNEMONIC_KEY, KeyEvent.VK_S);
+         }
+         
+         public void actionPerformed(ActionEvent arg0)
+         {
+            console.setFont("Monospaced-plain-12");
+         }
+      };
+      
+      JMenuBar menubar = new JMenuBar();
+      JMenu actions = new JMenu("Actions");
+      actions.add(help);
+      actions.add(large);
+      actions.add(small);
+      actions.add(quit);
+      menubar.add(actions);
+      frame.setJMenuBar(menubar);
+      
       frame.setVisible(true);
 
       Driver d = new Driver(console);
@@ -262,6 +331,12 @@ public class Driver
       return line.trim().toLowerCase().split(" ");
    }
 
+   private static void runCommand(String command)
+   {
+      console.setInputScript(new BufferedReader(new StringReader(command)));
+   }
+   
    private IOModel io;
    private GameState gameState;
+   private static IOConsole console;
 }
