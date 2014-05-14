@@ -77,7 +77,6 @@ public class Driver
       {
          {
             putValue(MNEMONIC_KEY, KeyEvent.VK_L);
-            System.out.println(console.getFont());
          }
          
          public void actionPerformed(ActionEvent arg0)
