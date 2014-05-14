@@ -156,7 +156,7 @@ public class Driver
    {
       String[] words = getCommand();
 
-      while (!gameState.reachedGoal())
+      while (true)
       {
          if (words[0].equals("quit") || words[0].equals("q"))
          {
@@ -316,10 +316,12 @@ public class Driver
 
       if (gameState.reachedGoal())
       {
-         io.println(gameState.getLocationDescription()); // this is a hack...
          io.println("*** YOU WIN!!! ***");
       }
 
+      io.println("You achieved " + gameState.getPoints()
+               + " points out of " + gameState.getGoal()
+               + ", taking " + gameState.getMoves() + " moves!");
       io.println("Goodbye!");
    }
 

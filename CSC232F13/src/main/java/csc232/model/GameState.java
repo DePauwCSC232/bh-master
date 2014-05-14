@@ -16,11 +16,9 @@ public class GameState
 {
    public GameState()
    {
-      this.inventory = new ContainerItem("inventory",
-               "The stuff you are carrying");
+      this.inventory = new ContainerItem("inventory", "The stuff you are carrying");
       this.map = new GameMap();
-      // this.location = populateDemoMap(); // Use this for testing...
-      this.location = populateCastleMap();
+      this.location = populateCastleMap(); // also sets goal
 
       this.moves = 0;
       this.points = 0;
@@ -31,6 +29,21 @@ public class GameState
       return location;
    }
 
+   public int getPoints()
+   {
+      return points;
+   }
+   
+   public int getGoal()
+   {
+      return goal;
+   }
+   
+   public int getMoves()
+   {
+      return moves;
+   }
+   
    /**
     * @return the description string for the current location
     */
