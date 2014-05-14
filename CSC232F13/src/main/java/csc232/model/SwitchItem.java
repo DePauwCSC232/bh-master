@@ -12,7 +12,8 @@ package csc232.model;
  * A <code>SwitchItem</code> behaves like an ordinary {@link ContainerItem},
  * except when a trigger object is added to it, it switches to the triggered
  * state: the description will change, the hidden object (if not null) will be
- * added to the container, and the points will be added to the player's total.
+ * added to the container, the points will be added to the player's total, and
+ * the message (which may be null) to display to the player.
  * Furthermore, if it is being used as a location, a new or modified exit will
  * be inserted in the map, going in the specified direction and leading to the
  * specified neighbor. Finally, the <code>keep</code> flag determines whether
@@ -22,7 +23,7 @@ public class SwitchItem extends ContainerItem
 {
    public SwitchItem(String shortName, String description, Item trigger,
             Item hidden, boolean keep, String direction,
-            ContainerItem neighbor, String newDescription, int points)
+            ContainerItem neighbor, String newDescription, int points, String message)
    {
       super(shortName, description);
       this.trigger = trigger;
@@ -32,6 +33,7 @@ public class SwitchItem extends ContainerItem
       this.neighbor = neighbor;
       this.newDescription = newDescription;
       this.points = points;
+      this.message = message;
       this.triggered = false;
    }
 
@@ -39,9 +41,9 @@ public class SwitchItem extends ContainerItem
     * @see csc232.model.ContainerItem#addItem(csc232.model.Item, csc232.model.GameState)
     */
    @Override
-   public void addItem(Item item, GameState gameState)
+   public String addItem(Item item, GameState gameState)
    {
-      if (!triggered && item == trigger)
+      if (gameState != null && !triggered && item == trigger)
       {
          triggered = true;
          setDescription(newDescription);
@@ -58,10 +60,11 @@ public class SwitchItem extends ContainerItem
          {
             super.addItem(item, gameState);
          }
+         return message;
       }
       else
       {
-         super.addItem(item, gameState);
+         return super.addItem(item, gameState);
       }
    }
 
@@ -72,5 +75,6 @@ public class SwitchItem extends ContainerItem
    private ContainerItem neighbor;
    private String newDescription;
    private int points;
+   private String message;
    private boolean triggered;
 }

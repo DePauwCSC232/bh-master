@@ -263,8 +263,15 @@ public class Driver
                   else
                   {
                      gameState.removeInventoryItem(item);
-                     target.addItem(item, gameState);
-                     io.println("Done");
+                     String message = target.addItem(item, gameState);
+                     if (message != null)
+                     {
+                        io.println(message);
+                     }
+                     else
+                     {
+                        io.println("Done");
+                     }
                      gameState.addMove();
                   }
                }

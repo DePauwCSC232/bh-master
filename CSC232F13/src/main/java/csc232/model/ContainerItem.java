@@ -38,18 +38,22 @@ public class ContainerItem extends Item
    /**
     * Add an item to this container. Takes the current {@link GameState},
     * in case a subclass wants to modify its behavior based on state.
+    * Returns a message to be displayed to the player, or null.
     * 
     * @param item
     * @param gameState current state, or null if not available
+    * @return message to display, or null
     */
-   public void addItem(Item item, GameState gameState)
+   public String addItem(Item item, GameState gameState)
    {
       items.add(item);
+      return null;
    }
 
    /**
     * Add an item to this container. Passes a null {@link GameState}, for
-    * cases where we don't have one available.
+    * cases where we don't have one available. This should only be used
+    * when initially populating a game map, or for unit tests.
     * 
     * @param item
     */

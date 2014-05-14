@@ -110,7 +110,7 @@ public class GameState
     */
    public void addInventoryItem(Item item)
    {
-      inventory.addItem(item, this);
+      inventory.addItem(item, this); // there shouldn't be a message returned
    }
 
    /**
@@ -228,7 +228,8 @@ public class GameState
       ContainerItem pond = new SwitchItem("pond",
                "You are at the edge of a small fishing pond.", pole, fish,
                true, null, null,
-               "You are at the edge of a small fishing pond.", 10);
+               "You are at the edge of a small fishing pond.", 10,
+               "You cast the line over the pond, and immediately pull back a fish.");
 
       ContainerItem path = new ContainerItem("path",
                "You are walking along a winding path. There is a tall tree here.");
@@ -254,7 +255,8 @@ public class GameState
                "east",
                hall,
                "You are in the courtyard of ACTION CASTLE. There is an unconscious guard here.",
-               20);
+               20,
+               "You hit the guard over the head and knock him unconscious. Something falls from his pocket.");
 
       ContainerItem drawbridge = new SwitchItem(
                "drawbridge",
@@ -265,7 +267,8 @@ public class GameState
                "east",
                courtyard,
                "You are standing on one side of a drawbridge leading to ACTION CASTLE. There is a satisfied troll here.",
-               20);
+               20,
+               "You give the fish to the troll; it steps to the side and starts to eat.");
 
       ContainerItem tower = new SwitchItem(
                "tower",
@@ -276,7 +279,8 @@ public class GameState
                null,
                null,
                "You are inside a tower. The princess is here. She says she will marry you if you have a crown.",
-               10);
+               10,
+               "The princess is deeply moved by your gesture.");
 
       ContainerItem towerStairs = new SwitchItem(
                "tower stairs",
@@ -287,19 +291,22 @@ public class GameState
                "up",
                tower,
                "You are climbing the stairs to the tower. There is an unlocked door here.",
-               5);
+               5,
+               "The key unlocks the door.");
 
       Item crown = new Item("crown", "tool", "an ornate golden crown");
       ContainerItem dungeon = new SwitchItem(
                "dungeon",
                "You are in the dungeon. There is a spooky ghost here, wearing a crown.",
-               candle, crown, true, null, null, "You are in the dungeon.", 10);
+               candle, crown, true, null, null, "You are in the dungeon.", 10,
+               "The smoke from the candle drives the ghost away, but it leaves the crown behind.");
 
       ContainerItem dungeonStairs = new SwitchItem(
                "dungeon stairs",
                "You are climbing the stairs down to the dungeon. It is too dark to see!",
                lamp, null, true, "down", dungeon,
-               "You are climbing the stairs down to the dungeon.", 5);
+               "You are climbing the stairs down to the dungeon.", 5,
+               "You light the lamp.");
 
       ContainerItem throne = new SwitchItem(
                "throne room",
@@ -310,7 +317,8 @@ public class GameState
                null,
                null,
                "This is the throne room of ACTION CASTLE. You are sitting in an ornate golden throne, with your new queen by your side.",
-               20);
+               20,
+               "You hear a blast of trumpets, and the following events are a bit of a blur.");
 
       map.addNeighbor(cottage, "out", garden);
       map.addNeighbor(garden, "in", cottage);

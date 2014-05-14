@@ -14,7 +14,7 @@ public class SwitchItemTest
    public void testSwitchItem()
    {
       Item trigger = new Item("trigger", "", "");
-      SwitchItem test = new SwitchItem("a", "b", trigger, null, false, null, null, "c", 0);
+      SwitchItem test = new SwitchItem("a", "b", trigger, null, false, null, null, "c", 0, null);
       Item foo = new Item("foo", "", "");
       GameState gameState = mock(GameState.class);
       
@@ -36,14 +36,14 @@ public class SwitchItemTest
    public void testAddItem1()
    {
       Item trigger = new Item("trigger", "", "");
-      SwitchItem test = new SwitchItem("a", "b", trigger, null, false, null, null, "c", 0);
+      SwitchItem test = new SwitchItem("a", "b", trigger, null, false, null, null, "c", 0, null);
       Item foo = new Item("foo", "", "");
       GameState gameState = mock(GameState.class);
       
       // Inserting the trigger item changes the description:
-      test.addItem(trigger, gameState);
+      assertEquals(null, test.addItem(trigger, gameState));
       assertEquals("c", test.getDescription());
-      test.addItem(foo, gameState);
+      assertEquals(null, test.addItem(foo, gameState));
       assertEquals("c\nIt contains: foo", test.getDescription());
       
       // When hidden and direction are null, keep is false, and points is 0,
@@ -60,14 +60,14 @@ public class SwitchItemTest
       Item trigger = new Item("trigger", "", "");
       Item bar = new Item("bar", "", "");
       ContainerItem baz = new ContainerItem("baz", "");
-      SwitchItem test = new SwitchItem("a", "b", trigger, bar, true, "north", baz, "c", 1);
+      SwitchItem test = new SwitchItem("a", "b", trigger, bar, true, "north", baz, "c", 1, "d");
       Item foo = new Item("foo", "", "");
       GameState gameState = mock(GameState.class);
       
       // Inserting the trigger item changes the description:
-      test.addItem(trigger, gameState);
+      assertEquals("d", test.addItem(trigger, gameState));
       assertEquals("c\nIt contains: bar, trigger", test.getDescription());
-      test.addItem(foo, gameState);
+      assertEquals(null, test.addItem(foo, gameState));
       assertEquals("c\nIt contains: bar, trigger, foo", test.getDescription());
       
       // Trigger object is added to test because keep is true:
