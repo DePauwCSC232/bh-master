@@ -1,4 +1,4 @@
-CSC232-Spring 2014
+CSC232-Fall 2014
 ==================
 
 This is the initial contents of the group project repository.
