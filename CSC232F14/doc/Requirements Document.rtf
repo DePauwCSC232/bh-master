@@ -3,7 +3,7 @@
 {\colortbl;\red255\green255\blue255;}
 {\info
 {\title Original file was requirementsmodel_php8hR03u.tex}
-{\doccomm Created using latex2rtf 2.3.3 r1230 (released Feb 26, 2013) on Thu Oct  3 19:24:31 2013}}\paperw12280\paperh15900\margl2680\margr2700\margb1760\margt2540\vieww20500\viewh19040\viewkind0
+{\doccomm Created using latex2rtf 2.3.3 r1230 (released Feb 26, 2013) on Thu Oct  3 19:24:31 2013}}\paperw12280\paperh15900\margl2680\margr2700\margb1760\margt2540\vieww14820\viewh10400\viewkind0
 \deftab720
 \pard\pardeftab720\sb240\sa240\qc
 
@@ -32,10 +32,10 @@ DePauw University\
 \b0\fs24 \cf0 This document was developed both as a guideline for student developers, and also as a reference for potential game designers and players.\
 \pard\pardeftab720\sb120\sa120
 
-\b\fs32 \cf0 1.3  Project Scope <STOPPED HERE>\
+\b\fs32 \cf0 1.3  Project Scope\
 \pard\pardeftab720\sb60\qj
 
-\b0\fs24 \cf0 The goal of TAGS is to support the playing of classical interactive fiction games, where the user is able to give text commands to control their player\'92s movements through an imaginary world. In the initial version, all interaction will be through a textual interface, where the player may move from location to location, collecting and examining objects, interacting with computer-controlled players, exploring the world and solving a series of puzzles to achieve an overall goal. While the initial focus will be on creating a single playable game, the system will be flexible enough that additional levels of the game, or entirely new games, may be supported with minimal extra programming. The player\'92s status in the game will be savable, so that the game may be played in multiple sessions. Future versions may add features such as static graphics or sound effects, or an environment in which to author additional levels or games.\
+\b0\fs24 \cf0 The goal of DePauw Solitaire is to support the playing of traditional card-based solitaire games, also known as \'93patience\'94. Interaction will be through a graphical user interface, where the player may move cards between piles to achieve an overall goal. The system will allow the player to choose from among several solitaire variations, each with a different layout of cards, end goal, and rules for which cards may be moved where. The implementation should be flexible enough that new variations could be added with relatively little programming effort.\
 \pard\pardeftab720\sb240\sa120
 
 \b\fs32 \cf0 2  Overall Description\
@@ -43,7 +43,7 @@ DePauw University\
 \cf0 2.1  Product Perspective\
 \pard\pardeftab720\sb60\qj
 
-\b0\fs24 \cf0 This software product is being developed by students of the Object-Oriented Software Development course at DePauw University and is intended for use by anyone wanting to experience traditional text-based interactive fiction games. The goal of this project is to develop a feature-rich application which will serve as a functioning prototype for a more comprehensive application which could be developed by extending the codebase. \
+\b0\fs24 \cf0 This software product is being developed by students of the Object-Oriented Software Development course at DePauw University and is intended for use by anyone wanting to experience traditional card-based solitaire games. The goal of this project is to develop a feature-rich application which will serve as a functioning prototype for a more comprehensive application which could be developed by extending the codebase. \
 \pard\pardeftab720\sb120\sa120
 
 \b\fs32 \cf0 2.2  Product Features\
@@ -51,33 +51,31 @@ DePauw University\
 
 \b0\fs24 \cf0 The main features of this product are: \
 \pard\tx283\pardeftab720\li600\fi-300\sb50\sa120
-\cf0 \'95	managing the textual interface to the game: accepting user commands and displaying descriptions of the player\'92s progress \
-\'95	maintaining game state (positions of player and various objects, health, inventory, score), and allowing it to be saved and restored \
+\cf0 \'95	managing the graphical interface to the game: displaying cards in a layout and allowing the player to move them between piles \
+\'95	maintaining game state (positions of cards, statistics such as number of moves) and enforcing game rules\
 \'95	providing a flexible design to support expansion or revision of the game \
 \pard\pardeftab720\sb180\sa120
 
 \b\fs32 \cf0 2.3  User Classes and Characteristics\
 \pard\pardeftab720\sb60\qj
 
-\b0\fs24 \cf0 The users will include those who simple wish to play the game, as well as those who are designing and testing the game or extensions to the game. The latter will initially be the developers themselves, although future versions may enable non-programmers to create and edit game content.\
-\pard\pardeftab720\sb120\sa120
+\b0\fs24 \cf0 The users will include those who simple wish to play the game, as well as those (the developers) who are designing and testing the game or extensions to the game.\
 
-\b\fs32 \cf0 2.4  Operating Environment\
-\pard\pardeftab720\sb60\qj
+\b\fs32 2.4  Operating Environment\
 
-\b0\fs24 \cf0 This application is designed to work with a Java Virtual Machine in a desktop environment. Users of this application are expected to be running either a Windows, MacOS, or Linux desktop operating system. \
+\b0\fs24 This application is designed to work with a Java Virtual Machine in a desktop environment. Users of this application are expected to be running either a Windows, MacOS, or Linux desktop operating system. \
 \pard\pardeftab720\sb120\sa120
 
 \b\fs32 \cf0 2.5  Design and Implementation Constraints\
 \pard\pardeftab720\sb60\qj
 
-\b0\fs24 \cf0 This application will use the filesystem as a means of saving game state and content.\
+\b0\fs24 \cf0 This application may use the filesystem as a means of saving game state and statistics.\
 \pard\pardeftab720\sb120\sa120
 
 \b\fs32 \cf0 2.6  User Documentation\
 \pard\pardeftab720\sb60\qj
 
-\b0\fs24 \cf0 A programmer\'92s guide to working with the software components developed as part of this application will be provided for those who wish to continue development on this application. Additionally, a user\'92s guide will be provided for those who wish to use this application to play a work of interactive fiction. Within the game, a limited amount of help information will also be available.\
+\b0\fs24 \cf0 A programmer\'92s guide to working with the software components developed as part of this application will be provided for those who wish to continue development on this application. Additionally, a user\'92s guide will be provided for those who wish to use this application to play a game of solitaire. Within the game, a limited amount of help information will also be available.\
 \pard\pardeftab720\sb240\sa120
 
 \b\fs32 \cf0 3  System Features\
@@ -86,72 +84,60 @@ DePauw University\
 \b0\fs24 \cf0 The following features, with their associated requirements, will be implemented in the final revision of this software system:\
 \pard\pardeftab720\sb120\sa120
 
-\b\fs32 \cf0 3.1  Textual Interface\
+\b\fs32 \cf0 3.1  Graphical Interface\
 \pard\pardeftab720\sb180\sa120
 
 \fs24 \cf0 3.1.1  Description and Priority\
 \pard\pardeftab720\sb60\qj
 
-\b0 \cf0 A user can enter textual commands to control their player\'92s interaction in the game.\
+\b0 \cf0 A user can interact with a visual representation of playing cards on the screen.\
 \pard\pardeftab720\sb120\sa120
 
 \b \cf0 3.1.2  Functional Requirements\
 \pard\pardeftab720\sb60\qj
 \cf0 REQ-1:
-\b0  Commands should be expressed as phrases in natural language (
-\i e.g.
-\i0 , English), consisting of a verb accompanied by zero or more nouns. Additional words (articles, prepositions, 
-\i etc
-\i0 .) may be allowed; if allowed, they may be ignored.\
+\b0  The game shall simulate one or more decks of playing cards, allowing them to be shuffled, dealt into piles, turned face-up or face-down, and shifted from pile to pile.\
 \pard\pardeftab720\qj
 
 \b \cf0 REQ-2:
-\b0  All interaction with the game must be possible through textual commands, including in-game help, saving and restoring game state, starting a new game, and exiting the game. The game interface may provide other ways (
-\i e.g.
-\i0 , selection from a menu or tool bar) to perform some of these operations.\
+\b0  The user shall be able to move cards by direct manipulation on the screen, using the mouse or a touch screen.\
 
 \b REQ-3:
-\b0  Unrecognized or invalid commands must be handled gracefully, with a message to the user informing them of the problem and with an opportunity to continue with a valid command.\
+\b0  The game must allow the player to undo at least the most recent move, and should permit multiple undo and redo operations.\
 
 \b REQ-4:
-\b0  Abbreviations and alternate forms for commonly used verbs and nouns should be accepted.\
-
-\b REQ-5:
-\b0  The game state must only change in response to a user command (a \'93move\'94).\
-
-\b REQ-6:
-\b0  Executing a valid command, other than getting help or saving or restoring game state, should increment a count of the number of moves the user has made.\
+\b0  The user shall be able to choose from a variety of screen backgrounds and card designs.\
 \pard\pardeftab720\sb120\sa120
 
-\b\fs32 \cf0 3.2  Mapping and Object Management\
+\b\fs32 \cf0 3.2  Rules and Card Layouts\
 \pard\pardeftab720\sb180\sa120
 
 \fs24 \cf0 3.2.1  Description and Priority\
 \pard\pardeftab720\sb60\qj
 
-\b0 \cf0 The system will maintain a collection of virtual objects and locations so as to present the illusion of interacting with real (or fantastical) objects and locations. \
+\b0 \cf0 The system allows the user to play several variants of solitaire, which differ in where cards are placed, how they may be moved, and how the game is won.\
 \pard\pardeftab720\sb120\sa120
 
 \b \cf0 3.2.2  Functional Requirements\
 \pard\pardeftab720\sb60\qj
 \cf0 REQ-1:
-\b0  Objects and locations must have associated descriptions, which the user may query when they are encountered in the game; the descriptions may change as the game progresses to reveal new information.\
+\b0  The system must keep track of rules and card layouts for several different solitaire variants.\
 \pard\pardeftab720\qj
 
 \b \cf0 REQ-2:
-\b0  Every object should have an associated location, and locations should maintain a collection of the objects associated with them.\
+\b0  The system must deal cards into the appropriate layout when a new game is started.\
 
 \b REQ-3:
-\b0  Each location should be connected to one or more neighboring locations; the player should be able to move to neighboring locations by giving a command.\
+\b0  The system should follows rules to know where cards may be moved, and should give an appropriate error response when an illegal move is attempted.\
 
 \b REQ-4:
-\b0  The user should generally be able to construct a map of locations and associated objects to assist in navigating the virtual world, although the game does not need to make it easy to do so.\
+\b0  The system should detect when the player has achieved an arrangement of cards that wins the game.\
 
 \b REQ-5:
-\b0  Objects and locations may have associated actions that are triggered directly or indirectly by user command; these actions may affect the state of the game. For example, turning on a flashlight could reveal a door to a neighboring room, or a coin could be exchanged for a potion that increases the player\'92s health for five moves.\
+\b0  The user should be able to view a summary of the rules for each variant.\
 \pard\pardeftab720\sb120\sa120
 
-\b\fs32 \cf0 3.3  Starting and Ending the Game\
+\b\fs32 \cf0 3.3  Starting and Ending a Game\
 \pard\pardeftab720\sb180\sa120
 
 \fs24 \cf0 3.3.1  Description and Priority\
@@ -163,17 +149,20 @@ DePauw University\
 \b \cf0 3.3.2  Functional Requirements\
 \pard\pardeftab720\sb60\qj
 \cf0 REQ-1:
-\b0  When a new game is started, the player and all objects and locations should be in well-defined initial states. A random number generator may be used to determine some aspects of the initial setup.\
+\b0  When a new game is started, the player may choose which variant to play.\
 \pard\pardeftab720\qj
 
 \b \cf0 REQ-2:
-\b0  There must be a definite goal or set of goals used to determine completion of the game, although the user may not know what they are until they are reached.\
+\b0  The system should use a random number generator to determine some aspects of the initial setup; it may allow the player to choose an initial seed to select a particular instance of the game.\
 
 \b REQ-3:
-\b0  The system should provide the user with an indication of what fraction of the game has been completed, together with a current score and a count of how many moves have been made since the game was started.\
+\b0  At any time during play, the player may start a new game, restart the current game, or quit the game system altogether.\
+
+\b REQ-4:
+\b0  When the player wins the current game, the system should provide an appropriate indication, then ask the player whether they want to start a new game or quit.\
 \pard\pardeftab720\sb120\sa120
 
-\b\fs32 \cf0 3.4  Saving and Restoring the Game State\
+\b\fs32 \cf0 3.4  Scores and Statistics\
 \pard\pardeftab720\sb180\sa120
 
 \fs24 \cf0 3.4.1  Description and Priority\
@@ -185,20 +174,17 @@ DePauw University\
 \b \cf0 3.4.2  Functional Requirements\
 \pard\pardeftab720\sb60\qj
 \cf0 REQ-1:
-\b0  The game state should reflect the player\'92s location, inventory, health, score, move count, and the locations and states of all other objects; it may include other information needed to describe the user\'92s current position in the game.\
+\b0  The system should keep track of the player\'92s current score, which may depend on the number of moves made or the amount of time passed.\
 \pard\pardeftab720\qj
 
 \b \cf0 REQ-2:
-\b0  It must be possible for the user to give a command to save the state of the game and associate it with a name or timestamp.\
+\b0  The system should keep track of the high scores for each solitaire variant.\
 
-\b REQ-5:
-\b0  When the application is started, the user should be given the option of starting a new game or restoring a saved game; in the latter case, they should be able to choose from a list of saved games (identified by name and/or timestamp).\
+\b REQ-3:
+\b0  The system should keep track of the player\'92s game play statistics, including number of games started, games won, and games lost.\
 
 \b REQ-4:
-\b0  It must be possible for the user to give a command to restore the state of a saved game while in the middle of another game, replacing the current game state; the application should ask for confirmation, and may give the option of saving the current state before replacing it with the saved one.\
-
-\b REQ-5:
-\b0  The application may automatically save the game state during play; for example, upon achieving a subgoal or encountering a dangerous situation.\
+\b0  The system should display the current score while the game is being played, and should allow the user to view high scores and other statistics on demand. \
 \pard\pardeftab720\sb240\sa120
 
 \b\fs32 \cf0 4  External Interface Requirements\
@@ -220,13 +206,13 @@ DePauw University\
 \cf0 5.1  Performance Requirements\
 \pard\pardeftab720\sb60\qj
 
-\b0\fs24 \cf0 Management of the textual interface and game state must consume minimal system resources so as to be accessible in real-time by users of the system. This application is intended to be used interactively, so users should not be expected to wait for the completion of any of the operations provided by the application.\
+\b0\fs24 \cf0 Management of the graphical interface and game state must consume minimal system resources so as to be accessible in real-time by users of the system. This application is intended to be used interactively, so users should not be expected to wait for the completion of any of the operations provided by the application.\
 \pard\pardeftab720\sb120\sa120
 
 \b\fs32 \cf0 5.2  Security Requirements\
 \pard\pardeftab720\sb60\qj
 
-\b0\fs24 \cf0 The application will not require any sensitive information from the user. It will rely on existing user-based security on the host operating system to keep saved game states private. If the application allows the user to edit or create additional game content to be shared with other users, the resulting modified game must not pose any additional security risk to players.\
+\b0\fs24 \cf0 The application will not require any sensitive information from the user. It will rely on existing user-based security on the host operating system to keep saved game states private.\
 \pard\pardeftab720\sb120\sa120
 
 \b\fs32 \cf0 5.3  Software Quality Attributes\
