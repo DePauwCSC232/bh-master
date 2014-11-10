@@ -24,7 +24,6 @@ import bhsol.model.Deck;
  * 
  * @author bhoward
  */
-@SuppressWarnings("serial")
 public class DeckComponent extends JComponent
 {
    /**
@@ -81,6 +80,16 @@ public class DeckComponent extends JComponent
    public void setDeckListener(DeckListener listener)
    {
       this.listener = listener;
+   }
+
+   /**
+    * Set whether this component allows cards to be dragged from it.
+    * 
+    * @param draggable true if drag is allowed
+    */
+   public void setDraggable(boolean draggable)
+   {
+      this.draggable = draggable;
    }
 
    /**
@@ -254,8 +263,11 @@ public class DeckComponent extends JComponent
          @Override
          public void mouseDragged(MouseEvent e)
          {
-            TransferHandler handler = getTransferHandler();
-            handler.exportAsDrag(DeckComponent.this, e, TransferHandler.MOVE);
+            if (draggable)
+            {
+               TransferHandler handler = getTransferHandler();
+               handler.exportAsDrag(DeckComponent.this, e, TransferHandler.MOVE);
+            }
          }
       });
    }
@@ -305,9 +317,10 @@ public class DeckComponent extends JComponent
    private Deck deck;
    private CardImages images;
    private int fanDirection;
+   private boolean draggable;
 
    private DeckListener listener;
-   
+
    // Customize these to adjust how cards are packed when fanned
    private static final double FAN_EXPANSION_FACTOR = 2.0;
    private static final int MAX_UNSQUEEZED_CARDS = 7;

@@ -52,6 +52,10 @@ public class GUIDemo
             return card.getSuit().equals(deckComponent.getTopCard().getSuit());
          }
       });
+      
+      dcA.setDraggable(true);
+      dcB.setDraggable(true);
+      dcC.setDraggable(false);
             
       JPanel panel = new JPanel();
       panel.add(dcA);
