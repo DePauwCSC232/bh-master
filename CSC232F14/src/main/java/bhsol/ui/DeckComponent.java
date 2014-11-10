@@ -24,7 +24,6 @@ import bhsol.model.Deck;
  * 
  * @author bhoward
  */
-@SuppressWarnings("serial")
 public class DeckComponent extends JComponent
 {
    /**
@@ -221,13 +220,18 @@ public class DeckComponent extends JComponent
          }
 
          // This is called when a card is dragged away from this deck and
-         // dropped on another deck
+         // dropped on another deck. Always flip the next card face-up,
+         // on the theory that only face-up cards are going to be dragged.
          protected void exportDone(JComponent source, Transferable data,
                   int action)
          {
             if (action == MOVE)
             {
                removeTopCard();
+               Card newTop = getTopCard();
+               if (newTop != null && !newTop.isFaceUp()) {
+                  flipTopCard();
+               }
             }
          }
 
