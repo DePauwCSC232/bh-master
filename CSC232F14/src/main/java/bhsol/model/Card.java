@@ -1,4 +1,4 @@
-package csc232;
+package bhsol.model;
 
 /**
  * Represent a card from an ordinary 52-card deck, including a rank, a suit, and
@@ -27,7 +27,8 @@ public class Card implements Comparable<Card>
     * 
     * @param rank
     * @param suit
-    * @param faceUp true if the card is initially face-up
+    * @param faceUp
+    *           true if the card is initially face-up
     */
    public Card(Rank rank, Suit suit, boolean faceUp)
    {
@@ -57,6 +58,17 @@ public class Card implements Comparable<Card>
    public void flip()
    {
       faceUp = !faceUp;
+   }
+
+   /**
+    * Get a two-letter abbreviation for this card, such as "AH" for the Ace of
+    * Hearts.
+    * 
+    * @return a two-character String: rank and suit
+    */
+   public String getAbbrev()
+   {
+      return "" + rank.getAbbrev() + suit.getAbbrev();
    }
 
    @Override

@@ -1,4 +1,7 @@
-package csc232;
+package bhsol.ui;
+
+import bhsol.model.Card;
+import bhsol.model.Deck;
 
 /**
  * Plays a simple card game, as described in Homework #4.

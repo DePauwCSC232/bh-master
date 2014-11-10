@@ -1,7 +1,8 @@
-package csc232;
+package bhsol.model;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Random;
  * 
  * @author bhoward
  */
-public class Deck
+public class Deck implements Iterable<Card>
 {
    /**
     * Construct an empty deck of cards.
@@ -81,6 +82,21 @@ public class Deck
    }
 
    /**
+    * Look at the topmost (most recently added) card of this deck.
+    * If this deck is empty, throws {@link EmptyStackException}.
+    * 
+    * @return the top card
+    */
+   public Card getTop()
+   {
+      if (cards.isEmpty())
+      {
+         throw new EmptyStackException();
+      }
+      return cards.get(cards.size() - 1);
+   }
+   
+   /**
     * Check whether this deck is empty.
     * 
     * @return true if there are no cards in the deck
@@ -108,6 +124,14 @@ public class Deck
       return cards.size();
    }
 
+   /* (non-Javadoc)
+    * @see java.lang.Iterable#iterator()
+    */
+   public Iterator<Card> iterator()
+   {
+      return cards.iterator();
+   }
+   
    private ArrayList<Card> cards;
 
    private static Random random = new Random();
