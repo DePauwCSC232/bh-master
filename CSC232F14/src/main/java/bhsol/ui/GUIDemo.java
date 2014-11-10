@@ -40,6 +40,12 @@ public class GUIDemo
          {
             // When clicked, deal a card to deck C
             Card card = deckComponent.removeTopCard();
+            
+            Card newTop = deckComponent.getTopCard();
+            if (newTop != null && !newTop.isFaceUp()) {
+               deckComponent.flipTopCard();
+            }
+            
             if (card != null)
             {
                dcC.addCard(card);

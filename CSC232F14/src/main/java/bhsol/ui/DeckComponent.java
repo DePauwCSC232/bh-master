@@ -24,6 +24,7 @@ import bhsol.model.Deck;
  * 
  * @author bhoward
  */
+@SuppressWarnings("serial")
 public class DeckComponent extends JComponent
 {
    /**
@@ -85,7 +86,8 @@ public class DeckComponent extends JComponent
    /**
     * Set whether this component allows cards to be dragged from it.
     * 
-    * @param draggable true if drag is allowed
+    * @param draggable
+    *           true if drag is allowed
     */
    public void setDraggable(boolean draggable)
    {
@@ -110,8 +112,7 @@ public class DeckComponent extends JComponent
    }
 
    /**
-    * Remove the top card from the deck. The next card, if there is one, is
-    * flipped face-up.
+    * Remove the top card from the deck.
     * 
     * @return the former top card from the deck, or null if none
     */
@@ -120,15 +121,23 @@ public class DeckComponent extends JComponent
       if (!deck.isEmpty())
       {
          Card card = deck.deal();
-         if (!deck.isEmpty() && !deck.getTop().isFaceUp())
-         {
-            deck.getTop().flip();
-         }
          repaint();
          return card;
       }
 
       return null;
+   }
+
+   /**
+    * Flip the top card of the deck.
+    */
+   public void flipTopCard()
+   {
+      if (!deck.isEmpty())
+      {
+         deck.getTop().flip();
+         repaint();
+      }
    }
 
    /**
