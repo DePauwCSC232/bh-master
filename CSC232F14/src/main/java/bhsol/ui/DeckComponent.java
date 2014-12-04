@@ -149,6 +149,16 @@ public class DeckComponent extends JComponent
       deck.add(card);
       repaint();
    }
+   
+   /**
+    * Check whether the deck is empty.
+    * 
+    * @return true if there are no cards in the deck
+    */
+   public boolean isEmpty()
+   {
+      return deck.isEmpty();
+   }
 
    /**
     * Constants describing the desired fan direction.
@@ -191,18 +201,12 @@ public class DeckComponent extends JComponent
          {
             Card card = getCard(support.getTransferable());
 
-            if (card.equals(getTopCard()))
+            if (card == getTopCard())
             {
                return false;
             }
 
-            if (listener != null
-                     && !listener.checkDrop(DeckComponent.this, card))
-            {
-               return false;
-            }
-
-            return true;
+            return listener != null && listener.checkDrop(DeckComponent.this, card);
          }
 
          // This is called when the dragged card is dropped onto this deck
@@ -229,7 +233,8 @@ public class DeckComponent extends JComponent
             {
                removeTopCard();
                Card newTop = getTopCard();
-               if (newTop != null && !newTop.isFaceUp()) {
+               if (newTop != null && !newTop.isFaceUp())
+               {
                   flipTopCard();
                }
             }
@@ -265,8 +270,19 @@ public class DeckComponent extends JComponent
          {
             if (listener != null)
             {
-               listener.handleClick(DeckComponent.this);
-               repaint();
+               // Run this in a separate thread, for possible animation
+               new Thread(new Runnable()
+               {
+                  public void run()
+                  {
+                     // queue up subsequent clicks
+                     synchronized (DeckComponent.class)
+                     {
+                        listener.handleClick(DeckComponent.this);
+                        repaint();
+                     }
+                  }
+               }).start();
             }
          }
       });
