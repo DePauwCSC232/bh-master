@@ -5,8 +5,9 @@ import java.awt.event.MouseEvent;
 
 /**
  * A SimpleItem is an implementation of the Item interface that holds a static
- * image, keeps track of a position, and allows itself to be dragged. It does
- * not respond to clicks or drops.
+ * image, keeps track of a position, and allows itself to be dragged. When
+ * released, it returns to its original position. It does not respond to clicks
+ * or drops.
  * 
  * @author bhoward
  */
@@ -71,6 +72,8 @@ public class SimpleItem implements Item
 
    public Item startDrag(MouseEvent event)
    {
+      startX = x;
+      startY = y;
       return this;
    }
 
@@ -78,12 +81,15 @@ public class SimpleItem implements Item
    {
       // do nothing
    }
-   
+
    public void cancelDrag(MouseEvent event)
    {
-      // do nothing
+      // return to starting position
+      x = startX;
+      y = startY;
    }
 
    private int x, y;
+   private int startX, startY;
    private Image image;
 }

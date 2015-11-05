@@ -2,7 +2,6 @@ package bhsol;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -32,15 +31,7 @@ public class GUIDemo
       {
          String filename = "/cards/" + rank + "S.png";
          Image image = ImageIO.read(GUIDemo.class.getResource(filename));
-         Item card = new SimpleItem(image)
-         {
-            @Override
-            public void cancelDrag(MouseEvent event)
-            {
-               table.bringItemToFront(this);
-               super.cancelDrag(event);
-            }
-         };
+         Item card = new SimpleItem(image);
          table.addItem(card);
          card.setX(x);
          card.setY(y);
