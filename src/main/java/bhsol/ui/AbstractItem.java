@@ -4,7 +4,9 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 
 /**
- * Provide default implementations of some of the Item interface.
+ * Provide default implementations of some of the Item interface. Keeps track of
+ * an item position, and determines whether a MouseEvent is over the item by
+ * checking whether it is within the bounds of the item's image.
  * 
  * @author bhoward
  */
