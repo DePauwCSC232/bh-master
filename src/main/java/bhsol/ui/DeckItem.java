@@ -61,7 +61,8 @@ public class DeckItem extends AbstractItem
 
    public void handleDrop(Item item, MouseEvent event)
    {
-      // the CardItem will add itself in its endDrag method
+      // the CardItem will add itself in its endDrag method,
+      // so there is nothing to do here
    }
 
    public boolean canDrag(MouseEvent event)
