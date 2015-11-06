@@ -51,6 +51,11 @@ public class Card
    {
       return faceUp;
    }
+   
+   public String getAbbrev()
+   {
+      return "" + rank.getAbbrev() + suit.getAbbrev();
+   }
 
    /**
     * Change the state (face-up/face-down) by flipping the card over.

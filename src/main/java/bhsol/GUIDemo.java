@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import bhsol.model.Deck;
+import bhsol.ui.CardImages;
+import bhsol.ui.DeckItem;
 import bhsol.ui.Item;
 import bhsol.ui.SimpleItem;
 import bhsol.ui.Table;
@@ -37,6 +40,21 @@ public class GUIDemo
          card.setY(y);
          x += 20;
       }
+      
+      CardImages images = new CardImages("/cards/", ".png");
+      
+      Deck deck1 = new Deck();
+      deck1.fill();
+      Item deckItem1 = new DeckItem(deck1, images);
+      table.addItem(deckItem1);
+      deckItem1.setX(200);
+      deckItem1.setY(250);
+
+      Deck deck2 = new Deck();
+      Item deckItem2 = new DeckItem(deck2, images);
+      table.addItem(deckItem2);
+      deckItem2.setX(400);
+      deckItem2.setY(250);
 
       frame.setVisible(true);
    }

@@ -137,8 +137,6 @@ public class Table extends JPanel
     */
    final class TableListener extends MouseInputAdapter
    {
-      private Point point;
-
       @Override
       public void mouseClicked(MouseEvent e)
       {
@@ -154,6 +152,7 @@ public class Table extends JPanel
       public void mousePressed(MouseEvent e)
       {
          point = e.getPoint();
+         dragStarting = true;
       }
 
       @Override
@@ -176,18 +175,20 @@ public class Table extends JPanel
 
             repaint();
          }
+         dragStarting = false;
       }
 
       @Override
       public void mouseDragged(MouseEvent e)
       {
-         if (dragItem == null)
+         if (dragStarting)
          {
             Item item = findItem(e);
             if (item != null && item.canDrag(e))
             {
                dragItem = item.startDrag(e);
             }
+            dragStarting = false;
          }
 
          if (dragItem != null)
@@ -253,5 +254,8 @@ public class Table extends JPanel
 
          return null;
       }
+      
+      private Point point;
+      private boolean dragStarting;
    }
 }
