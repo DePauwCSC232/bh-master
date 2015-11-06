@@ -87,11 +87,15 @@ public class CardImages
       names.add("back2");
       names.add("joker");
       names.add("joker2");
-      for (Rank r : Rank.values())
+
+      char[] ranks = { 'A', '2', '3', '4', '5', '6', '7', '8',
+               '9', 'T', 'J', 'Q', 'K' };
+      char[] suits = { 'C', 'D', 'H', 'S' };
+      for (char rank : ranks)
       {
-         for (Suit s : Suit.values())
+         for (char suit : suits)
          {
-            names.add("" + r.getAbbrev() + s.getAbbrev());
+            names.add("" + rank + suit);
          }
       }
 
