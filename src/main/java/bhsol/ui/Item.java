@@ -70,7 +70,8 @@ public interface Item
 
    /**
     * Process an item dropped on this. A previous call to canDrop for the given
-    * item should already have returned true.
+    * item should already have returned true. This will be called after the item
+    * has processed its endDrag handler.
     * 
     * @param item
     *           the dropped item
@@ -101,14 +102,15 @@ public interface Item
    Item startDrag(MouseEvent event);
 
    /**
-    * Notify this item that it has been dropped on the given item.
+    * Notify this item that it has been dropped on the given item. This is
+    * called before the target runs its handleDrop method.
     * 
-    * @param item
+    * @param target
     *           the target of the drop
     * @param event
     *           the mouseReleased event for the drop
     */
-   void endDrag(Item item, MouseEvent event);
+   void endDrag(Item target, MouseEvent event);
 
    /**
     * Notify this item that its current drag motion has been cancelled.

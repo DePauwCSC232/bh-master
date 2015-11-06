@@ -51,7 +51,7 @@ public class Card
    {
       return faceUp;
    }
-   
+
    public String getAbbrev()
    {
       return "" + rank.getAbbrev() + suit.getAbbrev();
@@ -69,7 +69,7 @@ public class Card
    public String toString()
    {
       return "Card [rank=" + rank + ", suit=" + suit + ", faceUp=" + faceUp
-               + "]";
+         + "]";
    }
 
    private Rank rank;

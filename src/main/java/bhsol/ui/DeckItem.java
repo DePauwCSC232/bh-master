@@ -36,6 +36,11 @@ public class DeckItem extends AbstractItem
       deck.add(card);
    }
 
+   public Deck getDeck()
+   {
+      return deck;
+   }
+
    public Image getImage()
    {
       if (deck.isEmpty())

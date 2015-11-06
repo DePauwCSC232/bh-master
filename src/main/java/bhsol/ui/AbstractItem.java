@@ -37,7 +37,7 @@ public abstract class AbstractItem implements Item
       // check whether the event is over this item's image
       Image image = getImage();
       return x <= event.getX() && event.getX() < x + image.getWidth(null)
-               && y <= event.getY() && event.getY() < y + image.getHeight(null);
+         && y <= event.getY() && event.getY() < y + image.getHeight(null);
    }
 
    private int x;

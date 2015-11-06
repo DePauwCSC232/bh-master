@@ -13,18 +13,26 @@ import bhsol.model.Card;
 public class CardItem extends AbstractItem
 {
    /**
-    * Construct a CardItem for a card being dragged from the given
-    * origin DeckItem, with a provided static Image.
+    * Construct a CardItem for a card being dragged from the given origin
+    * DeckItem, with a provided static Image.
     * 
-    * @param origin the DeckItem from which this card is being dragged
-    * @param card the Card being dragged
-    * @param image the Image to display for the card
+    * @param origin
+    *           the DeckItem from which this card is being dragged
+    * @param card
+    *           the Card being dragged
+    * @param image
+    *           the Image to display for the card
     */
    public CardItem(DeckItem origin, Card card, Image image)
    {
       this.origin = origin;
       this.card = card;
       this.image = image;
+   }
+
+   public Card getCard()
+   {
+      return card;
    }
 
    public Image getImage()

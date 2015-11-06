@@ -163,8 +163,8 @@ public class Table extends JPanel
             Item item = findItem(e);
             if (item != null && item.canDrop(dragItem, e))
             {
-               item.handleDrop(dragItem, e);
                dragItem.endDrag(item, e);
+               item.handleDrop(dragItem, e);
             }
             else
             {
@@ -254,7 +254,7 @@ public class Table extends JPanel
 
          return null;
       }
-      
+
       private Point point;
       private boolean dragStarting;
    }
