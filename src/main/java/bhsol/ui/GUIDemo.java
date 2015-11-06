@@ -1,4 +1,4 @@
-package bhsol;
+package bhsol.ui;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -6,10 +6,6 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 import bhsol.model.Deck;
-import bhsol.ui.CardImages;
-import bhsol.ui.DeckItem;
-import bhsol.ui.Item;
-import bhsol.ui.Table;
 
 /**
  * A simple demonstration of using DeckItems on a Table. Cards may be dragged
