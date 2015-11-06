@@ -14,24 +14,24 @@ import java.awt.event.MouseEvent;
 public interface Item
 {
    /**
-    * @return the current x-coordinate of the upper-right corner of this item
+    * @return the current x-coordinate of the upper-left corner of this item
     */
    int getX();
 
    /**
     * @param x
-    *           the new x-coordinate of the upper-right corner of this item
+    *           the new x-coordinate of the upper-left corner of this item
     */
    void setX(int x);
 
    /**
-    * @return the current y-coordinate of the upper-right corner of this item
+    * @return the current y-coordinate of the upper-left corner of this item
     */
    int getY();
 
    /**
     * @param y
-    *           the new y-coordinate of the upper-right corner of this item
+    *           the new y-coordinate of the upper-left corner of this item
     */
    void setY(int y);
 
