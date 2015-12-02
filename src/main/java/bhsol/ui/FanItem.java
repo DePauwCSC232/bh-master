@@ -93,6 +93,7 @@ public class FanItem extends AbstractItem
    {
       // Determine how many cards are selected
       int dx = event.getX() - getX();
+      int dy = event.getY() - getY();
       int n = Math.min(dx / OFFSET, deck.size() - 1);
       
       // Create a new deck with the selected cards
@@ -107,8 +108,8 @@ public class FanItem extends AbstractItem
       }
       
       Item result = new PacketItem(this, deck1, images);
-      result.setX(event.getX());
-      result.setY(event.getY());
+      result.setX(event.getX() - dx + n * OFFSET);
+      result.setY(event.getY() - dy);
       return result;
    }
 
