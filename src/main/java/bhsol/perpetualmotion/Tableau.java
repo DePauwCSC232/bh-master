@@ -19,11 +19,10 @@ public class Tableau extends DeckItem
    @Override
    public boolean canDrop(Item item, MouseEvent event)
    {
-      Deck deck = getDeck();
-      if (deck.isEmpty())
+      if (isEmpty())
          return false;
 
-      Card topCard = deck.getTop();
+      Card topCard = getTop();
       Card testCard = ((CardItem) item).getCard();
       return testCard.getRank() == topCard.getRank();
    }

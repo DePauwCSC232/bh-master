@@ -6,7 +6,7 @@ import bhsol.model.Deck;
 
 /**
  * A PacketItem is a FanItem that is being dragged from one place to another; it
- * knows where it came from.
+ * knows where it came from. The deck will not be empty.
  * 
  * @author bhoward
  */
@@ -14,27 +14,41 @@ public class PacketItem extends FanItem
 {
    public PacketItem(FanItem origin, Deck deck, CardImages images)
    {
-      super(deck, images);
+      this(origin, deck, images, false);
+   }
+
+   public PacketItem(FanItem origin, Deck deck, CardImages images,
+            boolean isVertical)
+   {
+      super(deck, images, isVertical);
       this.origin = origin;
    }
 
    @Override
    public void endDrag(Item target, MouseEvent event)
    {
-      FanItem fan = (FanItem) target;
-      for (int i = 0; i < deck.size(); i++)
+      if (target instanceof DeckItem)
       {
-         fan.addCard(deck.get(i));
+         DeckItem deckItem = (DeckItem) target;
+         for (int i = 0; i < size(); i++)
+         {
+            deckItem.addCard(getCard(i));
+         }
       }
    }
 
    @Override
    public void cancelDrag(MouseEvent event)
    {
-      for (int i = 0; i < deck.size(); i++)
+      for (int i = 0; i < size(); i++)
       {
-         origin.addCard(deck.get(i));
+         origin.addCard(getCard(i));
       }
+   }
+
+   public FanItem getOrigin()
+   {
+      return origin;
    }
 
    private FanItem origin;

@@ -39,7 +39,7 @@ public class GUIDemo2
       table.addItem(fanItem1);
 
       Deck deck2 = new Deck();
-      Item fanItem2 = new FanItem(deck2, images);
+      Item fanItem2 = new FanItem(deck2, images, true);
       fanItem2.setX(50);
       fanItem2.setY(300);
       table.addItem(fanItem2);

@@ -22,6 +22,14 @@ public enum Suit
    {
       return abbrev;
    }
+   
+   /**
+    * @return true if this card is red
+    */
+   public boolean isRed()
+   {
+      return this == Diamonds || this == Hearts;
+   }
 
    private final char abbrev;
 }

@@ -9,64 +9,68 @@ import bhsol.model.Card;
 import bhsol.model.Deck;
 
 /**
- * Represents a deck of cards to be displayed in a horizontal fan on a card game
- * table. The cards are drawn using the provided CardImages object.
+ * Represents a deck of cards to be displayed in a horizontal or vertical fan on
+ * a card game table. The cards are drawn using the provided CardImages object.
  * 
  * @author bhoward
  */
-public class FanItem extends AbstractItem
+public class FanItem extends DeckItem
 {
    /**
-    * Construct a FanItem for the given deck and set of card images.
+    * Construct a horizontal FanItem for the given deck and set of card images.
     * 
     * @param deck
     * @param images
     */
    public FanItem(Deck deck, CardImages images)
    {
-      this.deck = deck;
-      this.images = images;
+      this(deck, images, false);
    }
 
    /**
-    * Add the given card to the deck.
+    * Construct a FanItem for the given deck and set of card images, with the given
+    * fan direction (true for vertical).
     * 
-    * @param card
+    * @param deck
+    * @param images
+    * @param isVertical
     */
-   public void addCard(Card card)
+   public FanItem(Deck deck, CardImages images, boolean isVertical)
    {
-      deck.add(card);
+      super(deck, images);
+      this.images = images;
+      if (isVertical) {
+         xOFFSET = 0;
+         yOFFSET = VOFFSET;
+      } else {
+         xOFFSET = HOFFSET;
+         yOFFSET = 0;
+      }
    }
-
+   
    @Override
    public Image getImage()
    {
-      if (deck.isEmpty())
+      if (isEmpty())
       {
          return images.getImage(null);
       }
       else
       {
-         Image top = images.getImage(deck.getTop());
-         int width = top.getWidth(null) + OFFSET * (deck.size() - 1);
-         int height = top.getHeight(null);
+         Image top = images.getImage(getTop());
+         int width = top.getWidth(null) + xOFFSET * (size() - 1);
+         int height = top.getHeight(null) + yOFFSET * (size() - 1);
          BufferedImage image = new BufferedImage(width, height,
                   BufferedImage.TYPE_INT_ARGB);
          Graphics g = image.getGraphics();
-         for (int i = 0; i < deck.size(); i++)
+         for (int i = 0; i < size(); i++)
          {
-            Card card = deck.get(i);
+            Card card = getCard(i);
             Image cardImage = images.getImage(card);
-            g.drawImage(cardImage, OFFSET * i, 0, null);
+            g.drawImage(cardImage, xOFFSET * i, yOFFSET * i, null);
          }
          return image;
       }
-   }
-
-   @Override
-   public void handleClick(MouseEvent event)
-   {
-      // do nothing
    }
 
    @Override
@@ -83,50 +87,46 @@ public class FanItem extends AbstractItem
    }
 
    @Override
-   public boolean canDrag(MouseEvent event)
+   public Item startDrag(MouseEvent event)
    {
-      return !deck.isEmpty();
+      int n = identifyCard(event);
+
+      // Create a new deck with the selected cards
+      Deck deck1 = new Deck();
+      for (int i = n; i < size(); i++)
+      {
+         deck1.add(getCard(i));
+      }
+
+      // Remove those cards from our deck
+      for (int i = 0; i < deck1.size(); i++)
+      {
+         deal();
+      }
+
+      Item result = new PacketItem(this, deck1, images, yOFFSET != 0);
+      result.setX(getX() + n * xOFFSET);
+      result.setY(getY() + n * yOFFSET);
+      return result;
    }
 
-   @Override
-   public Item startDrag(MouseEvent event)
+   protected int identifyCard(MouseEvent event)
    {
       // Determine how many cards are selected
       int dx = event.getX() - getX();
       int dy = event.getY() - getY();
-      int n = Math.min(dx / OFFSET, deck.size() - 1);
-      
-      // Create a new deck with the selected cards
-      Deck deck1 = new Deck();
-      for (int i = n; i < deck.size(); i++) {
-         deck1.add(deck.get(i));
+      if (yOFFSET != 0) {
+         return Math.min(dy / yOFFSET, size() - 1);
+      } else {
+         return Math.min(dx / xOFFSET, size() - 1);
       }
-      
-      // Remove those cards from our deck
-      for (int i = 0; i < deck1.size(); i++) {
-         deck.deal();
-      }
-      
-      Item result = new PacketItem(this, deck1, images);
-      result.setX(event.getX() - dx + n * OFFSET);
-      result.setY(event.getY() - dy);
-      return result;
    }
 
-   @Override
-   public void endDrag(Item target, MouseEvent event)
-   {
-      // not used
-   }
+   private static int HOFFSET = 12;
+   private static int VOFFSET = 18;
 
-   @Override
-   public void cancelDrag(MouseEvent event)
-   {
-      // not used
-   }
-
-   private static int OFFSET = 12;
-
-   protected Deck deck;
+   private int xOFFSET;
+   private int yOFFSET;
+   
    private CardImages images;
 }

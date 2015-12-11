@@ -14,24 +14,20 @@ public class Stock extends DeckItem
 {
    public Stock(CardImages images)
    {
-      super(new Deck(), images);
-      Deck deck = getDeck();
-      deck.fill();
-      deck.shuffle();
+      super(makeDeck(), images);
       this.images = images;
    }
 
    @Override
    public void handleClick(MouseEvent event)
    {
-      Deck deck = getDeck();
-      if (deck.isEmpty())
+      if (isEmpty())
       {
          Game.setStatus("You Win!");
          return;
       }
 
-      Card top = deck.deal();
+      Card top = deal();
       top.flip();
       Item topItem = new FreeCard(top, images.getImage(top), 500, 50);
       Game.addToTable(topItem);
@@ -40,13 +36,13 @@ public class Stock extends DeckItem
       Random random = new Random();
       for (int i = 0; i < value; i++)
       {
-         if (deck.isEmpty())
+         if (isEmpty())
          {
             Game.setStatus("You Lose!");
             return;
          }
          
-         Card card = deck.deal();
+         Card card = deal();
          int x = random.nextInt(250) + 150;
          int y = random.nextInt(100) + 50;
          Item item = new FreeCard(card, images.getImage(card), x, y);
@@ -66,6 +62,14 @@ public class Stock extends DeckItem
       return false;
    }
 
+   private static Deck makeDeck()
+   {
+      Deck deck = new Deck();
+      deck.fill();
+      deck.shuffle();
+      return deck;
+   }
+
    /**
     * Compute the "value" of the given rank: ace is 1, two is 2, ..., ten is 10,
     * and all face cards are also 10.
@@ -73,7 +77,7 @@ public class Stock extends DeckItem
     * @param rank
     * @return The value of the given rank
     */
-   private int computeValue(Rank rank)
+   private static int computeValue(Rank rank)
    {
       switch (rank)
       {

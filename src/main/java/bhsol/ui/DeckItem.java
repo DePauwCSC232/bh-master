@@ -35,10 +35,54 @@ public class DeckItem extends AbstractItem
    {
       deck.add(card);
    }
-
-   public Deck getDeck()
+   
+   /**
+    * @return the top card dealt from the deck
+    */
+   public Card deal()
    {
-      return deck;
+      return deck.deal();
+   }
+   
+   /**
+    * @return the top card of the deck, without removing it
+    */
+   public Card getTop()
+   {
+      return deck.getTop();
+   }
+   
+   /**
+    * @return the bottom card of the deck, without removing it
+    */
+   public Card getBottom()
+   {
+      return deck.get(0);
+   }
+   
+   /**
+    * @param i
+    * @return the ith card, where the bottom is 0
+    */
+   public Card getCard(int i)
+   {
+      return deck.get(i);
+   }
+   
+   /**
+    * @return true if the deck is empty
+    */
+   public boolean isEmpty()
+   {
+      return deck.isEmpty();
+   }
+   
+   /**
+    * @return the number of cards in the deck
+    */
+   public int size()
+   {
+      return deck.size();
    }
 
    public Image getImage()
