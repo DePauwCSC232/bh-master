@@ -2,8 +2,6 @@ package bhsol.perpetualmotion;
 
 import java.awt.event.MouseEvent;
 
-import javax.swing.JOptionPane;
-
 import bhsol.model.Card;
 import bhsol.model.Deck;
 import bhsol.ui.CardImages;
@@ -12,10 +10,11 @@ import bhsol.ui.Item;
 
 public class Stock extends DeckItem
 {
-   public Stock(Deck deck, CardImages images, Tableau[] tableau)
+   public Stock(Deck deck, CardImages images, Tableau[] tableau, PMFrame frame)
    {
       super(deck, images);
       this.tableau = tableau;
+      this.frame = frame;
    }
 
    @Override
@@ -35,7 +34,7 @@ public class Stock extends DeckItem
 
          if (isEmpty())
          {
-            JOptionPane.showMessageDialog(null, "You Win!");
+            frame.showWin();
          }
       }
       else
@@ -49,8 +48,7 @@ public class Stock extends DeckItem
             && card0.getRank() == card2.getRank()
             && card0.getRank() == card3.getRank())
          {
-            JOptionPane.showMessageDialog(null,
-                     "All four were " + card0.getRank());
+            frame.showStatus("All four were " + card0.getRank());
          }
          else
          {
@@ -85,4 +83,5 @@ public class Stock extends DeckItem
    }
 
    private Tableau[] tableau;
+   private PMFrame frame;
 }

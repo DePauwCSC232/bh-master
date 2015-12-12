@@ -13,9 +13,10 @@ import bhsol.ui.PacketItem;
 
 public class Foundation extends DeckItem
 {
-   public Foundation(CardImages images)
+   public Foundation(CardImages images, KFrame frame)
    {
       super(new Deck(), images);
+      this.frame = frame;
    }
 
    @Override
@@ -60,6 +61,8 @@ public class Foundation extends DeckItem
          tab.flipIfExposed();
       }
       
-      Game.checkForWin();
+      frame.checkForWin();
    }
+   
+   private KFrame frame;
 }

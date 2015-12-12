@@ -9,9 +9,10 @@ import bhsol.ui.Item;
 
 public class Stock extends DeckItem
 {
-   public Stock(Deck deck, CardImages images)
+   public Stock(Deck deck, CardImages images, KFrame frame)
    {
       super(deck, images);
+      this.frame = frame;
    }
 
    @Override
@@ -19,11 +20,11 @@ public class Stock extends DeckItem
    {
       if (isEmpty())
       {
-         Game.recycleWaste();
+         frame.recycleWaste();
       }
       else
       {
-         Game.dealOne();
+         frame.dealOne();
       }
    }
 
@@ -44,4 +45,6 @@ public class Stock extends DeckItem
    {
       return null;
    }
+   
+   private KFrame frame;
 }

@@ -9,9 +9,10 @@ import bhsol.ui.Item;
 
 public class Waste extends DeckItem
 {
-   public Waste(CardImages images)
+   public Waste(CardImages images, KFrame frame)
    {
       super(new Deck(), images);
+      this.frame = frame;
    }
 
    @Override
@@ -19,7 +20,7 @@ public class Waste extends DeckItem
    {
       if (!isEmpty())
       {
-         Game.tryFoundation(this);
+         frame.tryFoundation(this);
       }
    }
 
@@ -28,4 +29,6 @@ public class Waste extends DeckItem
    {
       return false;
    }
+   
+   private KFrame frame;
 }

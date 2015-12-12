@@ -13,9 +13,10 @@ import bhsol.ui.PacketItem;
 
 public class Tableau extends FanItem
 {
-   public Tableau(CardImages images)
+   public Tableau(CardImages images, KFrame frame)
    {
       super(new Deck(), images, true);
+      this.frame = frame;
    }
 
    @Override
@@ -23,7 +24,7 @@ public class Tableau extends FanItem
    {
       if (!isEmpty())
       {
-         Game.tryFoundation(this);
+         frame.tryFoundation(this);
       }
    }
 
@@ -98,4 +99,6 @@ public class Tableau extends FanItem
          }
       }
    }
+   
+   private KFrame frame;
 }
