@@ -12,14 +12,14 @@ package edu.depauw.csc232;
 
 /**
  * The <code>Customer</code> class describes a customer in a simulation.
- * 
+ *
  * @author bhoward
  */
 public class Customer {
    /**
     * Construct a customer given name, age, and arrival time (in military time
     * format: 0000 to 2359).
-    * 
+    *
     * @param name
     * @param age
     * @param arrivalTime
@@ -28,13 +28,6 @@ public class Customer {
       this.name = name;
       this.age = age;
       this.arrivalTime = arrivalTime;
-   }
-
-   /**
-    * @return this customer's name
-    */
-   public String getName() {
-      return name;
    }
 
    /**
@@ -49,6 +42,13 @@ public class Customer {
     */
    public String getArrivalTime() {
       return arrivalTime;
+   }
+
+   /**
+    * @return this customer's name
+    */
+   public String getName() {
+      return name;
    }
 
    @Override
