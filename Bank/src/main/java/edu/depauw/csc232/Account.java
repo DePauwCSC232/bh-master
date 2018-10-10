@@ -10,16 +10,19 @@
 
 package edu.depauw.csc232;
 
-import java.math.BigDecimal;
+/**
+ * Common interface for accounts in a bank simulation.
+ *
+ * @author bhoward
+ */
+public interface Account {
+   Money balance();
 
-public abstract class Account {
-   public BigDecimal balance() {
-      return balance;
-   }
+   boolean deposit(Money amount);
 
-   public abstract boolean deposit(BigDecimal amount, Account from);
+   boolean transferIn(Money amount, Account from);
 
-   public abstract boolean withdraw(BigDecimal amount, Account to);
+   boolean transferOut(Money amount, Account to);
 
-   private BigDecimal balance;
+   boolean withdraw(Money amount);
 }
