@@ -14,13 +14,23 @@ public class Main {
 		printWhen("Longer than 6", words, new LongerThanN(6));
 		
 		CounterDecorator counter = new CounterDecorator(new StartWithT());
-		printWhen("Starts with T", words, counter);
+		printWhen("Starts with t", words, counter);
 		System.out.println("Found " + counter.count());
+		System.out.println();
 		
 		AndStrategyComposite longWordsThatStartWithT = new AndStrategyComposite();
 		longWordsThatStartWithT.addStrategy(new LongerThanN(5));
 		longWordsThatStartWithT.addStrategy(new StartWithT());
-		printWhen("Longer than 5 and starting with T", words, longWordsThatStartWithT);
+		printWhen("Longer than 5 and starting with t", words, longWordsThatStartWithT);
+
+		CheckStrategy startsWithEitherT = new LowercaseDecorator(new StartWithT());
+		printWhen("Starts with T or t", words, startsWithEitherT);
+		
+		AndStrategyComposite TPalindromesLongerThan3 = new AndStrategyComposite();
+		TPalindromesLongerThan3.addStrategy(new LongerThanN(3));
+		TPalindromesLongerThan3.addStrategy(new Palindrome());
+		TPalindromesLongerThan3.addStrategy(startsWithEitherT);
+		printWhen("Longer than 3 palindromes and starting with T or t", words, TPalindromesLongerThan3);
 	}
 
 	private static void printWhen(String header, List<String> words, CheckStrategy checker) {
@@ -43,6 +53,7 @@ public class Main {
 				String word = st.nextToken();
 				words.add(word);
 			}
+			line = in.readLine();
 		}
 		
 		return words;
