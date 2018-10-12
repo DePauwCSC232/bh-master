@@ -12,6 +12,7 @@ package edu.depauw.csc232;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.Locale;
 
 /**
@@ -21,8 +22,18 @@ import java.util.Locale;
  */
 public class Money implements Comparable<Money> {
    /**
+    * Construct an amount of money from a BigDecimal number.
+    *
+    * @param amount
+    *           the desired amount
+    */
+   public Money(BigDecimal amount) {
+      this.amount = amount;
+   }
+
+   /**
     * Construct an amount of money with the given number of dollars.
-    * 
+    *
     * @param dollars
     *           the desired amount
     */
@@ -32,7 +43,7 @@ public class Money implements Comparable<Money> {
 
    /**
     * Construct an amount of money with the given number of dollars and cents.
-    * 
+    *
     * @param dollars
     *           the desired amount of dollars
     * @param cents
@@ -43,19 +54,9 @@ public class Money implements Comparable<Money> {
    }
 
    /**
-    * Construct an amount of money from a BigDecimal number.
-    * 
-    * @param amount
-    *           the desired amount
-    */
-   public Money(BigDecimal amount) {
-      this.amount = amount;
-   }
-
-   /**
     * Construct an amount of money from a string representation such as
     * "123456.78".
-    * 
+    *
     * @param stringAmount
     *           the desired amount as a String
     */
@@ -65,7 +66,7 @@ public class Money implements Comparable<Money> {
 
    /**
     * Add the given money amount to this and return the sum.
-    * 
+    *
     * @param money
     *           the amount to add
     * @return the sum
@@ -101,7 +102,7 @@ public class Money implements Comparable<Money> {
 
    /**
     * Subtract the given money amount from this and return the difference.
-    * 
+    *
     * @param money
     *           the amount to subtract
     * @return the difference
@@ -117,6 +118,14 @@ public class Money implements Comparable<Money> {
 
    private BigDecimal amount;
 
-   private static final NumberFormat NUMBER_FORMAT = NumberFormat
-      .getCurrencyInstance(Locale.US);
+   {
+      Currency usd = Currency.getInstance("USD");
+      NUMBER_FORMAT.setCurrency(usd);
+   }
+   
+   static {
+      NUMBER_FORMAT = NumberFormat.getCurrencyInstance(Locale.US);
+   }
+
+   private static final NumberFormat NUMBER_FORMAT;
 }
