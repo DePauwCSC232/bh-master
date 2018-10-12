@@ -41,7 +41,7 @@ public class MoneyTest {
       assertEquals("$0.35", money5.toString());
 
       Money money6 = new Money("-1234");
-      assertEquals("($1,234.00)", money6.toString());
+      assertEquals("-$1,234.00", money6.toString());
 
       Money money7 = new Money("123.005");
       assertEquals("$123.00", money7.toString());
@@ -65,6 +65,7 @@ public class MoneyTest {
       assertTrue(money1.compareTo(money2) == 0);
       assertTrue(money1.compareTo(money3) < 0);
       assertTrue(money2.compareTo(money3) < 0);
+      assertTrue(money3.compareTo(money2) > 0);
 
       // These are not technically equal because of precision
       assertNotEquals(money1, money2);

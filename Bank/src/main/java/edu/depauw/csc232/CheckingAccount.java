@@ -11,10 +11,28 @@
 package edu.depauw.csc232;
 
 /**
+ * Models a checking account in a bank simulation.
+ * 
  * @author bhoward
- *
  */
 public class CheckingAccount implements Account {
+   /**
+    * Construct a checking account with a default zero balance.
+    */
+   public CheckingAccount() {
+      this.balance = new Money(0);
+   }
+
+   /**
+    * Construct a checking account with the given balance.
+    * 
+    * @param amount
+    *           the starting balance
+    */
+   public CheckingAccount(Money amount) {
+      this.balance = amount;
+   }
+
    @Override
    public Money balance() {
       return balance;
