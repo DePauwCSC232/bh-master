@@ -13,7 +13,6 @@ package edu.depauw.csc232;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * Represents an amount of money.
@@ -21,14 +20,56 @@ import java.util.Objects;
  * @author bhoward
  */
 public class Money implements Comparable<Money> {
+   /**
+    * Construct an amount of money with the given number of dollars.
+    * 
+    * @param dollars
+    *           the desired amount
+    */
+   public Money(long dollars) {
+      this.amount = BigDecimal.valueOf(dollars);
+   }
+
+   /**
+    * Construct an amount of money with the given number of dollars and cents.
+    * 
+    * @param dollars
+    *           the desired amount of dollars
+    * @param cents
+    *           the desired amount of cents
+    */
+   public Money(long dollars, long cents) {
+      this.amount = BigDecimal.valueOf(dollars * 100 + cents, 2);
+   }
+
+   /**
+    * Construct an amount of money from a BigDecimal number.
+    * 
+    * @param amount
+    *           the desired amount
+    */
    public Money(BigDecimal amount) {
       this.amount = amount;
    }
 
+   /**
+    * Construct an amount of money from a string representation such as
+    * "123456.78".
+    * 
+    * @param stringAmount
+    *           the desired amount as a String
+    */
    public Money(String stringAmount) {
       this.amount = new BigDecimal(stringAmount);
    }
 
+   /**
+    * Add the given money amount to this and return the sum.
+    * 
+    * @param money
+    *           the amount to add
+    * @return the sum
+    */
    public Money add(Money money) {
       return new Money(amount.add(money.amount));
    }
@@ -50,14 +91,21 @@ public class Money implements Comparable<Money> {
          return false;
       }
       Money other = (Money) obj;
-      return Objects.equals(amount, other.amount);
+      return amount.equals(other.amount);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(amount);
+      return amount.hashCode();
    }
 
+   /**
+    * Subtract the given money amount from this and return the difference.
+    * 
+    * @param money
+    *           the amount to subtract
+    * @return the difference
+    */
    public Money subtract(Money money) {
       return new Money(amount.subtract(money.amount));
    }
