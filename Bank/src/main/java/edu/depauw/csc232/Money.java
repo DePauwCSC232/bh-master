@@ -11,8 +11,8 @@
 package edu.depauw.csc232;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Currency;
 import java.util.Locale;
 
 /**
@@ -118,14 +118,6 @@ public class Money implements Comparable<Money> {
 
    private BigDecimal amount;
 
-   {
-      Currency usd = Currency.getInstance("USD");
-      NUMBER_FORMAT.setCurrency(usd);
-   }
-   
-   static {
-      NUMBER_FORMAT = NumberFormat.getCurrencyInstance(Locale.US);
-   }
-
-   private static final NumberFormat NUMBER_FORMAT;
+   private static final NumberFormat NUMBER_FORMAT = NumberFormat
+      .getCurrencyInstance(Locale.US);
 }
