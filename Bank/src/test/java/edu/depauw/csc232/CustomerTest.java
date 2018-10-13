@@ -10,7 +10,7 @@
 
 package edu.depauw.csc232;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

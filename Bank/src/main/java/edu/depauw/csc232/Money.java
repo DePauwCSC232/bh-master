@@ -11,7 +11,6 @@
 package edu.depauw.csc232;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
