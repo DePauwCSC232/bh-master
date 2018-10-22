@@ -72,4 +72,16 @@ public interface Account {
     * @return true if successful
     */
    boolean withdraw(Money amount);
+
+   /**
+    * Perform any required end-of-day processing on this account.
+    */
+   void processEndOfDay();
+
+   /**
+    * Perform any required end-of-month processing on this account. This will be
+    * called after {@link edu.depauw.csc232.Account#processEndOfDay()} on the
+    * last day of the month.
+    */
+   void processEndOfMonth();
 }

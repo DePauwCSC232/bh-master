@@ -91,12 +91,14 @@ public class Money implements Comparable<Money> {
          return false;
       }
       Money other = (Money) obj;
-      return amount.equals(other.amount);
+      return amount.compareTo(other.amount) == 0;
    }
 
    @Override
    public int hashCode() {
-      return amount.hashCode();
+      // This is more expensive than amount.hashCode(), but it is
+      // required to be compatible with the above equals() method.
+      return toString().hashCode();
    }
 
    /**

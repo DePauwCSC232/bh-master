@@ -5,7 +5,7 @@
 //
 // Acknowledgements: None
 //
-// Online sources:   (include Web URLs and description of any information used)
+// Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
 
 package edu.depauw.csc232;

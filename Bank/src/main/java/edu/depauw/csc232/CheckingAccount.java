@@ -45,7 +45,7 @@ public class CheckingAccount implements Account {
 
    @Override
    public boolean withdraw(Money amount) {
-      if (balance.compareTo(amount) >= 0) {
+      if (balance.subtract(amount).compareTo(OVERDRAFT_LIMIT) >= 0) {
          balance = balance.subtract(amount);
          return true;
       } else {
@@ -53,5 +53,31 @@ public class CheckingAccount implements Account {
       }
    }
 
+   @Override
+   public void processEndOfDay() {
+      if (balance.compareTo(new Money(0)) < 0) {
+         balance = balance.subtract(OVERDRAFT_CHARGE);
+         // TODO transfer the charge to the bank
+      }
+   }
+
+   @Override
+   public void processEndOfMonth() {
+      // TODO generate statement -- need to log transactions
+   }
+
    private Money balance;
+
+   /**
+    * Minimum transient balance for a checking account. An account may drop to
+    * this balance without incurring a fee as long as it returns to a
+    * non-negative balance by the end of the day.
+    */
+   public static final Money OVERDRAFT_LIMIT = new Money("-50.00");
+
+   /**
+    * Charge to be deducted from balance if account is negative at the end of
+    * the day.
+    */
+   public static final Money OVERDRAFT_CHARGE = new Money("20.00");
 }

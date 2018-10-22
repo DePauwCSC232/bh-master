@@ -75,8 +75,7 @@ public class MoneyTest {
       assertTrue(money2.compareTo(money3) < 0);
       assertTrue(money3.compareTo(money2) > 0);
 
-      // These are not technically equal because of precision
-      assertNotEquals(money1, money2);
+      assertEquals(money1, money2);
       assertNotEquals(money1, money3);
       assertNotEquals(money2, money3);
    }
