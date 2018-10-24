@@ -1,10 +1,12 @@
 package gui;
 
-import java.util.Observable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TrafficLight extends Observable {
+public class TrafficLight {
 	public TrafficLight() {
 		state = LightState.GREEN;
+		observers = new ArrayList<>();
 	}
 	
 	public LightState getState() {
@@ -23,8 +25,17 @@ public class TrafficLight extends Observable {
 			state = LightState.GREEN;
 			break;
 		}
-		setChanged();
 		notifyObservers();
+	}
+	
+	private void notifyObservers() {
+		for (LightObserver o : observers) {
+			o.update(this);
+		}
+	}
+
+	public void addObserver(LightObserver o) {
+		observers.add(o);
 	}
 	
 	public String toString() {
@@ -32,4 +43,5 @@ public class TrafficLight extends Observable {
 	}
 
 	private LightState state;
+	private List<LightObserver> observers;
 }

@@ -1,21 +1,17 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.util.Observable;
-import java.util.Observer;
 
-import javax.swing.JFrame;
 import javax.swing.Box;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class App implements Observer {
+public class App implements LightObserver {
 	private TrafficLight light;
 
 	private JFrame frame;
@@ -57,40 +53,44 @@ public class App implements Observer {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JButton btnNext = new JButton("Next");
-		btnNext.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				light.next();
-			}
-		});
+		btnNext.addActionListener(e -> light.next());
 		frame.getContentPane().add(btnNext, BorderLayout.CENTER);
-		
+
 		lblState = new JLabel(light.toString());
 		Box stateDisplay = Box.createHorizontalBox();
 		stateDisplay.add(new JLabel("Current State: "));
 		stateDisplay.add(lblState);
 		frame.getContentPane().add(stateDisplay, BorderLayout.NORTH);
-		
+
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		
+
 		mnWindow = new JMenu("Window");
 		menuBar.add(mnWindow);
-		
+
 		mntmShowLight = new JMenuItem("Show Light");
-		mntmShowLight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LightDisplay display = new LightDisplay(light.getState());
-				display.setVisible(true);
-				light.addObserver(display);
-			}
+		// Using an anonymous inner class:
+		// mntmShowLight.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent e) {
+		// LightDisplay display = new LightDisplay(light.getState());
+		// display.setVisible(true);
+		// light.addObserver(display);
+		// }
+		// });
+
+		// Use an anonymous function (lambda) instead:
+		mntmShowLight.addActionListener(e -> {
+			LightDisplay display = new LightDisplay(light.getState());
+			display.setVisible(true);
+			light.addObserver(display);
 		});
 		mnWindow.add(mntmShowLight);
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(TrafficLight tl) {
 		lblState.setText(light.toString());
 	}
 }

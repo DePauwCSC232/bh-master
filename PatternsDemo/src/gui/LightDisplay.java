@@ -2,14 +2,12 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class LightDisplay extends JFrame implements Observer {
+public class LightDisplay extends JFrame implements LightObserver {
 	private JPanel contentPane;
 
 	/**
@@ -26,8 +24,7 @@ public class LightDisplay extends JFrame implements Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		TrafficLight light = (TrafficLight) o;
+	public void update(TrafficLight light) {
 		LightState state = light.getState();
 		setColor(state);
 	}
