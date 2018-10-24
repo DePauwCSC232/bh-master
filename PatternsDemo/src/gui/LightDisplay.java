@@ -7,19 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class LightDisplay extends JFrame implements LightObserver {
+public class LightDisplay implements LightObserver {
+	private JFrame frame;
 	private JPanel contentPane;
 
 	/**
 	 * Create the frame.
 	 */
 	public LightDisplay(LightState state) {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		frame.setContentPane(contentPane);
 		setColor(state);
 	}
 
@@ -43,4 +45,7 @@ public class LightDisplay extends JFrame implements LightObserver {
 		}
 	}
 
+	public void setVisible(boolean b) {
+		frame.setVisible(b);
+	}
 }
