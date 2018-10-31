@@ -20,18 +20,6 @@ public interface Image {
    Color colorAt(double x, double y);
 
    /**
-    * Create a shifted version of this image, dx units to the right and dy units
-    * down.
-    * 
-    * @param dx the amount by which to shift the x-coordinates
-    * @param dy the amount by which to shift the y-coordinates
-    * @return the shifted image
-    */
-   default Image shifted(double dx, double dy) {
-      return new ShiftedImage(this, dx, dy);
-   }
-
-   /**
     * Create a scaled version of this image, with width multiplied by sx and height
     * multiplied by sy. The image is scaled about the origin, (0, 0).
     * 
@@ -41,6 +29,19 @@ public interface Image {
     */
    default Image scaled(double sx, double sy) {
       return new ScaledImage(this, sx, sy);
+   }
+
+   /**
+    * Create a shifted version of this image, dx units to the right and dy units
+    * down.
+    * 
+    * @param dx the amount by which to shift the x-coordinates
+    * @param dy the amount by which to shift the y-coordinates
+    * @return the shifted image
+    */
+   default Image shifted(double dx, double dy) {
+      // TODO return a new ShiftedImage wrapping this
+      return this;
    }
 
    /**
@@ -55,7 +56,8 @@ public interface Image {
     * @return the rectangle image
     */
    static Image rectangle(double x, double y, double w, double h, Color color) {
-      return new Square(color).scaled(w, h).shifted(x, y);
+      // TODO return an appropriately scaled and shifted Square
+      return null;
    }
 
    /**
