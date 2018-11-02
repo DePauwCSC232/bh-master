@@ -1,3 +1,15 @@
+////////////////////////////////////////////////////////////////////////////////
+// File:             Canvas.java
+// Course:           CSC 232A/B, Fall 2018
+// Authors:          Brian Howard
+//
+// Acknowledgements: None
+//
+// Online sources:   Bug workaround thanks to
+//                   https://stackoverflow.com/questions/30861201
+//                   (why is java awt graphics drawline exceptionally slow)
+////////////////////////////////////////////////////////////////////////////////
+
 package edu.depauw.csc232;
 
 import java.awt.Graphics;
