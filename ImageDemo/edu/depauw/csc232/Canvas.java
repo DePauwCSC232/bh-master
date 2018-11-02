@@ -1,6 +1,8 @@
 package edu.depauw.csc232;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -29,6 +31,10 @@ public class Canvas extends JPanel {
 
    @Override
    public void paint(Graphics g) {
+      // The following two lines work around a bug in Java on Windows. Don't ask.
+      Graphics2D g2 = (Graphics2D) g;
+      g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+      
       drawImages(g);
    }
 
