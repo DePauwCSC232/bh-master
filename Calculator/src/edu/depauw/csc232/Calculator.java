@@ -10,24 +10,22 @@
 
 package edu.depauw.csc232;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.Insets;
-import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
-import javax.swing.BoxLayout;
 import java.awt.Component;
-import javax.swing.Box;
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.function.BinaryOperator;
-import java.awt.event.ActionEvent;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
 
 /**
  * Demonstration of a calculator using Swing and some design patterns. Interface
@@ -44,6 +42,14 @@ public class Calculator {
 	private static BinaryOperator<Double> SUB_OP = (total, value) -> total - value;
 	private static BinaryOperator<Double> MUL_OP = (total, value) -> total * value;
 	private static BinaryOperator<Double> DIV_OP = (total, value) -> total / value;
+
+	// Note that a "lambda" (anonymous function) is equivalent to the following:
+//	private static BinaryOperator<Double> DIV_OP = new BinaryOperator<Double>() {
+//		@Override
+//		public Double apply(Double total, Double value) {
+//			return total / value;
+//		}
+//	};
 
 	/**
 	 * Launch the application.
@@ -123,7 +129,7 @@ public class Calculator {
 		gbc_button_2.gridy = 1;
 		frame.getContentPane().add(button_2, gbc_button_2);
 
-		JButton button_3 = new JButton(new OperatorAction(this, "÷", DIV_OP));
+		JButton button_3 = new JButton(new OperatorAction(this, "/", DIV_OP));
 		GridBagConstraints gbc_button_3 = new GridBagConstraints();
 		gbc_button_3.insets = new Insets(0, 0, 5, 0);
 		gbc_button_3.gridx = 3;
@@ -151,7 +157,7 @@ public class Calculator {
 		gbc_button_6.gridy = 2;
 		frame.getContentPane().add(button_6, gbc_button_6);
 
-		JButton button_7 = new JButton(new OperatorAction(this, "×", MUL_OP));
+		JButton button_7 = new JButton(new OperatorAction(this, "*", MUL_OP));
 		GridBagConstraints gbc_button_7 = new GridBagConstraints();
 		gbc_button_7.insets = new Insets(0, 0, 5, 0);
 		gbc_button_7.gridx = 3;
@@ -194,12 +200,7 @@ public class Calculator {
 		frame.getContentPane().add(button_12, gbc_button_12);
 
 		JButton button_13 = new JButton(".");
-		button_13.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				state = state.pressDecimal();
-				updateDisplay();
-			}
-		});
+		button_13.addActionListener(e -> pressDecimal());
 		GridBagConstraints gbc_button_13 = new GridBagConstraints();
 		gbc_button_13.insets = new Insets(0, 0, 0, 5);
 		gbc_button_13.gridx = 1;
@@ -253,6 +254,14 @@ public class Calculator {
 	 */
 	public void pressOperator(BinaryOperator<Double> op) {
 		state = state.pressOperator(op);
+		updateDisplay();
+	}
+
+	/**
+	 * Handle a decimal point press by delegating to the current state.
+	 */
+	private void pressDecimal() {
+		state = state.pressDecimal();
 		updateDisplay();
 	}
 }

@@ -3,7 +3,7 @@
 // Course:           CSC 232A/B, Fall 2018
 // Authors:          Brian Howard
 //
-// Acknowledgements: None
+// Acknowledgements: Originally written with Joey Kendall-Morwick, long ago
 //
 // Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
