@@ -23,8 +23,7 @@ public class Money implements Comparable<Money> {
    /**
     * Construct an amount of money from a BigDecimal number.
     *
-    * @param amount
-    *           the desired amount
+    * @param amount the desired amount
     */
    public Money(BigDecimal amount) {
       this.amount = amount;
@@ -33,8 +32,7 @@ public class Money implements Comparable<Money> {
    /**
     * Construct an amount of money with the given number of dollars.
     *
-    * @param dollars
-    *           the desired amount
+    * @param dollars the desired amount
     */
    public Money(long dollars) {
       this.amount = BigDecimal.valueOf(dollars);
@@ -43,10 +41,8 @@ public class Money implements Comparable<Money> {
    /**
     * Construct an amount of money with the given number of dollars and cents.
     *
-    * @param dollars
-    *           the desired amount of dollars
-    * @param cents
-    *           the desired amount of cents
+    * @param dollars the desired amount of dollars
+    * @param cents   the desired amount of cents
     */
    public Money(long dollars, long cents) {
       this.amount = BigDecimal.valueOf(dollars * 100 + cents, 2);
@@ -56,8 +52,7 @@ public class Money implements Comparable<Money> {
     * Construct an amount of money from a string representation such as
     * "123456.78".
     *
-    * @param stringAmount
-    *           the desired amount as a String
+    * @param stringAmount the desired amount as a String
     */
    public Money(String stringAmount) {
       this.amount = new BigDecimal(stringAmount);
@@ -66,8 +61,7 @@ public class Money implements Comparable<Money> {
    /**
     * Add the given money amount to this and return the sum.
     *
-    * @param money
-    *           the amount to add
+    * @param money the amount to add
     * @return the sum
     */
    public Money add(Money money) {
@@ -104,8 +98,7 @@ public class Money implements Comparable<Money> {
    /**
     * Subtract the given money amount from this and return the difference.
     *
-    * @param money
-    *           the amount to subtract
+    * @param money the amount to subtract
     * @return the difference
     */
    public Money subtract(Money money) {
@@ -119,6 +112,7 @@ public class Money implements Comparable<Money> {
 
    private BigDecimal amount;
 
-   private static final NumberFormat NUMBER_FORMAT = NumberFormat
-      .getCurrencyInstance(Locale.US);
+   private static final NumberFormat NUMBER_FORMAT = NumberFormat.getCurrencyInstance(Locale.US);
+
+   public static final Money ZERO = new Money(0);
 }

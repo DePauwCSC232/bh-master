@@ -11,37 +11,55 @@
 package edu.depauw.csc232;
 
 /**
- * Common base class for accounts in a bank simulation.
+ * Describes a general account in a bank simulation.
  *
  * @author bhoward
  */
-public interface Account {
+public class Account {
+   /**
+    * @param rules
+    */
+   public Account(AccountRules rules) {
+      this.rules = rules;
+      this.balance = Money.ZERO;
+   }
+
+   /**
+    * @param rules
+    * @param balance
+    */
+   public Account(AccountRules rules, Money balance) {
+      this.rules = rules;
+      this.balance = balance;
+   }
+
    /**
     * Get the balance of this account.
     * 
     * @return the current balance
     */
-   Money balance();
+   public Money balance() {
+      return balance;
+   }
 
    /**
     * Deposit money into this account. A deposit should always succeed.
     * 
-    * @param amount
-    *           how much money to deposit
+    * @param amount how much money to deposit
     */
-   void deposit(Money amount);
+   public void deposit(Money amount) {
+      balance = balance.add(amount);
+   }
 
    /**
     * Attempt to transfer money into this account. If unable to complete the
     * transfer, return false and leave both balances unchanged.
     * 
-    * @param amount
-    *           how much money to transfer
-    * @param from
-    *           which account to take the money from
+    * @param amount how much money to transfer
+    * @param from   which account to take the money from
     * @return true if successful
     */
-   default boolean transferIn(Money amount, Account from) {
+   public boolean transferIn(Money amount, Account from) {
       boolean result = from.withdraw(amount);
       if (result) {
          deposit(amount);
@@ -53,13 +71,11 @@ public interface Account {
     * Attempt to transfer money out of this account. If unable to complete the
     * transfer, return false and leave both balances unchanged.
     * 
-    * @param amount
-    *           how much money to transfer
-    * @param to
-    *           which account to put the money in
+    * @param amount how much money to transfer
+    * @param to     which account to put the money in
     * @return true if successful
     */
-   default boolean transferOut(Money amount, Account to) {
+   public boolean transferOut(Money amount, Account to) {
       return to.transferIn(amount, this);
    }
 
@@ -67,21 +83,35 @@ public interface Account {
     * Attempt to withdraw money from this account. If unable to complete the
     * action, return false and leave the balance unchanged.
     * 
-    * @param amount
-    *           of money to withdraw
+    * @param amount of money to withdraw
     * @return true if successful
     */
-   boolean withdraw(Money amount);
+   public boolean withdraw(Money amount) {
+      if (rules.canWithdraw(this, amount)) {
+         balance = balance.subtract(amount);
+         return true;
+      } else {
+         return false;
+      }
+   }
 
    /**
     * Perform any required end-of-day processing on this account.
     */
-   void processEndOfDay();
+   public void processEndOfDay() {
+      rules.processEndOfDay(this);
+   }
 
    /**
     * Perform any required end-of-month processing on this account. This will be
-    * called after {@link edu.depauw.csc232.Account#processEndOfDay()} on the
-    * last day of the month.
+    * called after {@link edu.depauw.csc232.Account#processEndOfDay()} on the last
+    * day of the month.
     */
-   void processEndOfMonth();
+   public void processEndOfMonth() {
+      rules.processEndOfMonth(this);
+   }
+
+   private Money balance;
+
+   private AccountRules rules;
 }
