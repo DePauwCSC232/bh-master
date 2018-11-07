@@ -17,7 +17,10 @@ package edu.depauw.csc232;
  */
 public class Account {
    /**
-    * @param rules
+    * Construct an account with an initial zero balance, following the given
+    * account rules.
+    * 
+    * @param rules the AccountRules governing this account
     */
    public Account(AccountRules rules) {
       this.rules = rules;
@@ -25,8 +28,11 @@ public class Account {
    }
 
    /**
-    * @param rules
-    * @param balance
+    * Construct an account with the given initial balance, following the given
+    * account rules.
+    * 
+    * @param rules   the AccountRules governing this account
+    * @param balance the initial balance
     */
    public Account(AccountRules rules, Money balance) {
       this.rules = rules;

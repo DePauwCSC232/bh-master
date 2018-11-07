@@ -11,8 +11,8 @@
 package edu.depauw.csc232;
 
 /**
- * @author bhoward
- *
+ * An AccountRules object specifies the strategies for checking whether an
+ * account will allow a withdrawal, and for end-of-day/month processing.
  */
 public interface AccountRules {
    /**
@@ -25,13 +25,16 @@ public interface AccountRules {
    boolean canWithdraw(Account account, Money amount);
 
    /**
-    * @param account
+    * Handle the end-of-day processing for this kind of account.
     * 
+    * @param account the Account being processed
     */
    void processEndOfDay(Account account);
 
    /**
-    * @param account
+    * Handle the end-of-month processing for this kind of account.
+    * 
+    * @param account the Account being processed
     */
    void processEndOfMonth(Account account);
 }
