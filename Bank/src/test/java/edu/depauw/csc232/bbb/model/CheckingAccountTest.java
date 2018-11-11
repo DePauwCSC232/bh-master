@@ -32,8 +32,8 @@ public class CheckingAccountTest {
       Account acct1 = new Account(CheckingAccountRules.INSTANCE);
       Account acct2 = new Account(CheckingAccountRules.INSTANCE, new Money("123.45"));
 
-      assertTrue(acct1.balance().compareTo(new Money(0)) == 0);
-      assertTrue(acct2.balance().compareTo(new Money(123, 45)) == 0);
+      assertTrue(acct1.balance().equals(Money.ZERO));
+      assertTrue(acct2.balance().equals(new Money(123, 45)));
    }
 
    /**
@@ -45,7 +45,7 @@ public class CheckingAccountTest {
       Account acct1 = new Account(CheckingAccountRules.INSTANCE);
       acct1.deposit(new Money(42, 0));
 
-      assertTrue(acct1.balance().compareTo(new Money("42.00")) == 0);
+      assertTrue(acct1.balance().equals(new Money("42.00")));
    }
 
    /**
@@ -56,11 +56,11 @@ public class CheckingAccountTest {
    public void testWithdraw() {
       Account acct1 = new Account(CheckingAccountRules.INSTANCE);
       assertFalse(acct1.withdraw(new Money(52, 0)));
-      assertTrue(acct1.balance().compareTo(new Money(0)) == 0);
+      assertTrue(acct1.balance().equals(new Money(0)));
 
       Account acct2 = new Account(CheckingAccountRules.INSTANCE, new Money("123.45"));
       assertTrue(acct2.withdraw(new Money(52, 0)));
-      assertTrue(acct2.balance().compareTo(new Money(71, 45)) == 0);
+      assertTrue(acct2.balance().equals(new Money(71, 45)));
    }
 
    @Test
@@ -69,11 +69,11 @@ public class CheckingAccountTest {
       Account acct2 = new Account(CheckingAccountRules.INSTANCE, new Money("123.45"));
 
       assertTrue(acct1.transferIn(new Money(20), acct2));
-      assertTrue(acct1.balance().compareTo(new Money(20)) == 0);
-      assertTrue(acct2.balance().compareTo(new Money("103.45")) == 0);
+      assertTrue(acct1.balance().equals(new Money(20)));
+      assertTrue(acct2.balance().equals(new Money("103.45")));
 
       assertFalse(acct1.transferOut(new Money(82), acct2));
-      assertTrue(acct1.balance().compareTo(new Money(20)) == 0);
-      assertTrue(acct2.balance().compareTo(new Money("103.45")) == 0);
+      assertTrue(acct1.balance().equals(new Money(20)));
+      assertTrue(acct2.balance().equals(new Money("103.45")));
    }
 }

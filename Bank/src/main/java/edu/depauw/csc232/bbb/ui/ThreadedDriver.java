@@ -28,7 +28,7 @@ public class ThreadedDriver {
                // Try to take out $100
                if (account.withdraw(new Money(100))) {
                   Money balance = account.balance();
-                  if (balance.compareTo(Money.ZERO) < 0) {
+                  if (balance.lessThan(Money.ZERO)) {
                      System.err.println("Oops! Balance is " + balance);
                   }
                   // Put the $100 back

@@ -18,7 +18,7 @@ public class SavingsAccountRules implements AccountRules {
    @Override
    public boolean canWithdraw(Account account, Money amount) {
       Money balance = account.balance();
-      return balance.compareTo(amount) >= 0;
+      return balance.greaterThanOrEqual(amount);
    }
 
    @Override

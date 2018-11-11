@@ -23,8 +23,7 @@ public class Account {
     * @param rules the AccountRules governing this account
     */
    public Account(AccountRules rules) {
-      this.rules = rules;
-      this.balance = Money.ZERO;
+      this(rules, Money.ZERO);
    }
 
    /**
@@ -50,6 +49,7 @@ public class Account {
 
    /**
     * Deposit money into this account. A deposit should always succeed.
+    * Precondition: amount must be greater than zero
     * 
     * @param amount how much money to deposit
     */

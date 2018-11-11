@@ -80,5 +80,8 @@ public class MoneyTest {
       assertEquals(money1, money2);
       assertNotEquals(money1, money3);
       assertNotEquals(money2, money3);
+      assertTrue(money1.lessThan(money3));
+      assertTrue(money2.lessThan(money3));
+      assertTrue(money3.greaterThan(money2));
    }
 }

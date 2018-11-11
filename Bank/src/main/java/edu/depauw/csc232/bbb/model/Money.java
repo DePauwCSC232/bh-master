@@ -68,6 +68,56 @@ public class Money implements Comparable<Money> {
       return new Money(amount.add(money.amount));
    }
 
+   /**
+    * Subtract the given money amount from this and return the difference.
+    *
+    * @param money the amount to subtract
+    * @return the difference
+    */
+   public Money subtract(Money money) {
+      return new Money(amount.subtract(money.amount));
+   }
+
+   /**
+    * Check whether this money amount is less than the other amount.
+    * 
+    * @param other
+    * @return true if this < other
+    */
+   public boolean lessThan(Money other) {
+      return compareTo(other) < 0;
+   }
+
+   /**
+    * Check whether this money amount is less than or equal to the other amount.
+    * 
+    * @param other
+    * @return true if this <= other
+    */
+   public boolean lessThanOrEqual(Money other) {
+      return compareTo(other) <= 0;
+   }
+
+   /**
+    * Check whether this money amount is greater than the other amount.
+    * 
+    * @param other
+    * @return true if this > other
+    */
+   public boolean greaterThan(Money other) {
+      return compareTo(other) > 0;
+   }
+
+   /**
+    * Check whether this money amount is greater than or equal to the other amount.
+    * 
+    * @param other
+    * @return true if this >= other
+    */
+   public boolean greaterThanOrEqual(Money other) {
+      return compareTo(other) >= 0;
+   }
+
    @Override
    public int compareTo(Money other) {
       return amount.compareTo(other.amount);
@@ -93,16 +143,6 @@ public class Money implements Comparable<Money> {
       // This is more expensive than amount.hashCode(), but it is
       // required to be compatible with the above equals() method.
       return toString().hashCode();
-   }
-
-   /**
-    * Subtract the given money amount from this and return the difference.
-    *
-    * @param money the amount to subtract
-    * @return the difference
-    */
-   public Money subtract(Money money) {
-      return new Money(amount.subtract(money.amount));
    }
 
    @Override

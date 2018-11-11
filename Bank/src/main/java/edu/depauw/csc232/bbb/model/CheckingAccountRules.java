@@ -19,13 +19,13 @@ public class CheckingAccountRules implements AccountRules {
    @Override
    public boolean canWithdraw(Account account, Money amount) {
       Money balance = account.balance();
-      return balance.subtract(amount).compareTo(OVERDRAFT_LIMIT) >= 0;
+      return balance.subtract(amount).greaterThanOrEqual(OVERDRAFT_LIMIT);
    }
 
    @Override
    public void processEndOfDay(Account account) {
       Money balance = account.balance();
-      if (balance.compareTo(Money.ZERO) < 0) {
+      if (balance.lessThan(Money.ZERO)) {
          account.transferOut(OVERDRAFT_CHARGE, Bank.FEE_ACCOUNT);
       }
    }
