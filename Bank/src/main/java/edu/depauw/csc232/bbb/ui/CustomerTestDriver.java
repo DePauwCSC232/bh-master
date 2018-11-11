@@ -8,7 +8,9 @@
 // Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
 
-package edu.depauw.csc232;
+package edu.depauw.csc232.bbb.ui;
+
+import edu.depauw.csc232.bbb.model.Customer;
 
 /**
  * Tests the <code>Customer</code> class by creating two objects and printing

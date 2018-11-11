@@ -8,7 +8,7 @@
 // Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
 
-package edu.depauw.csc232;
+package edu.depauw.csc232.bbb.model;
 
 import java.util.HashMap;
 import java.util.Map;

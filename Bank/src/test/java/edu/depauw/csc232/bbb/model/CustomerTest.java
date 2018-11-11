@@ -8,11 +8,13 @@
 // Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
 
-package edu.depauw.csc232;
+package edu.depauw.csc232.bbb.model;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import edu.depauw.csc232.bbb.model.Customer;
 
 /**
  * A simple JUnit test of the <code>Customer</code> class.

@@ -8,13 +8,15 @@
 // Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
 
-package edu.depauw.csc232;
+package edu.depauw.csc232.bbb.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import edu.depauw.csc232.bbb.model.Money;
 
 /**
  * JUnit test for the Money class. Assumes the default en_US locale.
@@ -23,7 +25,7 @@ import org.junit.Test;
  */
 public class MoneyTest {
    /**
-    * Test method for {@link edu.depauw.csc232.Money#toString()}.
+    * Test method for {@link edu.depauw.csc232.bbb.model.Money#toString()}.
     */
    @Test
    public void testToString() {
@@ -62,7 +64,7 @@ public class MoneyTest {
    }
 
    /**
-    * Test method for {@link edu.depauw.csc232.Money#equals()}.
+    * Test method for {@link edu.depauw.csc232.bbb.model.Money#equals()}.
     */
    @Test
    public void testEquals() {

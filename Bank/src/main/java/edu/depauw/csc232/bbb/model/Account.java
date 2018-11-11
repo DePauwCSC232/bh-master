@@ -8,7 +8,7 @@
 // Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
 
-package edu.depauw.csc232;
+package edu.depauw.csc232.bbb.model;
 
 /**
  * Describes a general account in a bank simulation.
@@ -104,7 +104,7 @@ public class Account {
 
    /**
     * Perform any required end-of-month processing on this account. This will be
-    * called after {@link edu.depauw.csc232.Account#processEndOfDay()} on the last
+    * called after {@link edu.depauw.csc232.bbb.model.Account#processEndOfDay()} on the last
     * day of the month.
     */
    public void processEndOfMonth() {

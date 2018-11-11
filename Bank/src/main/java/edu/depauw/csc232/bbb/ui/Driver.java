@@ -8,7 +8,11 @@
 // Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
 
-package edu.depauw.csc232;
+package edu.depauw.csc232.bbb.ui;
+
+import edu.depauw.csc232.bbb.model.Account;
+import edu.depauw.csc232.bbb.model.Bank;
+import edu.depauw.csc232.bbb.model.Money;
 
 /**
  * @author bhoward

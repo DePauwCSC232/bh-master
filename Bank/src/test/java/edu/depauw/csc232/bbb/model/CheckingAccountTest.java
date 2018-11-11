@@ -8,12 +8,16 @@
 // Online sources:   None
 ////////////////////////////////////////////////////////////////////////////////
 
-package edu.depauw.csc232;
+package edu.depauw.csc232.bbb.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import edu.depauw.csc232.bbb.model.Account;
+import edu.depauw.csc232.bbb.model.CheckingAccountRules;
+import edu.depauw.csc232.bbb.model.Money;
 
 /**
  * @author DePauw
@@ -21,7 +25,7 @@ import org.junit.Test;
  */
 public class CheckingAccountTest {
    /**
-    * Test method for {@link edu.depauw.csc232.Account#balance()}.
+    * Test method for {@link edu.depauw.csc232.bbb.model.Account#balance()}.
     */
    @Test
    public void testBalance() {
@@ -34,7 +38,7 @@ public class CheckingAccountTest {
 
    /**
     * Test method for
-    * {@link edu.depauw.csc232.Account#deposit(edu.depauw.csc232.Money)}.
+    * {@link edu.depauw.csc232.bbb.model.Account#deposit(edu.depauw.csc232.bbb.model.Money)}.
     */
    @Test
    public void testDeposit() {
@@ -46,7 +50,7 @@ public class CheckingAccountTest {
 
    /**
     * Test method for
-    * {@link edu.depauw.csc232.Account#withdraw(edu.depauw.csc232.Money)}.
+    * {@link edu.depauw.csc232.bbb.model.Account#withdraw(edu.depauw.csc232.bbb.model.Money)}.
     */
    @Test
    public void testWithdraw() {
