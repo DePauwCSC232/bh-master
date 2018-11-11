@@ -17,7 +17,10 @@ package edu.depauw.csc232.bbb.model;
  */
 public class Account {
    /**
-    * @param rules
+    * Construct an account with an initial zero balance, following the given
+    * account rules.
+    * 
+    * @param rules the AccountRules governing this account
     */
    public Account(AccountRules rules) {
       this.rules = rules;
@@ -25,8 +28,11 @@ public class Account {
    }
 
    /**
-    * @param rules
-    * @param balance
+    * Construct an account with the given initial balance, following the given
+    * account rules.
+    * 
+    * @param rules   the AccountRules governing this account
+    * @param balance the initial balance
     */
    public Account(AccountRules rules, Money balance) {
       this.rules = rules;
@@ -38,7 +44,7 @@ public class Account {
     * 
     * @return the current balance
     */
-   public Money balance() {
+   public synchronized Money balance() {
       return balance;
    }
 
@@ -47,13 +53,31 @@ public class Account {
     * 
     * @param amount how much money to deposit
     */
-   public void deposit(Money amount) {
+   public synchronized void deposit(Money amount) {
       balance = balance.add(amount);
    }
 
    /**
+    * Attempt to withdraw money from this account. If unable to complete the
+    * action, return false and leave the balance unchanged.
+    * 
+    * @param amount of money to withdraw
+    * @return true if successful
+    */
+   public synchronized boolean withdraw(Money amount) {
+      if (rules.canWithdraw(this, amount)) {
+         balance = balance.subtract(amount);
+         return true;
+      } else {
+         return false;
+      }
+   }
+
+   /**
     * Attempt to transfer money into this account. If unable to complete the
-    * transfer, return false and leave both balances unchanged.
+    * transfer, return false and leave both balances unchanged. Not synchronized to
+    * avoid deadlock, and because any access to the balance is made through
+    * synchronized methods.
     * 
     * @param amount how much money to transfer
     * @param from   which account to take the money from
@@ -69,7 +93,9 @@ public class Account {
 
    /**
     * Attempt to transfer money out of this account. If unable to complete the
-    * transfer, return false and leave both balances unchanged.
+    * transfer, return false and leave both balances unchanged. Not synchronized to
+    * avoid deadlock, and because any access to the balance is made through
+    * synchronized methods.
     * 
     * @param amount how much money to transfer
     * @param to     which account to put the money in
@@ -80,23 +106,9 @@ public class Account {
    }
 
    /**
-    * Attempt to withdraw money from this account. If unable to complete the
-    * action, return false and leave the balance unchanged.
-    * 
-    * @param amount of money to withdraw
-    * @return true if successful
-    */
-   public boolean withdraw(Money amount) {
-      if (rules.canWithdraw(this, amount)) {
-         balance = balance.subtract(amount);
-         return true;
-      } else {
-         return false;
-      }
-   }
-
-   /**
-    * Perform any required end-of-day processing on this account.
+    * Perform any required end-of-day processing on this account. Not synchronized
+    * to avoid deadlock, and because any access to the balance is made through
+    * synchronized methods.
     */
    public void processEndOfDay() {
       rules.processEndOfDay(this);
@@ -104,8 +116,9 @@ public class Account {
 
    /**
     * Perform any required end-of-month processing on this account. This will be
-    * called after {@link edu.depauw.csc232.bbb.model.Account#processEndOfDay()} on the last
-    * day of the month.
+    * called after {@link edu.depauw.csc232.Account#processEndOfDay()} on the last
+    * day of the month. Not synchronized to avoid deadlock, and because any access
+    * to the balance is made through synchronized methods.
     */
    public void processEndOfMonth() {
       rules.processEndOfMonth(this);

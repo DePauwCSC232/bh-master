@@ -11,27 +11,17 @@
 package edu.depauw.csc232.bbb.model;
 
 /**
+ * The AccountRules for a checking account.
+ * 
  * @author bhoward
- *
  */
 public class CheckingAccountRules implements AccountRules {
-   /*
-    * (non-Javadoc)
-    * 
-    * @see edu.depauw.csc232.AccountRules#canWithdraw(edu.depauw.csc232.Account,
-    * edu.depauw.csc232.Money)
-    */
    @Override
    public boolean canWithdraw(Account account, Money amount) {
       Money balance = account.balance();
       return balance.subtract(amount).compareTo(OVERDRAFT_LIMIT) >= 0;
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see edu.depauw.csc232.AccountRules#processEndOfDay()
-    */
    @Override
    public void processEndOfDay(Account account) {
       Money balance = account.balance();
@@ -40,17 +30,15 @@ public class CheckingAccountRules implements AccountRules {
       }
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see
-    * edu.depauw.csc232.AccountRules#processEndOfMonth(edu.depauw.csc232.Account)
-    */
    @Override
    public void processEndOfMonth(Account account) {
       // TODO generate statement -- need to log transactions
    }
 
+   /**
+    * An instance of these rules. New checking accounts should be created with
+    * <code>new Account(CheckingAccountRules.INSTANCE)</code>.
+    */
    public static final CheckingAccountRules INSTANCE = new CheckingAccountRules();
 
    /**

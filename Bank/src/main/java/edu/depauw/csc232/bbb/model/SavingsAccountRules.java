@@ -15,40 +15,28 @@ package edu.depauw.csc232.bbb.model;
  *
  */
 public class SavingsAccountRules implements AccountRules {
-
-   /*
-    * (non-Javadoc)
-    * 
-    * @see edu.depauw.csc232.AccountRules#withdraw(edu.depauw.csc232.Money)
-    */
    @Override
    public boolean canWithdraw(Account account, Money amount) {
-      // TODO Auto-generated method stub
-      return false;
+      Money balance = account.balance();
+      return balance.compareTo(amount) >= 0;
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see edu.depauw.csc232.AccountRules#processEndOfDay()
-    */
    @Override
    public void processEndOfDay(Account account) {
       // TODO Auto-generated method stub
 
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see edu.depauw.csc232.AccountRules#processEndOfMonth()
-    */
    @Override
    public void processEndOfMonth(Account account) {
-      // TODO Auto-generated method stub
+      // TODO Pay interest monthly
 
    }
 
+   /**
+    * An instance of these rules. New savings accounts should be created with
+    * <code>new Account(SavingsAccountRules.INSTANCE)</code>.
+    */
    public static final AccountRules INSTANCE = new SavingsAccountRules();
 
 }
