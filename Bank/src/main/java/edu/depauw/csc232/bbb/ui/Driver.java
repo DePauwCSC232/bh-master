@@ -26,10 +26,10 @@ public class Driver {
          Bank bank = new Bank();
          Customer brian = new Customer("Brian Howard", "my secret password");
          int chkAcctNum = bank.createAccount(brian, "CHECKING");
-         Account chkAcct = bank.getAccount(chkAcctNum);
+         Account chkAcct = bank.getAccount(chkAcctNum, "my secret password");
 
          int svgAcctNum = bank.createAccount(brian, "SAVINGS");
-         Account svgAcct = bank.getAccount(svgAcctNum);
+         Account svgAcct = bank.getAccount(svgAcctNum, "my secret password");
 
          chkAcct.deposit(new Money("100.00"));
          chkAcct.transferOut(new Money("60.00"), svgAcct);

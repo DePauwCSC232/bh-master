@@ -38,9 +38,13 @@ public class Bank {
       return accountNumber;
    }
 
-   // TODO check authorization of customer
-   public Account getAccount(int accountNumber) {
-      return accounts.get(accountNumber);
+   public Account getAccount(int accountNumber, String password) throws BankException {
+      Account account = accounts.get(accountNumber);
+      if (account.authorize(password)) {
+         return accounts.get(accountNumber);
+      } else {
+         throw new BankException("Unauthorized access to account " + accountNumber);
+      }
    }
 
    public void processEndOfDay() {

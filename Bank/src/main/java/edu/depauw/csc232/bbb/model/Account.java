@@ -125,6 +125,17 @@ public class Account {
       rules.processEndOfMonth(this);
    }
 
+   /**
+    * Check whether the caller is authorized to access this account, by matching
+    * the customer's password.
+    * 
+    * @param password the password string to test
+    * @return true if password matches
+    */
+   public boolean authorize(String password) {
+      return customer.checkPassword(password);
+   }
+
    private Customer customer;
 
    private Money balance;

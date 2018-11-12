@@ -35,6 +35,17 @@ public class Customer {
       return name;
    }
 
+   /**
+    * Check whether the given password matches the saved one. This is very
+    * insecure.
+    * 
+    * @param password2 The password string to check
+    * @return true if the passwords match
+    */
+   public boolean checkPassword(String password2) {
+      return password.equals(password2);
+   }
+
    @Override
    public String toString() {
       return "Customer:\n" + "    name: " + name + "\n" + "    password: " + password;
