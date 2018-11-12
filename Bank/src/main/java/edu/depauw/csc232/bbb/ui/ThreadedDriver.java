@@ -12,6 +12,7 @@ package edu.depauw.csc232.bbb.ui;
 
 import edu.depauw.csc232.bbb.model.Account;
 import edu.depauw.csc232.bbb.model.CheckingAccountRules;
+import edu.depauw.csc232.bbb.model.Customer;
 import edu.depauw.csc232.bbb.model.Money;
 
 /**
@@ -20,7 +21,8 @@ import edu.depauw.csc232.bbb.model.Money;
  */
 public class ThreadedDriver {
    public static void main(String[] args) {
-      Account account = new Account(CheckingAccountRules.INSTANCE, new Money(100));
+      Customer brian = new Customer("Brian Howard", "my secret password");
+      Account account = new Account(brian, CheckingAccountRules.INSTANCE, new Money(100));
       Runnable task = new Runnable() {
          @Override
          public void run() {

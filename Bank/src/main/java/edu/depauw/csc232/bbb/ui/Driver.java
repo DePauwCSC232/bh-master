@@ -12,6 +12,8 @@ package edu.depauw.csc232.bbb.ui;
 
 import edu.depauw.csc232.bbb.model.Account;
 import edu.depauw.csc232.bbb.model.Bank;
+import edu.depauw.csc232.bbb.model.BankException;
+import edu.depauw.csc232.bbb.model.Customer;
 import edu.depauw.csc232.bbb.model.Money;
 
 /**
@@ -20,21 +22,26 @@ import edu.depauw.csc232.bbb.model.Money;
 public class Driver {
    public static void main(String[] args) {
       // This is just a simple test driver
-      Bank bank = new Bank();
-      int chkAcctNum = bank.createAccount(true);
-      Account chkAcct = bank.getAccount(chkAcctNum);
-      
-      int svgAcctNum = bank.createAccount(false);
-      Account svgAcct = bank.getAccount(svgAcctNum);
-      
-      chkAcct.deposit(new Money("100.00"));
-      chkAcct.transferOut(new Money("60.00"), svgAcct);
-      chkAcct.withdraw(new Money("50.00"));
-      System.out.println(chkAcct.balance());
-      chkAcct.transferIn(new Money("15.00"), svgAcct);
-      bank.processEndOfDay();
-      
-      System.out.println(chkAcct.balance());
-      System.out.println(svgAcct.balance());
+      try {
+         Bank bank = new Bank();
+         Customer brian = new Customer("Brian Howard", "my secret password");
+         int chkAcctNum = bank.createAccount(brian, "CHECKING");
+         Account chkAcct = bank.getAccount(chkAcctNum);
+
+         int svgAcctNum = bank.createAccount(brian, "SAVINGS");
+         Account svgAcct = bank.getAccount(svgAcctNum);
+
+         chkAcct.deposit(new Money("100.00"));
+         chkAcct.transferOut(new Money("60.00"), svgAcct);
+         chkAcct.withdraw(new Money("50.00"));
+         System.out.println(chkAcct.balance());
+         chkAcct.transferIn(new Money("15.00"), svgAcct);
+         bank.processEndOfDay();
+
+         System.out.println(chkAcct.balance());
+         System.out.println(svgAcct.balance());
+      } catch (BankException be) {
+         System.err.println("Something went wrong: " + be.getMessage());
+      }
    }
 }

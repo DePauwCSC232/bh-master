@@ -20,8 +20,8 @@ import edu.depauw.csc232.bbb.model.Customer;
  */
 public class CustomerTestDriver {
    public static void main(String[] args) {
-      Customer brian = new Customer("Brian Howard", 53, "1230");
-      Customer alice = new Customer("Alice Howard", 13, "1245");
+      Customer brian = new Customer("Brian Howard", "my secret password");
+      Customer alice = new Customer("Alice Howard", "A+Better-P455W0RD");
       
       System.out.println(brian);
       System.out.println(alice);

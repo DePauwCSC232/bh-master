@@ -22,8 +22,8 @@ public class Account {
     * 
     * @param rules the AccountRules governing this account
     */
-   public Account(AccountRules rules) {
-      this(rules, Money.ZERO);
+   public Account(Customer customer, AccountRules rules) {
+      this(customer, rules, Money.ZERO);
    }
 
    /**
@@ -33,7 +33,8 @@ public class Account {
     * @param rules   the AccountRules governing this account
     * @param balance the initial balance
     */
-   public Account(AccountRules rules, Money balance) {
+   public Account(Customer customer, AccountRules rules, Money balance) {
+      this.customer = customer;
       this.rules = rules;
       this.balance = balance;
    }
@@ -123,6 +124,8 @@ public class Account {
    public void processEndOfMonth() {
       rules.processEndOfMonth(this);
    }
+
+   private Customer customer;
 
    private Money balance;
 

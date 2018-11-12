@@ -11,37 +11,21 @@
 package edu.depauw.csc232.bbb.model;
 
 /**
- * The <code>Customer</code> class describes a customer in a simulation.
+ * The <code>Customer</code> class describes a customer in a bank simulation.
  *
  * @author bhoward
  */
 public class Customer {
    /**
-    * Construct a customer given name, age, and arrival time (in military time
-    * format: 0000 to 2359).
+    * Construct a customer given name and password. The password is in cleartext,
+    * because we aren't trying to be secure in this simulation.
     *
     * @param name
-    * @param age
-    * @param arrivalTime
+    * @param password
     */
-   public Customer(String name, int age, String arrivalTime) {
+   public Customer(String name, String password) {
       this.name = name;
-      this.age = age;
-      this.arrivalTime = arrivalTime;
-   }
-
-   /**
-    * @return this customer's age in years
-    */
-   public int getAge() {
-      return age;
-   }
-
-   /**
-    * @return this customer's arrival time (U.S. military time format)
-    */
-   public String getArrivalTime() {
-      return arrivalTime;
+      this.password = password;
    }
 
    /**
@@ -53,13 +37,9 @@ public class Customer {
 
    @Override
    public String toString() {
-      return "Customer:\n"
-               + "    name: " + name + "\n"
-               + "    age: " + age + "\n"
-               + "    arrival time: " + arrivalTime;
+      return "Customer:\n" + "    name: " + name + "\n" + "    password: " + password;
    }
 
    private String name;
-   private int age;
-   private String arrivalTime;
+   private String password;
 }

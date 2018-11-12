@@ -24,11 +24,10 @@ import edu.depauw.csc232.bbb.model.Customer;
 public class CustomerTest {
    @Test
    public void testToString() {
-      Customer brian = new Customer("Brian Howard", 53, "1230");
+      Customer brian = new Customer("Brian Howard", "my secret password");
       String expected = "Customer:\n" + 
                "    name: Brian Howard\n" + 
-               "    age: 53\n" + 
-               "    arrival time: 1230";
+               "    password: my secret password";
       assertEquals(expected, brian.toString());
    }
 }

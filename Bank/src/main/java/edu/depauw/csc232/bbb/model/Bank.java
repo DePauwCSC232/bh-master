@@ -19,19 +19,21 @@ import java.util.Map;
 public class Bank {
    public Bank() {
       this.accounts = new HashMap<>();
+      this.availableRules = new HashMap<>();
+      availableRules.put("CHECKING", CheckingAccountRules.INSTANCE);
+      availableRules.put("SAVINGS", SavingsAccountRules.INSTANCE);
    }
 
-   // TODO associate account with a customer
-   public int createAccount(boolean isChecking) {
+   public int createAccount(Customer customer, String accountType) throws BankException {
+      AccountRules rules = availableRules.get(accountType);
+      if (rules == null) {
+         throw new BankException("Account type " + accountType + " is unavailable");
+      }
+
       int accountNumber = nextAccountNumber;
       nextAccountNumber += 1;
 
-      // TODO make this nicer -- have a collection of available rules?
-      if (isChecking) {
-         accounts.put(accountNumber, new Account(CheckingAccountRules.INSTANCE));
-      } else {
-         accounts.put(accountNumber, new Account(SavingsAccountRules.INSTANCE));
-      }
+      accounts.put(accountNumber, new Account(customer, rules));
 
       return accountNumber;
    }
@@ -54,6 +56,7 @@ public class Bank {
    }
 
    private Map<Integer, Account> accounts;
+   private Map<String, AccountRules> availableRules;
 
    private int nextAccountNumber = 1;
 
