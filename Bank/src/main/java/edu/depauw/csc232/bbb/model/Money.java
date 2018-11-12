@@ -154,5 +154,8 @@ public class Money implements Comparable<Money> {
 
    private static final NumberFormat NUMBER_FORMAT = NumberFormat.getCurrencyInstance(Locale.US);
 
+   /**
+    * Convenience constant for a zero money amount.
+    */
    public static final Money ZERO = new Money(0);
 }
