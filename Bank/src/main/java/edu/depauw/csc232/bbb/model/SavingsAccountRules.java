@@ -22,15 +22,19 @@ public class SavingsAccountRules implements AccountRules {
    }
 
    @Override
-   public void processEndOfDay(Account account) {
-      // TODO Auto-generated method stub
-
+   public void processEndOfDay(Bank bank, Account account) {
+      // Nothing to do here
    }
 
    @Override
-   public void processEndOfMonth(Account account) {
-      // TODO Pay interest monthly
+   public void processEndOfMonth(Bank bank, Account account) {
+      Money interest = account.balance().multiply(MONTHLY_INTEREST_RATE);
+      account.transferIn(interest, bank.getFeeAccount());
+   }
 
+   @Override
+   public String toString() {
+      return "SAVINGS";
    }
 
    /**
@@ -39,4 +43,5 @@ public class SavingsAccountRules implements AccountRules {
     */
    public static final AccountRules INSTANCE = new SavingsAccountRules();
 
+   public static final double MONTHLY_INTEREST_RATE = 0.005;
 }

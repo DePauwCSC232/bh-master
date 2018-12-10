@@ -20,23 +20,30 @@ public class Account {
     * Construct an account with an initial zero balance, following the given
     * account rules.
     * 
-    * @param rules the AccountRules governing this account
+    * @param accountNumber the assigned account number
+    * @param customer      the Customer who owns this account
+    * @param rules         the AccountRules governing this account
     */
-   public Account(Customer customer, AccountRules rules) {
-      this(customer, rules, Money.ZERO);
+   public Account(int accountNumber, Customer customer, AccountRules rules) {
+      this(accountNumber, customer, rules, Money.ZERO);
    }
 
    /**
     * Construct an account with the given initial balance, following the given
     * account rules.
     * 
-    * @param rules   the AccountRules governing this account
-    * @param balance the initial balance
+    * @param accountNumber the assigned account number
+    * @param customer      the Customer who owns this account
+    * @param rules         the AccountRules governing this account
+    * @param balance       the initial balance
     */
-   public Account(Customer customer, AccountRules rules, Money balance) {
+   public Account(int accountNumber, Customer customer, AccountRules rules, Money balance) {
+      this.accountNumber = accountNumber;
       this.customer = customer;
       this.rules = rules;
       this.balance = balance;
+      this.log = new Log();
+      log.append("Account created for " + customer + " with rules " + rules + " and initial balance " + balance);
    }
 
    /**
@@ -56,6 +63,7 @@ public class Account {
     */
    public synchronized void deposit(Money amount) {
       balance = balance.add(amount);
+      log.append("Deposit of " + amount);
    }
 
    /**
@@ -68,6 +76,7 @@ public class Account {
    public synchronized boolean withdraw(Money amount) {
       if (rules.canWithdraw(this, amount)) {
          balance = balance.subtract(amount);
+         log.append("Withdrawal of " + amount);
          return true;
       } else {
          return false;
@@ -111,8 +120,8 @@ public class Account {
     * to avoid deadlock, and because any access to the balance is made through
     * synchronized methods.
     */
-   public void processEndOfDay() {
-      rules.processEndOfDay(this);
+   public void processEndOfDay(Bank bank) {
+      rules.processEndOfDay(bank, this);
    }
 
    /**
@@ -121,13 +130,27 @@ public class Account {
     * day of the month. Not synchronized to avoid deadlock, and because any access
     * to the balance is made through synchronized methods.
     */
-   public void processEndOfMonth() {
-      rules.processEndOfMonth(this);
+   public void processEndOfMonth(Bank bank) {
+      rules.processEndOfMonth(bank, this);
+   }
+
+   /**
+    * Print the end-of-month statement of transactions from the log to System.out.
+    * As a convenience for the simulation, also clear the log to be ready for the
+    * next month.
+    */
+   public void printStatement() {
+      System.out.println("Statement for " + this);
+      log.printTo(System.out);
+      System.out.println("Current balance: " + balance);
+      System.out.println();
+      log.clear();
    }
 
    /**
     * Check whether the caller is authorized to access this account, by matching
-    * the customer's password.
+    * the customer's password. This is not secure at all, but it will suffice for
+    * this simulation.
     * 
     * @param password the password string to test
     * @return true if password matches
@@ -136,9 +159,18 @@ public class Account {
       return customer.checkPassword(password);
    }
 
+   @Override
+   public String toString() {
+      return "Account number " + accountNumber + " (" + rules + "); " + customer;
+   }
+
+   private int accountNumber;
+
    private Customer customer;
 
    private Money balance;
 
    private AccountRules rules;
+
+   private Log log;
 }

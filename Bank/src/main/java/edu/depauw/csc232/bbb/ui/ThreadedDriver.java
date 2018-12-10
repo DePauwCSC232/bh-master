@@ -22,7 +22,7 @@ import edu.depauw.csc232.bbb.model.Money;
 public class ThreadedDriver {
    public static void main(String[] args) {
       Customer brian = new Customer("Brian Howard", "my secret password");
-      Account account = new Account(brian, CheckingAccountRules.INSTANCE, new Money(100));
+      Account account = new Account(1, brian, CheckingAccountRules.INSTANCE, new Money(100));
       Runnable task = new Runnable() {
          @Override
          public void run() {

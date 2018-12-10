@@ -79,6 +79,16 @@ public class Money implements Comparable<Money> {
    }
 
    /**
+    * Multiply this money by the given factor and return the product.
+    * 
+    * @param factor
+    * @return the product
+    */
+   public Money multiply(double factor) {
+      return new Money(amount.multiply(BigDecimal.valueOf(factor)));
+   }
+   
+   /**
     * Check whether this money amount is less than the other amount.
     * 
     * @param other

@@ -48,7 +48,7 @@ public class Customer {
 
    @Override
    public String toString() {
-      return "Customer:\n" + "    name: " + name + "\n" + "    password: " + password;
+      return "Customer(name: " + name + ", password: " + password + ")";
    }
 
    private String name;

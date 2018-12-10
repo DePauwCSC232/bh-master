@@ -29,12 +29,12 @@ public interface AccountRules {
     * 
     * @param account the Account being processed
     */
-   void processEndOfDay(Account account);
+   void processEndOfDay(Bank bank, Account account);
 
    /**
     * Handle the end-of-month processing for this kind of account.
     * 
     * @param account the Account being processed
     */
-   void processEndOfMonth(Account account);
+   void processEndOfMonth(Bank bank, Account account);
 }

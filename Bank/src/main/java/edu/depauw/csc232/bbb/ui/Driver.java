@@ -31,15 +31,32 @@ public class Driver {
          int svgAcctNum = bank.createAccount(brian, "SAVINGS");
          Account svgAcct = bank.getAccount(svgAcctNum, "my secret password");
 
+         // Day one:
          chkAcct.deposit(new Money("100.00"));
          chkAcct.transferOut(new Money("60.00"), svgAcct);
          chkAcct.withdraw(new Money("50.00"));
-         System.out.println(chkAcct.balance());
+         System.out.println("Midday checking balance: " + chkAcct.balance());
          chkAcct.transferIn(new Money("15.00"), svgAcct);
          bank.processEndOfDay();
 
-         System.out.println(chkAcct.balance());
-         System.out.println(svgAcct.balance());
+         System.out.println("Day one");
+         System.out.println("  checking: " + chkAcct.balance());
+         System.out.println("  savings:  " + svgAcct.balance());
+         System.out.println();
+         
+         // Day two:
+         chkAcct.deposit(new Money("10.00"));
+         chkAcct.withdraw(new Money("25.00"));
+         svgAcct.transferOut(new Money("40.00"), chkAcct);
+         bank.processEndOfDay();
+         
+         System.out.println("Day two");
+         System.out.println("  checking: " + chkAcct.balance());
+         System.out.println("  savings:  " + svgAcct.balance());
+         System.out.println();
+         
+         // End of month:
+         bank.processEndOfMonth();
       } catch (BankException be) {
          System.err.println("Something went wrong: " + be.getMessage());
       }

@@ -30,8 +30,8 @@ public class CheckingAccountTest {
    @Test
    public void testBalance() {
       Customer x = new Customer("X", "x");
-      Account acct1 = new Account(x, CheckingAccountRules.INSTANCE);
-      Account acct2 = new Account(x, CheckingAccountRules.INSTANCE, new Money("123.45"));
+      Account acct1 = new Account(1, x, CheckingAccountRules.INSTANCE);
+      Account acct2 = new Account(2, x, CheckingAccountRules.INSTANCE, new Money("123.45"));
 
       assertTrue(acct1.balance().equals(Money.ZERO));
       assertTrue(acct2.balance().equals(new Money(123, 45)));
@@ -44,7 +44,7 @@ public class CheckingAccountTest {
    @Test
    public void testDeposit() {
       Customer x = new Customer("X", "x");
-      Account acct1 = new Account(x, CheckingAccountRules.INSTANCE);
+      Account acct1 = new Account(1, x, CheckingAccountRules.INSTANCE);
       acct1.deposit(new Money(42, 0));
 
       assertTrue(acct1.balance().equals(new Money("42.00")));
@@ -57,11 +57,11 @@ public class CheckingAccountTest {
    @Test
    public void testWithdraw() {
       Customer x = new Customer("X", "x");
-      Account acct1 = new Account(x, CheckingAccountRules.INSTANCE);
+      Account acct1 = new Account(1, x, CheckingAccountRules.INSTANCE);
       assertFalse(acct1.withdraw(new Money(52, 0)));
       assertTrue(acct1.balance().equals(new Money(0)));
 
-      Account acct2 = new Account(x, CheckingAccountRules.INSTANCE, new Money("123.45"));
+      Account acct2 = new Account(2, x, CheckingAccountRules.INSTANCE, new Money("123.45"));
       assertTrue(acct2.withdraw(new Money(52, 0)));
       assertTrue(acct2.balance().equals(new Money(71, 45)));
    }
@@ -69,8 +69,8 @@ public class CheckingAccountTest {
    @Test
    public void testTransfer() {
       Customer x = new Customer("X", "x");
-      Account acct1 = new Account(x, CheckingAccountRules.INSTANCE);
-      Account acct2 = new Account(x, CheckingAccountRules.INSTANCE, new Money("123.45"));
+      Account acct1 = new Account(1, x, CheckingAccountRules.INSTANCE);
+      Account acct2 = new Account(2, x, CheckingAccountRules.INSTANCE, new Money("123.45"));
 
       assertTrue(acct1.transferIn(new Money(20), acct2));
       assertTrue(acct1.balance().equals(new Money(20)));

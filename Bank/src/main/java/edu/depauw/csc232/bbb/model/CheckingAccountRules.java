@@ -23,16 +23,21 @@ public class CheckingAccountRules implements AccountRules {
    }
 
    @Override
-   public void processEndOfDay(Account account) {
+   public void processEndOfDay(Bank bank, Account account) {
       Money balance = account.balance();
       if (balance.lessThan(Money.ZERO)) {
-         account.transferOut(OVERDRAFT_CHARGE, Bank.FEE_ACCOUNT);
+         account.transferOut(OVERDRAFT_CHARGE, bank.getFeeAccount());
       }
    }
 
    @Override
-   public void processEndOfMonth(Account account) {
-      // TODO generate statement -- need to log transactions
+   public void processEndOfMonth(Bank bank, Account account) {
+      account.transferOut(MONTHLY_CHARGE, bank.getFeeAccount());
+   }
+
+   @Override
+   public String toString() {
+      return "CHECKING";
    }
 
    /**
@@ -54,4 +59,8 @@ public class CheckingAccountRules implements AccountRules {
     */
    public static final Money OVERDRAFT_CHARGE = new Money("20.00");
 
+   /**
+    * Monthly fee for a checking account.
+    */
+   public static final Money MONTHLY_CHARGE = new Money("5.00");
 }
