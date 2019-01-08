@@ -6,36 +6,16 @@ import java.util.Iterator;
 import java.util.NavigableSet;
 
 public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E> {
-	private class Node {
-		E value;
-		Node left;
-		Node right;
-	}
-	
-	private Node root;
-	private Comparator<? super E> comparator;
+	// TODO implement this with a TreeMap
 	
 	public TreeSet() {
-		this.root = null;
-		this.comparator = null;
+		
 	}
 	
 	@Override
 	public boolean contains(Object o) {
-		@SuppressWarnings("unchecked")
-		E e = (E) o;
-		Node node = root;
-		while (node != null) {
-			int cmp = comparator.compare(node.value, e);
-			if (cmp < 0) {
-				node = node.left;
-			} else if (cmp == 0) {
-				return true;
-			} else {
-				node = node.right;
-			}
-		}
-		return false;
+		// TODO Auto-generated method stub
+		return super.contains(o);
 	}
 
 	@Override

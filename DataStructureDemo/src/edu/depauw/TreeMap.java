@@ -9,23 +9,27 @@ import java.util.Set;
 
 public class TreeMap<K, V> implements NavigableMap<K, V> {
 	private class Node {
-		int size; // TODO keep this just in the tree itself?
 		K key;
 		V value;
 		Node left, right;
+
+		public Node(Node left, K key, V value, Node right) {
+			this.left = left;
+			this.key = key;
+			this.value = value;
+			this.right = right;
+		}
 	}
 
 	private Node root;
 	private Comparator<? super K> comparator;
-	
+	private int size;
+
 	// TODO constructors
 
 	@Override
 	public int size() {
-		if (root == null) {
-			return 0;
-		}
-		return root.size;
+		return size;
 	}
 
 	@Override
@@ -61,8 +65,32 @@ public class TreeMap<K, V> implements NavigableMap<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		// TODO Auto-generated method stub
-		return null;
+		Node node = findNode(key);
+		if (node != null) {
+			V old = node.value;
+			node.value = value;
+			return old;
+		} else {
+			root = putAux(root, key, value);
+			return null;
+		}
+	}
+
+	private Node putAux(Node node, K key, V value) {
+		if (node == null) {
+			Node result = new Node(null, key, value, null);
+			size += 1;
+			return result;
+		}
+		int cmp = compare(key, node.key);
+		if (cmp < 0) {
+			node.left = putAux(node.left, key, value);
+		} else if (cmp > 0) {
+			node.right = putAux(node.right, key, value);
+		} else {
+			// shouldn't happen
+		}
+		return node; // TODO balancing here?
 	}
 
 	@Override
