@@ -7,7 +7,6 @@ public class FramedShape implements Shape {
 	private Shape shape;
 	
 	public FramedShape(Shape shape) {
-		super();
 		this.shape = shape;
 	}
 
