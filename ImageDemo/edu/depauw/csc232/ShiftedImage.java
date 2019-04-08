@@ -10,7 +10,7 @@
 
 package edu.depauw.csc232;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 /**
  * Modifies an Image to be shifted by the given amounts in the x and y

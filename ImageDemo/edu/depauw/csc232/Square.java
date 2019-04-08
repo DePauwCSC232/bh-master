@@ -10,7 +10,7 @@
 
 package edu.depauw.csc232;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 /**
  * An Image consisting of a filled square that exactly fits the unit square of
