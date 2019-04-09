@@ -10,7 +10,7 @@
 
 package edu.depauw.csc232;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 /**
  * An Image is completely determined by the color at any given point (x, y). The

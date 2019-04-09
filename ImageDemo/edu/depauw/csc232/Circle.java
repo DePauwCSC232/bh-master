@@ -10,7 +10,7 @@
 
 package edu.depauw.csc232;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 /**
  * An Image consisting of a filled Circle with center at (0.5, 0.5) and radius
