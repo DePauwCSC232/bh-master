@@ -1,1 +1,0 @@
-This folder contains the source files for the project. This file is only a placeholder, because Git will not commit an empty directory; it may be deleted as soon as some source code is added.
