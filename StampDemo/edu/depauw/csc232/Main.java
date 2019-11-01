@@ -30,8 +30,8 @@ public class Main extends Application {
     * @return the Stamp
     */
    public Stamp makeStamp() {
-      Stamp house = new HouseStamp(20.0, 10.0);
-      Stamp row = new StampRow(50.0, house, house, house);
+      Stamp house = new RandomColorStamp(new HouseStamp(20.0, 10.0));
+      Stamp row = new StampCollection(new HorizontalStrategy(50.0), house, house, house);
       return row;
    }
 
