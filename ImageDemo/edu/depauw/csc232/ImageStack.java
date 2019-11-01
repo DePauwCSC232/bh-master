@@ -41,6 +41,8 @@ public class ImageStack {
    }
 
    public void draw(double width, double height) {
+      canvas.setWidth(width);
+      canvas.setHeight(height);
       GraphicsContext g = canvas.getGraphicsContext2D();
       PixelWriter writer = g.getPixelWriter();
       for (Image image : images) {
