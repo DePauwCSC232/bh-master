@@ -3,19 +3,18 @@ package edu.depauw.csc232;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- * A DisplayStrategy that separates successive stamps by a given horizontal
- * space.
+ * A DisplayStrategy that separates successive stamps by a given vertical space.
  * 
  * @author bhoward
  */
-public class HorizontalStrategy implements DisplayStrategy {
-   public HorizontalStrategy(double spacing) {
+public class VerticalStrategy implements DisplayStrategy {
+   public VerticalStrategy(double spacing) {
       this.spacing = spacing;
    }
 
    @Override
    public void prepare(GraphicsContext gc, int i) {
-      gc.translate(i * spacing, 0.0);
+      gc.translate(0.0, i * spacing);
    }
 
    private double spacing;
